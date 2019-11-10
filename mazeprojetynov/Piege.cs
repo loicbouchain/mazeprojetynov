@@ -6,9 +6,9 @@ namespace MazeProjetYNOV
 {
    public class Piege : Cell
     {
-        public Piege(int taille, int x, int y) : base(taille, x, y)
+        public Piege(int taille, int x, int y) : base( x, y)
         {
-            Cell piege = new Cell(taille, x, y);
+            Cell piege = new Cell( x, y);
             piege.setGscore(piege.getGscore()+999999999);
 
         }

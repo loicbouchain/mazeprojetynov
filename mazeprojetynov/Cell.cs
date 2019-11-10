@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace MazeProjetYNOV
@@ -13,16 +14,71 @@ namespace MazeProjetYNOV
         public int gscore;
         private bool celldep = false;
         private bool cellend = false;
+        public Cell Predecessor = null;
+        public const int North = 0;
+        public const int South = North + 1;
+        public const int East = South + 1;
+        public const int West = East + 1;
+        public Rectangle Bounds;
+        // The node's neighbors in order North, South, East, West.
+        public Cell[] Neighbors = new Cell[4];
 
-        public Cell(int taille,int x,int y)
+        public Cell(int x,int y)
         {
-            taille = 14;
+            taille_cell  = 14;
             this.x = x;
             this.y = y;
             traversable = true;
             this.gscore = 0;
 
         }
+
+        public void DrawWalls(Graphics gr, Pen pen)
+        {
+            for (int side = 0; side < 4; side++)
+            {
+                if ((Neighbors[side] == null) ||
+                    ((Neighbors[side].Predecessor != this) &&
+                     (Neighbors[side] != this.Predecessor)))
+                {
+                    DrawWall(gr, pen, side, 0);
+                }
+            }
+        }
+        public void DrawBoundingBox(Graphics gr, Pen pen)
+        {
+            gr.DrawRectangle(pen,
+                Bounds.Left + 1, Bounds.Y + 1,
+                Bounds.Width - 2, Bounds.Height - 2);
+        }
+        private void DrawWall(Graphics gr, Pen pen, int side, int offset)
+        {
+            switch (side)
+            {
+                case North:
+                    gr.DrawLine(pen,
+                        Bounds.Left + offset, Bounds.Top + offset,
+                        Bounds.Right - offset, Bounds.Top + offset);
+                    break;
+                case South:
+                    gr.DrawLine(pen,
+                        Bounds.Left + offset, Bounds.Bottom - offset,
+                        Bounds.Right - offset, Bounds.Bottom - offset);
+                    break;
+                case East:
+                    gr.DrawLine(pen,
+                        Bounds.Right - offset, Bounds.Top + offset,
+                        Bounds.Right - offset, Bounds.Bottom - offset);
+                    break;
+                case West:
+                    gr.DrawLine(pen,
+                        Bounds.Left + offset, Bounds.Top + offset,
+                        Bounds.Left + offset, Bounds.Bottom - offset);
+                    break;
+            }
+        }
+
+
         public int getTaille()
         {
             return this.taille_cell;

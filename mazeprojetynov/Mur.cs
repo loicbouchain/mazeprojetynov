@@ -9,9 +9,9 @@ namespace MazeProjetYNOV
     public class Mur : Cell
     {
 
-        public Mur(int taille, int x, int y):base(taille, x, y)
+        public Mur(int taille, int x, int y):base( x, y)
         {
-            Cell mur = new Cell(taille, x, y);
+            Cell mur = new Cell( x, y);
             mur.setTraversable(false);
 
         }
