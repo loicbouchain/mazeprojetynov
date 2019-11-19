@@ -12,7 +12,7 @@ namespace MazeProjetYNOV
         public Mur(int taille, int x, int y):base( x, y)
         {
             Cell mur = new Cell( x, y);
-            mur.setTraversable(false);
+            base.setTraversable(false);
 
         }
     }

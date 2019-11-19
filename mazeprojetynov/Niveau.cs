@@ -15,22 +15,41 @@ namespace MazeProjetYNOV
         private int nbpiege = 0;
         private int xcol;
         private int ycol;
-        private List<Cell> cellList;
-        private Cell startCell;
-        private Cell endCell;
-        
-        public Niveau(int xcol, int ycol, string nom, string createur, DateTime datecreation)
+        private Cell[,] cellList;
+        public Cell startCell;
+        private Pathfinder path;
+        public Cell endCell;
+
+        public Niveau(Cell[,] cellList, string nom, string createur)
         {
-            this.xcol = xcol;
-            this.ycol = ycol;
+            this.cellList = cellList;
             this.nom = nom;
             this.createur = createur;
-            this.datecreation = datecreation;
+
             this.datemodif = datecreation;
             this.nbcase = xcol * ycol;
-
-          
+            findStartandEndCell();
+            Console.WriteLine(startCell);
+            path = new Pathfinder(this);
         }
+
+        public void findStartandEndCell()
+        {
+            foreach (Cell cell in cellList)
+            {
+                if (cell.getCellDep() == true)
+                {
+                    startCell = cell;
+                    
+                }
+                if (cell.getCellEnd() == true)
+                {
+                    endCell = cell;
+                }
+
+            }
+        }
+
         public string getNom()
         {
             return this.nom;
@@ -104,7 +123,7 @@ namespace MazeProjetYNOV
         {
             this.ycol = ycol;
         }
-        public List<Cell> getCellList()
+        public Cell[,] getCellList()
         {
             return this.cellList;
         }

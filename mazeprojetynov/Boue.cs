@@ -9,7 +9,7 @@ namespace MazeProjetYNOV
         public Boue(int taille, int x, int y) : base( x, y)
         {
             Cell boue = new Cell( x, y);
-            boue.setGscore(boue.getGscore()+3);
+            base.setGscore(base.getGscore()+3);
 
         }
     }
