@@ -11,7 +11,9 @@ namespace MazeProjetYNOV
         private int x;
         private int y;
         private bool traversable;
-        public int gscore;
+        private int heuristic;
+        public int gscore=0;
+        private int fscore;
         public bool celldep = false;
         private bool cellend = false;
         public Cell Predecessor = null;
@@ -22,6 +24,10 @@ namespace MazeProjetYNOV
         public Rectangle Bounds;
         public List<Cell> voisins;
         public Cell voisinNord;
+        public Cell voisinNordEst;
+        public Cell voisinNordOuest;
+        public Cell voisinSudEst;
+        public Cell voisinSudOuest;
         public Cell voisinSud;
         public Cell voisinOuest;
         public Cell voisinEst;
@@ -134,6 +140,14 @@ namespace MazeProjetYNOV
         {
             this.x = x;
         }
+        public int getFscore()
+        {
+            return this.fscore;
+        }
+        public void setFscore(int f)
+        {
+            this.fscore = f;
+        }
         public int getY()
         {
             return this.y;
@@ -141,6 +155,14 @@ namespace MazeProjetYNOV
         public void setY(int y)
         {
             this.y = y;
+        }
+        public int getH()
+        {
+            return this.heuristic;
+        }
+        public void setH(int h)
+        {
+            this.heuristic = h;
         }
 
         public bool getTraversable()
@@ -158,6 +180,38 @@ namespace MazeProjetYNOV
         public void setCellDep(bool celldep)
         {
             this.celldep = celldep;
+        }
+        public Cell getVoisinNordEst()
+        {
+            return voisinNordEst;
+        }
+        public Cell getVoisinNordOuest()
+        {
+            return voisinNordOuest;
+        }
+        public Cell getVoisinSudEst()
+        {
+            return voisinSudEst;
+        }
+        public Cell getVoisinSudOuest()
+        {
+            return voisinSudOuest;
+        }
+        public void setVoisinSudOuest(Cell cell)
+        {
+            this.voisinSudOuest = cell;
+        }
+        public void setVoisinSudEst(Cell cell)
+        {
+            this.voisinSudEst = cell;
+        }
+        public void setVoisinNordOuest(Cell cell)
+        {
+            this.voisinNordOuest = cell;
+        }
+        public void setVoisinNordEst(Cell cell)
+        {
+            this.voisinNordEst = cell;
         }
 
         public Cell getVoisinNord()
@@ -180,6 +234,7 @@ namespace MazeProjetYNOV
         {
             this.voisinNord = cell;
         }
+        
         public void setVoisiSud(Cell cell)
         {
             this.voisinSud = cell;
@@ -194,6 +249,7 @@ namespace MazeProjetYNOV
         }
         public List<Cell> getVoisins()
         {
+            voisins = new List<Cell>();
             if (this.getVoisinNord() != null)
                 voisins.Add(this.getVoisinNord());
 
@@ -203,6 +259,14 @@ namespace MazeProjetYNOV
                 voisins.Add(this.getVoisinEst());
             if (this.getVoisinOuest() != null)
                 voisins.Add(this.getVoisinOuest());
+            if (this.getVoisinNordOuest() != null)
+                voisins.Add(this.getVoisinNordOuest());
+            if (this.getVoisinNordEst() != null)
+                voisins.Add(this.getVoisinNordEst());
+            if (this.getVoisinSudEst() != null)
+                voisins.Add(this.getVoisinSudEst());
+            if (this.getVoisinSudOuest() != null)
+                voisins.Add(this.getVoisinSudOuest());
 
             return voisins;
         }

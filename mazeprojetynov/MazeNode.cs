@@ -37,7 +37,7 @@ namespace howto_maze
         // Constructor.
         public MazeNode(int x, int y, int wid, int hgt)
         {
-            Console.WriteLine(x+" "+ y+" "+ wid+" "+ hgt);
+           // Console.WriteLine(x+" "+ y+" "+ wid+" "+ hgt);
             Bounds = new Rectangle(x, y, wid, hgt);
         }
 

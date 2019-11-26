@@ -75,34 +75,154 @@ namespace mazeprojetynov
                     if (c == wid - 1 && r == hgt - 1)
                     {
                         //nodes[r, c] = new Fin(x, y);
-                        nodes[r, c].setCellEnd(true);
+                       nodes[r, c].setCellEnd(true);
+                       nodes[2, 5].setTraversable(false); 
+                       nodes[3, 5].setTraversable(false); 
+                       nodes[5, 5].setTraversable(false); 
+                       nodes[4, 5].setTraversable(false); 
+                       nodes[6, 5].setTraversable(false); 
+                       nodes[7, 5].setTraversable(false); 
+                       nodes[8, 5].setTraversable(false); 
 
                     }
+                    
                  
 
                 }
+               
             }
+            
             // Initialize the nodes' neighbors.
             for (int r = 0; r < hgt; r++)
             {
                 for (int c = 0; c < wid; c++)
                 {
-                    if (r > 0) { 
-                        nodes[r, c].Neighbors[Cell.North] = nodes[r - 1, c];
-                        nodes[r, c].setVoisinNord(nodes[r-1, c]);
+
+                    if (r > 0) {
+
+                 
+                        if (nodes[r - 1, c].getTraversable())
+                        {
+                            nodes[r, c].Neighbors[Cell.North] = nodes[r - 1, c];
+                            nodes[r, c].setVoisinNord(nodes[r - 1, c]);
+                        }
+                        else
+                        {
+                            nodes[r, c].Neighbors[Cell.North] =null;
+                            nodes[r, c].setVoisinNord(null);
+                        }
+                      
+                       
+
+                       
                     }
-                    if (r < hgt - 1) { 
-                        nodes[r, c].Neighbors[Cell.South] = nodes[r + 1, c];
-                        nodes[r, c].setVoisiSud(nodes[r + 1, c]);
+                    if (r < hgt - 1) {
+
+                    
+
+
+                        if (nodes[r + 1, c].getTraversable())
+                        {
+                            nodes[r, c].Neighbors[Cell.South] = nodes[r + 1, c];
+                            nodes[r, c].setVoisiSud(nodes[r + 1, c]);
+                        }
+                        else
+                        {
+                            nodes[r, c].Neighbors[Cell.South] = null;
+                            nodes[r, c].setVoisiSud(null);
+                        }
+
+                       
+                        if (c < wid - 1)
+                        {
+                            if (nodes[r + 1, c + 1].getTraversable())
+                            {
+
+                                nodes[r, c].setVoisinSudEst(nodes[r + 1, c + 1]);
+                            }
+                            else
+                            {
+
+                                nodes[r, c].setVoisinSudEst(null);
+                            }
+                            if (r > 0) { 
+
+                                if (nodes[r - 1, c + 1].getTraversable())
+                                {
+
+                                    nodes[r, c].setVoisinNordEst(nodes[r - 1, c + 1]);
+                                }
+                                else
+                                {
+
+                                    nodes[r, c].setVoisinNordEst(null);
+                                }
+                            }
+
+
+                        }
+                        if (c > 0)
+                        {
+
+                            if (nodes[r + 1, c - 1].getTraversable())
+                            {
+
+                                nodes[r, c].setVoisinSudOuest(nodes[r + 1, c - 1]);
+                            }
+                            else
+                            {
+
+                                nodes[r, c].setVoisinSudOuest(null);
+                            }
+                            if (r > 0) { 
+                                if (nodes[r - 1, c -1].getTraversable())
+                                {
+
+                                    nodes[r, c].setVoisinNordOuest(nodes[r - 1, c - 1]);
+                                }
+                                else
+                                {
+
+                                    nodes[r, c].setVoisinNordOuest(null);
+                                }
+                            }
+                        }
+
+                        }
+                    if (c > 0) {
+
+                      
+
+
+                        if (nodes[r, c - 1].getTraversable())
+                        {
+                            nodes[r, c].Neighbors[Cell.West] = nodes[r, c - 1];
+                            nodes[r, c].setVoisinOuest(nodes[r, c - 1]);
+                        }
+                        else
+                        {
+                            nodes[r, c].Neighbors[Cell.West] =null;
+                            nodes[r, c].setVoisinOuest(null);
+
+                        }
+
                     }
-                    if (c > 0) { 
-                        nodes[r, c].Neighbors[Cell.West] = nodes[r, c - 1];
-                        nodes[r, c].setVoisinOuest(nodes[r, c-1]);
+                    if (c < wid - 1) {
+
+                        if (nodes[r, c + 1].getTraversable())
+                        {
+                            nodes[r, c].Neighbors[Cell.East] = nodes[r, c + 1];
+                            nodes[r, c].setVoisinEst(nodes[r, c + 1]);
+                        }
+                        else
+                        {
+                            nodes[r, c].Neighbors[Cell.East] =null;
+                            nodes[r, c].setVoisinEst(null);
+
+                        }
+
                     }
-                    if (c < wid - 1) { 
-                        nodes[r, c].Neighbors[Cell.East] = nodes[r, c + 1];
-                        nodes[r, c].setVoisinEst(nodes[r, c+1]);
-                    }
+                    
 
                 }
             }
@@ -114,8 +234,8 @@ namespace mazeprojetynov
                 if (i.getCellDep() == true)
                 {
                     startCell = i;
-                    Console.WriteLine("VOOVOVOVOVO  "+i.getVoisinEst().getX());
-                    Console.WriteLine("VOOVOVOVOVO  " + nodes[0,1].getX());
+                    //Console.WriteLine("VOOVOVOVOVO  "+i.getVoisinEst().getX());
+                  //  Console.WriteLine("VOOVOVOVOVO  " + nodes[0,1].getX());
                 }
                 if (i.getCellEnd() == true)
                 {
@@ -124,8 +244,23 @@ namespace mazeprojetynov
             }
             FindSpanningTree(nodes[0, 0]);
             DisplayMaze(nodes);
-            niv = new Niveau(nodes, "test", "crea");
+            niv = new Niveau(nodes,"","");
+           
             path = new Pathfinder(niv);
+            
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+
+                int u = 0;
+                foreach (Cell i in path.list)
+                {
+                    u = u + 1;
+                    Console.WriteLine(u + " liste " + i.getX() + "  " + i.getY());
+                    i.DrawBoundingBox(gr, Pens.Black);
+                }
+            }
+            picMaze.Image = bm;
         }
    
 
@@ -150,7 +285,9 @@ namespace mazeprojetynov
             {
                 if (neighbor != null)
                 {
+                    if (neighbor.getTraversable()) { 
                     links.Add(new MazeLink(root, neighbor));
+                    }
                     // Console.WriteLine(neighbor.getX() + "  " + neighbor.getY()); }
 
                 }
@@ -202,6 +339,7 @@ namespace mazeprojetynov
 
             private void DisplayMaze(Cell[,] nodes)
             {
+            Console.WriteLine("allo?");
                 int hgt = nodes.GetUpperBound(0) + 1;
                 int wid = nodes.GetUpperBound(1) + 1;
                  bm = new Bitmap(
@@ -215,12 +353,13 @@ namespace mazeprojetynov
                     {
                         for (int c = 0; c < wid; c++)
                         {
-                            //nodes[r, c].DrawCenter(gr, Brushes.Red);
-                            //nodes[r, c].DrawWalls(gr, Pens.Black);
-                            nodes[r, c].DrawBoundingBox(gr, Pens.Blue);
+                        //Console.WriteLine("le début du truc "+r+" "+c+" " + nodes[r, c].getX() + "   " + nodes[r, c].getY());
+                        //nodes[r, c].DrawCenter(gr, Brushes.Red);
+                        //nodes[r, c].DrawWalls(gr, Pens.Black);
+                        nodes[r, c].DrawBoundingBox(gr, Pens.Blue);
                            
 
-                        Console.WriteLine(r + " " + c + " heuristic : " + heuristic(nodes[r,c]));
+                        //Console.WriteLine(r + " " + c + " heuristic : " + heuristic(nodes[r,c]));
                             
                             // Console.WriteLine(c+"  "+nodes[r, c].getCellDep());
                             if (nodes[r, c].getCellDep() == true) {
@@ -234,8 +373,13 @@ namespace mazeprojetynov
                                 //  Console.WriteLine("la fin du truc "+nodes[r, c].getX() + "   " + nodes[r, c].getY());
                                 endCell = nodes[r, c];
                             }
+                            if(nodes[r,c].getTraversable() == false)
+                            {
+                               nodes[r, c].DrawBoundingBox(gr, Pens.White);  
+                            }
 
                             //  nodes[r, c].DrawPredecessorLink(gr, Pens.LightGray);
+
 
 
                         }
@@ -243,20 +387,27 @@ namespace mazeprojetynov
 
             }
 
-                label3.Text = StraightLineDistanceTo(nodes[2, 6]).ToString();
+               // label3.Text = StraightLineDistanceTo(nodes[2, 6]).ToString();
                 picMaze.Image = bm;
-            }
+            Console.WriteLine("oui?");
 
-            private void button1_Click(object sender, EventArgs e)
+
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
             {
 
                 using (Graphics gr = Graphics.FromImage(bm))
                 {
                     gr.SmoothingMode = SmoothingMode.AntiAlias;
 
-
+                int u = 0;
                     foreach (Cell i in path.list)
                     {
+                        u = u+1;
+                        //Console.WriteLine(u+" liste "+i.getX() + "  " + i.getY());
                         i.DrawBoundingBox(gr, Pens.Black);
                     }
                 }

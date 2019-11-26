@@ -15,7 +15,7 @@ namespace MazeProjetYNOV
         private Cell currentCell;
         private List<Cell> adjacentsquare;
         private Niveau niveau;
-        private int fnord =999999 , fsud= 999999, fwest= 999999, fest= 999999,gnord =999999 , gsud = 999999, gouest = 999999, gest = 999999;
+        private int fnord = 999999, fsud = 999999, fwest = 999999, fest = 999999, gnord = 999999, gsud = 999999, gouest = 999999, gest = 999999, hnord=99999,hsud=999999,houest=99999,hest=99999;
 
         public Pathfinder(Niveau niveau)
         {
@@ -28,12 +28,9 @@ namespace MazeProjetYNOV
             this.niveau = niveau;
             this.startCell= niveau.startCell;
             this.endCell = niveau.endCell;
-        
+            Console.WriteLine("dezz");
             resolve();
-            foreach(Cell cell in list)
-            {
-                Console.WriteLine(cell.getY());
-            }
+        
         }
        
         public double StraightLineDistanceTo(Cell cell)
@@ -43,8 +40,8 @@ namespace MazeProjetYNOV
 
         public int heuristic(Cell cell) {
 
-            int dx = Math.Abs(cell.getX() - endCell.getX());
-            int dy = Math.Abs(cell.getY() - endCell.getY()) ;
+            int dx = Math.Abs(cell.Center.X - endCell.Center.X);
+            int dy = Math.Abs(cell.Center.Y - endCell.Center.Y) ;
             return dx + dy;
         }
         public int gscore(Cell cell)
@@ -58,7 +55,7 @@ namespace MazeProjetYNOV
         public int fscore(Cell cell)
         {
             int h = heuristic(cell);
-            int g = gscore(cell);
+            int g = cell.getGscore();
             return h + g;
         }
        
@@ -79,69 +76,145 @@ namespace MazeProjetYNOV
 
                 foreach(Cell cell in adjacentsquare)
                 {
+
+                    Console.WriteLine("           "+cell.getX()+" "+cell.getY()+" "+heuristic(cell));
                     if (closedList.Contains(cell))
                     {
-                        continue;
+                        break;
+                     
                     }
                     if (openList.Contains(cell) == false)
                     {
-                        openList.Add(cell);
+                        
+                            if (cell != null)
+                                openList.Add(cell);
+                        
                     }
                     else
                     {
+                      if(gscore(cell) < gscore(currentCell))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            openList.Add(currentCell);
+                        }
 
                     }
-                }
+                    
+
+        }
 
 
             } while (openList.Count != 0);
-            
+           /* openList.Add(startCell);
+            do
+            {
+                Cell q = moinsloin(openList);
+                openList.Remove(q);
+                adjacentsquare = q.getVoisins();
+                foreach(Cell voisin in adjacentsquare)
+                {
+                    if(voisin == endCell)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        voisin.setGscore(q.getGscore()+1);
+                        voisin.setH(heuristic(voisin));
+                        voisin.setFscore(voisin.getGscore() + voisin.getH());
+                    }
+                   foreach(Cell v in openList)
+                    {
+                        if(fscore(voisin) > fscore(v))
+                        {
+                            continue;
+                        }
+                    }
+                    foreach (Cell v in closedList)
+                    {
+                        if (fscore(voisin) > fscore(v))
+                        {
+                            continue;
+                        }
+                        
+                    }
+                    
+                    openList.Add(voisin);
+                   
+                }
+                closedList.Add(q);
+
+            } while (openList.Count > 0);*/
+
         }
          public Cell moinsloin(List<Cell> openList)
         {
-            foreach( Cell i in openList) { 
-                if (i.getVoisinNord() != null && closedList.Contains(i)==false)
+            foreach( Cell i in openList) {
+                
+                if (i != null)
                 {
-                    fnord = fscore(i.getVoisinNord());
-                    gnord = gscore(i.getVoisinNord());
-                }
-                if (i.getVoisinSud() != null && closedList.Contains(i) == false)
-                {
-                    fsud = fscore(i.getVoisinSud());
-                    gsud = gscore(i.getVoisinSud());
-                }
-                if (i.getVoisinEst() != null && closedList.Contains(i) == false)
-                {
-                    fest = fscore(i.getVoisinEst());
-                    gest = gscore(i.getVoisinEst());
-                }
-                if (i.getVoisinOuest() != null && closedList.Contains(i) == false)
-                {
-                    fwest = fscore(i.getVoisinOuest());
-                    gouest = gscore(i.getVoisinOuest());
-                }
-                if (i.getVoisinOuest() != null && closedList.Contains(i) == false)
-                {
-                    if (fscore(i.getVoisinOuest()) == Math.Min(fnord, Math.Min(fsud, Math.Min(fwest, fest))))
-                        result = i.getVoisinOuest();
-                }
-                if (i.getVoisinEst() != null && closedList.Contains(i) == false)
-                {
-                    if (fscore(i.getVoisinEst()) == Math.Min(fnord, Math.Min(fsud, Math.Min(fwest, fest))))
-                        result = i.getVoisinEst();
-                }
-                if (i.getVoisinNord() != null && closedList.Contains(i) == false)
-                {
-                    if (fscore(i.getVoisinNord()) == Math.Min(fnord, Math.Min(fsud, Math.Min(fwest, fest))))
-                        result = i.getVoisinNord();
-                }
-                if (i.getVoisinSud() != null && closedList.Contains(i) == false)
-                {
-                    if (fscore(i.getVoisinSud()) == Math.Min(fnord, Math.Min(fsud, Math.Min(fwest, fest))))
-                        result = i.getVoisinSud();
+                        if (i.getVoisinNord() != null && closedList.Contains(i) == false)
+                        {
+                            fnord = fscore(i.getVoisinNord());
+                            gnord =i.getGscore()+i.getVoisinNord().getGscore();
+                            hnord = heuristic(i.getVoisinNord());
+
+                        }
+                        if (i.getVoisinSud() != null && closedList.Contains(i) == false)
+                        {
+                            fsud = fscore(i.getVoisinSud());
+                            gsud = gscore(i.getVoisinSud());
+                            hsud = heuristic(i.getVoisinSud());
+                        }
+                        if (i.getVoisinEst() != null && closedList.Contains(i) == false)
+                        {
+                            fest = fscore(i.getVoisinEst());
+                            gest = gscore(i.getVoisinEst());
+                            hest = heuristic(i.getVoisinEst());
+                        }
+                        if (i.getVoisinOuest() != null && closedList.Contains(i) == false)
+                        {
+                            fwest = fscore(i.getVoisinOuest());
+                            gouest = gscore(i.getVoisinOuest());
+                            houest = heuristic(i.getVoisinOuest());
+                        }
+                        if (i.getVoisinEst() != null && closedList.Contains(i) == false)
+                        {
+                            if (heuristic(i.getVoisinEst()) == Math.Min(hnord, Math.Min(hsud, Math.Min(houest, hest))))
+                                result = i.getVoisinEst();
+                            // Console.WriteLine("droite  " + heuristic(result));
+                        }
+                        if (i.getVoisinOuest() != null && closedList.Contains(i) == false)
+                        {
+                            if (fscore(i.getVoisinOuest()) == Math.Min(hnord, Math.Min(hsud, Math.Min(houest, hest))))
+                                result = i.getVoisinOuest();
+                            // Console.WriteLine("gauche  "+ heuristic(result));
+
+                        }
+
+                        if (i.getVoisinNord() != null && closedList.Contains(i) == false)
+                        {
+                            if (fscore(i.getVoisinNord()) == Math.Min(hnord, Math.Min(hsud, Math.Min(houest, hest))))
+                                result = i.getVoisinNord();
+                            //  Console.WriteLine("haut  " + heuristic(result));
+                        }
+                        if (i.getVoisinSud() != null && closedList.Contains(i) == false)
+                        {
+                            if (fscore(i.getVoisinSud()) == Math.Min(hnord, Math.Min(hsud, Math.Min(houest, hest))))
+                                result = i.getVoisinSud();
+                            //  Console.WriteLine("bas  " + heuristic(result));
+                        }
+                        
+                    
                 }
 
+
+
             }
+            Console.WriteLine(heuristic(result) + " " + result.getX() + " " + result.getY());
             list.Add(result);
             return result;
 

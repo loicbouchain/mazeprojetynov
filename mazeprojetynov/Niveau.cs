@@ -19,19 +19,22 @@ namespace MazeProjetYNOV
         public Cell startCell;
         private Pathfinder path;
         public Cell endCell;
+        public List<Cell> mur;
 
         public Niveau(Cell[,] cellList, string nom, string createur)
         {
             this.cellList = cellList;
             this.nom = nom;
             this.createur = createur;
-
+            mur = new List<Cell>();
             this.datemodif = datecreation;
             this.nbcase = xcol * ycol;
             findStartandEndCell();
-            Console.WriteLine(startCell);
+            //Console.WriteLine(startCell);
             path = new Pathfinder(this);
+            Console.WriteLine("oui");
         }
+        public Niveau() { mur = new List<Cell>(); }
 
         public void findStartandEndCell()
         {
@@ -135,6 +138,14 @@ namespace MazeProjetYNOV
         {
             return this.startCell;
         }
+        public List<Cell> getMur()
+        {
+            return mur;
+        }
 
+        public void addMur(Cell i)
+        {
+            mur.Add(i);
+        }
     }
 }
