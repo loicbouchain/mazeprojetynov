@@ -12,7 +12,7 @@ namespace MazeProjetYNOV
         private int y;
         private bool traversable;
         private int heuristic;
-        public int gscore=0;
+        public int gscore;
         private int fscore;
         public bool celldep = false;
         private bool cellend = false;
@@ -41,7 +41,6 @@ namespace MazeProjetYNOV
             this.x = x;
             this.y = y;
             traversable = true;
-            this.gscore = 0;
             Bounds = new Rectangle(x, y, 14, 14);
 
         }
@@ -78,6 +77,13 @@ namespace MazeProjetYNOV
         public void DrawBoundingBox(Graphics gr, Pen pen)
         {
             gr.DrawRectangle(pen,
+                Bounds.Left + 1, Bounds.Y + 1,
+                Bounds.Width - 2, Bounds.Height - 2);
+        }
+        public void FillRectangle(Graphics gr, SolidBrush brush)
+        {
+           
+            gr.FillRectangle(brush,
                 Bounds.Left + 1, Bounds.Y + 1,
                 Bounds.Width - 2, Bounds.Height - 2);
         }
@@ -142,7 +148,7 @@ namespace MazeProjetYNOV
         }
         public int getFscore()
         {
-            return this.fscore;
+            return gscore + heuristic;
         }
         public void setFscore(int f)
         {

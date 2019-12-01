@@ -75,18 +75,30 @@ namespace mazeprojetynov
                     if (c == wid - 1 && r == hgt - 1)
                     {
                         //nodes[r, c] = new Fin(x, y);
-                       nodes[r, c].setCellEnd(true);
-                       nodes[2, 5].setTraversable(false); 
-                       nodes[3, 5].setTraversable(false); 
-                       nodes[5, 5].setTraversable(false); 
-                       nodes[4, 5].setTraversable(false); 
-                       nodes[6, 5].setTraversable(false); 
-                       nodes[7, 5].setTraversable(false); 
-                       nodes[8, 5].setTraversable(false); 
+                        nodes[5, 6].setCellEnd(true);
+                        nodes[2, 5].setTraversable(false);
+                        nodes[3, 5].setTraversable(false);
+                        nodes[5, 5].setTraversable(false);
+                        nodes[4, 5].setTraversable(false);
+                        nodes[6, 5].setTraversable(false);
+                        //nodes[7, 5].setTraversable(false);
+                        //nodes[8, 5].setTraversable(false);
+
+                        //nodes[9, 12].setTraversable(false);
+                        //nodes[8, 12].setTraversable(false);
+                        //nodes[5, 7].setTraversable(false);
+                        //nodes[4, 7].setTraversable(false);
+                        //nodes[6, 7].setTraversable(false);
+
+
+
+                        //nodes[9, 8].setTraversable(false);
+                        //nodes[9, 7].setTraversable(false);
+
 
                     }
-                    
-                 
+
+
 
                 }
                
@@ -229,7 +241,7 @@ namespace mazeprojetynov
             // Display the maze.
             foreach (Cell i in nodes)
             {
-                
+                  
                // System.Console.WriteLine("{0} ", i.getCellEnd());
                 if (i.getCellDep() == true)
                 {
@@ -242,12 +254,18 @@ namespace mazeprojetynov
                     endCell = i;
                 }
             }
+            foreach(Cell i in nodes)
+            {
+                i.setH(heuristic(i));
+            }
+
+
             FindSpanningTree(nodes[0, 0]);
             DisplayMaze(nodes);
             niv = new Niveau(nodes,"","");
            
             path = new Pathfinder(niv);
-            
+            /*
             using (Graphics gr = Graphics.FromImage(bm))
             {
                 gr.SmoothingMode = SmoothingMode.AntiAlias;
@@ -256,11 +274,11 @@ namespace mazeprojetynov
                 foreach (Cell i in path.list)
                 {
                     u = u + 1;
-                    Console.WriteLine(u + " liste " + i.getX() + "  " + i.getY());
+                  
                     i.DrawBoundingBox(gr, Pens.Black);
                 }
             }
-            picMaze.Image = bm;
+            picMaze.Image = bm;*/
         }
    
 
@@ -339,7 +357,7 @@ namespace mazeprojetynov
 
             private void DisplayMaze(Cell[,] nodes)
             {
-            Console.WriteLine("allo?");
+          
                 int hgt = nodes.GetUpperBound(0) + 1;
                 int wid = nodes.GetUpperBound(1) + 1;
                  bm = new Bitmap(
@@ -363,20 +381,23 @@ namespace mazeprojetynov
                             
                             // Console.WriteLine(c+"  "+nodes[r, c].getCellDep());
                             if (nodes[r, c].getCellDep() == true) {
-                                //       Console.WriteLine("le début du truc " + nodes[r, c].getX() + "   " + nodes[r, c].getY());
-                                nodes[r, c].DrawBoundingBox(gr, Pens.Green);
+                            //       Console.WriteLine("le début du truc " + nodes[r, c].getX() + "   " + nodes[r, c].getY());
+                                SolidBrush brush = new SolidBrush(Color.Green);
+                                nodes[r,c].FillRectangle(gr, brush);
                                 startCell = nodes[r, c];
                             }
                             if (nodes[r, c].getCellEnd() == true)
                             {
-                                nodes[r, c].DrawBoundingBox(gr, Pens.Red);
+                                SolidBrush brush = new SolidBrush(Color.Red);
+                                nodes[r, c].FillRectangle(gr, brush);
                                 //  Console.WriteLine("la fin du truc "+nodes[r, c].getX() + "   " + nodes[r, c].getY());
                                 endCell = nodes[r, c];
                             }
                             if(nodes[r,c].getTraversable() == false)
                             {
-                               nodes[r, c].DrawBoundingBox(gr, Pens.White);  
-                            }
+                                SolidBrush brushWall = new SolidBrush(Color.Black);
+                                nodes[r, c].FillRectangle(gr, brushWall);
+                        }
 
                             //  nodes[r, c].DrawPredecessorLink(gr, Pens.LightGray);
 
@@ -389,7 +410,7 @@ namespace mazeprojetynov
 
                // label3.Text = StraightLineDistanceTo(nodes[2, 6]).ToString();
                 picMaze.Image = bm;
-            Console.WriteLine("oui?");
+          
 
 
 
@@ -407,10 +428,17 @@ namespace mazeprojetynov
                     foreach (Cell i in path.list)
                     {
                         u = u+1;
-                        //Console.WriteLine(u+" liste "+i.getX() + "  " + i.getY());
-                        i.DrawBoundingBox(gr, Pens.Black);
-                    }
+                    //Console.WriteLine(u+" liste "+i.getX() + "  " + i.getY());
+                    //i.DrawBoundingBox(gr, Pens.Black);
+                        SolidBrush brush = new SolidBrush(Color.RoyalBlue);
+                        i.FillRectangle(gr, brush);
+
                 }
+                SolidBrush brushstart = new SolidBrush(Color.Green);
+                startCell.FillRectangle(gr, brushstart);
+                SolidBrush brushend = new SolidBrush(Color.Red);
+                endCell.FillRectangle(gr, brushend);
+            }
                 picMaze.Image = bm;
 
 

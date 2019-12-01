@@ -31,8 +31,8 @@ namespace MazeProjetYNOV
             this.nbcase = xcol * ycol;
             findStartandEndCell();
             //Console.WriteLine(startCell);
-            path = new Pathfinder(this);
-            Console.WriteLine("oui");
+            //path = new Pathfinder(this);
+
         }
         public Niveau() { mur = new List<Cell>(); }
 
