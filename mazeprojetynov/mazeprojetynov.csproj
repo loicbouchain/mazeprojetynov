@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AStarSearch.cs" />
     <Compile Include="Boue.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="CellLink.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Form.Designer.cs">
       <DependentUpon>Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="IPriorityQueue.cs" />
     <Compile Include="MazeLink.cs" />
     <Compile Include="MazeNode.cs" />
     <Compile Include="Mur.cs" />

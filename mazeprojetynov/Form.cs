@@ -26,6 +26,7 @@ namespace mazeprojetynov
         private List<Cell> cellList;
         private int frmgscore = 0;
         private Pathfinder path;
+        List<Cell> list = new List<Cell>();
 
         public Form()
         {
@@ -81,13 +82,13 @@ namespace mazeprojetynov
                         nodes[5, 5].setTraversable(false);
                         nodes[4, 5].setTraversable(false);
                         nodes[6, 5].setTraversable(false);
-                        //nodes[7, 5].setTraversable(false);
-                        //nodes[8, 5].setTraversable(false);
+                        nodes[7, 5].setTraversable(false);
+                        nodes[8, 5].setTraversable(false);
 
                         //nodes[9, 12].setTraversable(false);
                         //nodes[8, 12].setTraversable(false);
                         //nodes[5, 7].setTraversable(false);
-                        //nodes[4, 7].setTraversable(false);
+                        nodes[4, 7].setTraversable(false);
                         //nodes[6, 7].setTraversable(false);
 
 
@@ -241,30 +242,28 @@ namespace mazeprojetynov
             // Display the maze.
             foreach (Cell i in nodes)
             {
-                  
-               // System.Console.WriteLine("{0} ", i.getCellEnd());
-                if (i.getCellDep() == true)
-                {
-                    startCell = i;
-                    //Console.WriteLine("VOOVOVOVOVO  "+i.getVoisinEst().getX());
-                  //  Console.WriteLine("VOOVOVOVOVO  " + nodes[0,1].getX());
-                }
-                if (i.getCellEnd() == true)
-                {
-                    endCell = i;
-                }
-            }
-            foreach(Cell i in nodes)
-            {
-                i.setH(heuristic(i));
-            }
 
+                Console.WriteLine(i.getX() + " "+ i.getY());
+                Console.WriteLine("VOISIN SUD " + i.getVoisinSud());
+                Console.WriteLine("VOISIN NORD " + i.getVoisinNord());
+                Console.WriteLine("VOISIN EST " + i.getVoisinEst());
+                Console.WriteLine("VOISIN OUEST " + i.getVoisinOuest());
+            }
+        
 
             FindSpanningTree(nodes[0, 0]);
             DisplayMaze(nodes);
             niv = new Niveau(nodes,"","");
-           
-            path = new Pathfinder(niv);
+            var astar = new AStarSearch(nodes, nodes[0, 0], nodes[5, 6]);
+            Cell cell = endCell;
+            while(cell != startCell)
+            {
+                Console.WriteLine(astar.cameFrom[cell].getX() + " " + astar.cameFrom[cell].getY());
+                list.Add(cell);
+                cell = astar.cameFrom[cell];
+            }
+
+            // path = new Pathfinder(niv);
             /*
             using (Graphics gr = Graphics.FromImage(bm))
             {
@@ -280,13 +279,18 @@ namespace mazeprojetynov
             }
             picMaze.Image = bm;*/
         }
-   
+
 
         public double StraightLineDistanceTo(Cell cell)
         {
             return Math.Sqrt(Math.Pow(cell.getX() - endCell.getX(), 2) + Math.Pow(cell.getY() - endCell.getY(), 2));
         }
+        public double heuristic(Cell a, Cell b)
+        {
+            return Math.Abs(a.getX() - b.getX()) + Math.Abs(a.getY() - b.getY());
+        }
 
+        
         // Build a spanning tree with the indicated root node.
         private void FindSpanningTree(Cell root)
         {
@@ -411,6 +415,7 @@ namespace mazeprojetynov
                // label3.Text = StraightLineDistanceTo(nodes[2, 6]).ToString();
                 picMaze.Image = bm;
           
+          
 
 
 
@@ -425,7 +430,7 @@ namespace mazeprojetynov
                     gr.SmoothingMode = SmoothingMode.AntiAlias;
 
                 int u = 0;
-                    foreach (Cell i in path.list)
+                    foreach (Cell i in list)
                     {
                         u = u+1;
                     //Console.WriteLine(u+" liste "+i.getX() + "  " + i.getY());

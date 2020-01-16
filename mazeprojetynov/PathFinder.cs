@@ -30,7 +30,7 @@ namespace MazeProjetYNOV
             this.startCell= niveau.startCell;
             this.endCell = niveau.endCell;
         
-            resolve();
+            //resolve();
         
 
         }
