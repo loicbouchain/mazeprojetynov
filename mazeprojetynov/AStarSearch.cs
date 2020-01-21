@@ -15,6 +15,17 @@ namespace mazeprojetynov
         {
             return Math.Abs(a.getX() - b.getX()) + Math.Abs(a.getY() - b.getY());
         }
+        public int IsDiag(Cell from, Cell to)
+        {
+            if (from.getVoisinNordEst() == to || from.getVoisinNordOuest() == to || from.getVoisinSudEst() == to || from.getVoisinSudOuest() == to)
+            {
+                return 14;
+            }
+            else
+            {
+                return 10;
+            }
+        }
 
         public class PriorityQueue<T>
         {
@@ -70,14 +81,14 @@ namespace mazeprojetynov
             {
                 var current = frontier.Dequeue();
 
-                if (current.Equals(goal))
+                if (current.Equals(goal)) 
                 {
                     break;
                 }
 
                 foreach (var next in current.getVoisins())
                 {
-                    double newCost = costSoFar[current];
+                    double newCost = costSoFar[current] + IsDiag(current,next);
                     if (!costSoFar.ContainsKey(next)
                         || newCost < costSoFar[next])
                     {
