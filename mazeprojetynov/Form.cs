@@ -42,9 +42,9 @@ namespace mazeprojetynov
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            int wid = 15;
-            int hgt = 10;
-            label3.Text = wid + " " + hgt;
+            int wid = Int16.Parse(txtWidth.Text);
+            int hgt = Int16.Parse(txtHeight.Text);
+
 
             CellWid = picMaze.ClientSize.Width / (wid + 2);
             CellHgt = picMaze.ClientSize.Height / (hgt + 2);

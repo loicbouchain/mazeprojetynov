@@ -35,7 +35,6 @@
             this.txtWidth = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.picMaze = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picMaze)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,12 +42,12 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button1.AutoSize = true;
-            this.button1.Location = new System.Drawing.Point(20, 375);
+            this.button1.Location = new System.Drawing.Point(20, 710);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 28);
+            this.button1.Size = new System.Drawing.Size(211, 28);
             this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
+            this.button1.Text = "Afficher le chemin le plus court";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -59,12 +58,13 @@
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(100, 28);
             this.btnCreate.TabIndex = 10;
-            this.btnCreate.Text = "Create";
+            this.btnCreate.Text = "Créer";
             this.btnCreate.UseVisualStyleBackColor = true;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
             // txtHeight
             // 
+            this.txtHeight.Enabled = false;
             this.txtHeight.Location = new System.Drawing.Point(79, 41);
             this.txtHeight.Margin = new System.Windows.Forms.Padding(4);
             this.txtHeight.Name = "txtHeight";
@@ -79,12 +79,13 @@
             this.label2.Location = new System.Drawing.Point(16, 44);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 17);
+            this.label2.Size = new System.Drawing.Size(59, 17);
             this.label2.TabIndex = 8;
-            this.label2.Text = "Height:";
+            this.label2.Text = "Hauteur";
             // 
             // txtWidth
             // 
+            this.txtWidth.Enabled = false;
             this.txtWidth.Location = new System.Drawing.Point(79, 9);
             this.txtWidth.Margin = new System.Windows.Forms.Padding(4);
             this.txtWidth.Name = "txtWidth";
@@ -99,9 +100,10 @@
             this.label1.Location = new System.Drawing.Point(16, 12);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 17);
+            this.label1.Size = new System.Drawing.Size(58, 17);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Width:";
+            this.label1.Text = "Largeur";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // picMaze
             // 
@@ -113,27 +115,16 @@
             this.picMaze.Location = new System.Drawing.Point(20, 74);
             this.picMaze.Margin = new System.Windows.Forms.Padding(4);
             this.picMaze.Name = "picMaze";
-            this.picMaze.Size = new System.Drawing.Size(420, 293);
+            this.picMaze.Size = new System.Drawing.Size(1145, 628);
             this.picMaze.TabIndex = 12;
             this.picMaze.TabStop = false;
             this.picMaze.Click += new System.EventHandler(this.picMaze_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(364, 25);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 17);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "label3";
             // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(457, 418);
-            this.Controls.Add(this.label3);
+            this.ClientSize = new System.Drawing.Size(1182, 753);
             this.Controls.Add(this.picMaze);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.txtHeight);
@@ -160,7 +151,6 @@
         private System.Windows.Forms.TextBox txtWidth;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox picMaze;
-        private System.Windows.Forms.Label label3;
     }
 }
 
