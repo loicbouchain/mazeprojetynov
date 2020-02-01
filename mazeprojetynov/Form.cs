@@ -32,6 +32,9 @@ namespace mazeprojetynov
 
         List<Cell> list = new List<Cell>();
         List<Cell> arraymur = new List<Cell>();
+        List<Cell> arraydepart = new List<Cell>();
+        List<Cell> arrayfin = new List<Cell>();
+        public string cellclic = "";
 
         public Form()
         {
@@ -58,13 +61,11 @@ namespace mazeprojetynov
                     if (c == 0 && r == 0)
                     {
                         //nodes[r, c] = new Depart(x, y);
-                        nodes[r, c].setCellDep(true); //cell de départ
 
                     }
                     if (c == wid - 1 && r == hgt - 1)
                     {
                         //nodes[r, c] = new Fin(x, y);
-                        nodes[5, 6].setCellEnd(true);// cell de fin
                         foreach (Cell mur in arraymur)
                         {
                             for (int u = 0; u < hgt; u++)
@@ -74,6 +75,36 @@ namespace mazeprojetynov
                                     if (nodes[u, w].getX() == mur.getX() && nodes[u, w].getY() == mur.getY())
                                     {
                                         nodes[u, w].setTraversable(false);
+                                    }
+                                }
+                            }
+
+
+                        }
+                        foreach (Cell mur in arraydepart)
+                        {
+                            for (int u = 0; u < hgt; u++)
+                            {
+                                for (int w = 0; w < wid; w++)
+                                {
+                                    if (nodes[u, w].getX() == mur.getX() && nodes[u, w].getY() == mur.getY())
+                                    {
+                                        nodes[u, w].setCellDep(true);
+                                    }
+                                }
+                            }
+
+
+                        }
+                        foreach (Cell mur in arrayfin)
+                        {
+                            for (int u = 0; u < hgt; u++)
+                            {
+                                for (int w = 0; w < wid; w++)
+                                {
+                                    if (nodes[u, w].getX() == mur.getX() && nodes[u, w].getY() == mur.getY())
+                                    {
+                                        nodes[u, w].setCellEnd(true);
                                     }
                                 }
                             }
@@ -600,10 +631,49 @@ namespace mazeprojetynov
                                 Console.WriteLine("OUAIAIIAIAIAIAIAIAI");
                                 using (Graphics gr = Graphics.FromImage(bm))
                                 {
-                                    SolidBrush brushend = new SolidBrush(Color.Purple);
-                                    cell.FillRectangle(gr, brushend);
-                                    cell.setTraversable(false);
-                                    arraymur.Add(cell);
+                                    if (cellclic == "mur") { 
+                                        SolidBrush brushend = new SolidBrush(Color.Black);
+                                        cell.FillRectangle(gr, brushend);
+                                       
+                                        arraymur.Add(cell);
+                                    }
+                                    if (cellclic == "piège")
+                                    {
+                                        if (cell.getTraversable() == false)
+                                        {
+                                                SolidBrush brushend = new SolidBrush(Color.Gray);
+                                                cell.FillRectangle(gr, brushend);
+                                                cell.setTraversable(true);
+                                                arraymur.Remove(cell);
+                                        }
+                                    }
+                                    if (cellclic == "")
+                                    {
+                                        if (cell.getTraversable() == false)
+                                        {
+                                            SolidBrush brushend = new SolidBrush(Color.Gray);
+                                            cell.FillRectangle(gr, brushend);
+                                            cell.setTraversable(true);
+                                            arraymur.Remove(cell);
+                                        }
+                                    }
+                                    if (cellclic == "depart")
+                                    {
+                                      SolidBrush brushend = new SolidBrush(Color.Green);
+                                      cell.FillRectangle(gr, brushend);
+                                     
+                                      arraydepart.Add(cell);
+                                        
+                                    }
+                                    if (cellclic == "fin")
+                                    {
+                                        SolidBrush brushend = new SolidBrush(Color.Red);
+                                        cell.FillRectangle(gr, brushend);
+
+                                        arrayfin.Add(cell);
+
+                                    }
+
 
                                 }
                                 picMaze.Image = bm;
@@ -616,8 +686,34 @@ namespace mazeprojetynov
             }
            
         }
-        
-}
+
+        private void btnvide_Click(object sender, EventArgs e)
+        {
+            cellclic = "";
+
+        }
+
+        private void btnpiege_Click(object sender, EventArgs e)
+        {
+            cellclic = "piège";
+        }
+
+        private void btnmur_Click(object sender, EventArgs e)
+        {
+            cellclic = "mur";
+        }
+
+        private void btnfin_Click(object sender, EventArgs e)
+        {
+            cellclic = "fin";
+        }
+
+        private void btndepart_Click(object sender, EventArgs e)
+        {
+            cellclic = "depart";
+        }
+
+    }
     }
 
 
