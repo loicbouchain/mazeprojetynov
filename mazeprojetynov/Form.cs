@@ -262,6 +262,33 @@ namespace mazeprojetynov
         }
         private void btnCreate_Click(object sender, EventArgs e)
         {
+
+
+
+            ynovprojetEntities testcontext = new ynovprojetEntities();
+            try
+            {
+
+                map emp = new map
+
+                {
+                    nom_map =  "test"
+                  
+                };
+                testcontext.map.Add(emp);
+                testcontext.SaveChanges();
+                MessageBox.Show("Record Inserted successfully.");
+              
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.InnerException.ToString());
+            }
+
+
+
+
             //taille du labyrinthe 
             int wid = Int16.Parse(txtWidth.Text);
             int hgt = Int16.Parse(txtHeight.Text);
@@ -628,13 +655,11 @@ namespace mazeprojetynov
                         {
                             if (y == (cell_y + u))
                             {
-                                Console.WriteLine("OUAIAIIAIAIAIAIAIAI");
                                 using (Graphics gr = Graphics.FromImage(bm))
                                 {
                                     if (cellclic == "mur") { 
                                         SolidBrush brushend = new SolidBrush(Color.Black);
                                         cell.FillRectangle(gr, brushend);
-                                       
                                         arraymur.Add(cell);
                                     }
                                     if (cellclic == "piège")
@@ -651,10 +676,11 @@ namespace mazeprojetynov
                                     {
                                         if (cell.getTraversable() == false)
                                         {
+                                            arraymur.Remove(cell);
                                             SolidBrush brushend = new SolidBrush(Color.Gray);
                                             cell.FillRectangle(gr, brushend);
                                             cell.setTraversable(true);
-                                            arraymur.Remove(cell);
+                                           
                                         }
                                     }
                                     if (cellclic == "depart")
@@ -669,11 +695,11 @@ namespace mazeprojetynov
                                     {
                                         SolidBrush brushend = new SolidBrush(Color.Red);
                                         cell.FillRectangle(gr, brushend);
-
                                         arrayfin.Add(cell);
 
                                     }
 
+                                    Console.WriteLine(cellclic);
 
                                 }
                                 picMaze.Image = bm;

@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ynovprojetModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="casemap">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_map" Type="int" Nullable="false" />
+          <Property Name="mur" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="map">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_map" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_map" Type="int" Nullable="false" />
+          <Property Name="resultat" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="casemap_ibfk_1">
+          <End Role="map" Type="Self.map" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="casemap" Type="Self.casemap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="map">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="casemap">
+              <PropertyRef Name="id_map" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="test_ibfk_1">
+          <End Role="map" Type="Self.map" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="test" Type="Self.test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="map">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="test">
+              <PropertyRef Name="id_map" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ynovprojetModelStoreContainer">
+          <EntitySet Name="casemap" EntityType="Self.casemap" Schema="ynovprojet" store:Type="Tables" />
+          <EntitySet Name="map" EntityType="Self.map" Schema="ynovprojet" store:Type="Tables" />
+          <EntitySet Name="test" EntityType="Self.test" Schema="ynovprojet" store:Type="Tables" />
+          <AssociationSet Name="casemap_ibfk_1" Association="Self.casemap_ibfk_1">
+            <End Role="map" EntitySet="map" />
+            <End Role="casemap" EntitySet="casemap" />
+          </AssociationSet>
+          <AssociationSet Name="test_ibfk_1" Association="Self.test_ibfk_1">
+            <End Role="map" EntitySet="map" />
+            <End Role="test" EntitySet="test" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ynovprojetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="casemap">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_map" Type="Int32" Nullable="false" />
+          <Property Name="mur" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="map" Relationship="Self.casemap_ibfk_1" FromRole="casemap" ToRole="map" />
+        </EntityType>
+        <EntityType Name="map">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_map" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="casemap" Relationship="Self.casemap_ibfk_1" FromRole="map" ToRole="casemap" />
+          <NavigationProperty Name="test" Relationship="Self.test_ibfk_1" FromRole="map" ToRole="test" />
+        </EntityType>
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_map" Type="Int32" Nullable="false" />
+          <Property Name="resultat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="map" Relationship="Self.test_ibfk_1" FromRole="test" ToRole="map" />
+        </EntityType>
+        <Association Name="casemap_ibfk_1">
+          <End Role="map" Type="Self.map" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="casemap" Type="Self.casemap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="map">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="casemap">
+              <PropertyRef Name="id_map" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="test_ibfk_1">
+          <End Role="map" Type="Self.map" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="test" Type="Self.test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="map">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="test">
+              <PropertyRef Name="id_map" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ynovprojetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="casemap" EntityType="Self.casemap" />
+          <EntitySet Name="map" EntityType="Self.map" />
+          <EntitySet Name="test" EntityType="Self.test" />
+          <AssociationSet Name="casemap_ibfk_1" Association="Self.casemap_ibfk_1">
+            <End Role="map" EntitySet="map" />
+            <End Role="casemap" EntitySet="casemap" />
+          </AssociationSet>
+          <AssociationSet Name="test_ibfk_1" Association="Self.test_ibfk_1">
+            <End Role="map" EntitySet="map" />
+            <End Role="test" EntitySet="test" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ynovprojetModelStoreContainer" CdmEntityContainer="ynovprojetEntities">
+          <EntitySetMapping Name="casemap">
+            <EntityTypeMapping TypeName="ynovprojetModel.casemap">
+              <MappingFragment StoreEntitySet="casemap">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_map" ColumnName="id_map" />
+                <ScalarProperty Name="mur" ColumnName="mur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="map">
+            <EntityTypeMapping TypeName="ynovprojetModel.map">
+              <MappingFragment StoreEntitySet="map">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom_map" ColumnName="nom_map" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="test">
+            <EntityTypeMapping TypeName="ynovprojetModel.test">
+              <MappingFragment StoreEntitySet="test">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_map" ColumnName="id_map" />
+                <ScalarProperty Name="resultat" ColumnName="resultat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
