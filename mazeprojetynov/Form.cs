@@ -29,6 +29,8 @@ namespace mazeprojetynov
         private Pathfinder path;
         public Cell[,] nodes;
         public Cell[,] all;
+        public map emp;
+        ynovprojetEntities testcontext = new ynovprojetEntities();
 
         List<Cell> list = new List<Cell>();
         List<Cell> arraymur = new List<Cell>();
@@ -108,14 +110,8 @@ namespace mazeprojetynov
                                     }
                                 }
                             }
-
-
                         }
-
-
-
                     }
-
                 }
             }
             setCells(nodes);
@@ -262,37 +258,18 @@ namespace mazeprojetynov
         }
         private void btnCreate_Click(object sender, EventArgs e)
         {
-
-
-
-            ynovprojetEntities testcontext = new ynovprojetEntities();
-            try
-            {
-
-                map emp = new map
-
-                {
-                    nom_map =  "test"
+          
+           emp = new map
+           {
+           nom_map =  "map3"
                   
-                };
-                testcontext.map.Add(emp);
-                testcontext.SaveChanges();
-                MessageBox.Show("Record Inserted successfully.");
-              
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.InnerException.ToString());
-            }
-
-
-
-
+           };
+           /* testcontext.map.Add(emp);
+            testcontext.SaveChanges();*/
+           // Console.WriteLine("ici jjdj "+testcontext.map.Find(1).nom_map); 
             //taille du labyrinthe 
             int wid = Int16.Parse(txtWidth.Text);
             int hgt = Int16.Parse(txtHeight.Text);
-
 
             CellWid = picMaze.ClientSize.Width / (wid + 2);
             CellHgt = picMaze.ClientSize.Height / (hgt + 2);
@@ -301,200 +278,20 @@ namespace mazeprojetynov
             Xmin = (picMaze.ClientSize.Width - wid * CellWid) / 2;
             Ymin = (picMaze.ClientSize.Height - hgt * CellHgt) / 2;
             makemap(wid, hgt);
-
-
-            // Make the nodes.
-            //créer une liste de Cell 
-            /*
-            nodes = new Cell[hgt, wid];
-            for (int r = 0; r < hgt; r++)
+            foreach(Cell cell in getCells())
             {
-                int y = Ymin + CellHgt * r;
-                for (int c = 0; c < wid; c++)
-                {
-
-                    int x = Xmin + CellWid * c;
-                    nodes[r, c] = new Cell(x, y);
-                    if (c == 0 && r == 0)
-                    {
-                        //nodes[r, c] = new Depart(x, y);
-                        nodes[r, c].setCellDep(true); //cell de départ
-
-                    }
-                    if (c == wid - 1 && r == hgt - 1)
-                    {
-                        //nodes[r, c] = new Fin(x, y);
-                        nodes[5, 6].setCellEnd(true);// cell de fin
-                   nodes[2, 5].setTraversable(false);
-                        nodes[3, 5].setTraversable(false);//défini un mur
-                        nodes[5, 5].setTraversable(false);
-                        nodes[4, 5].setTraversable(false);
-                        nodes[6, 5].setTraversable(false);
-                        nodes[7, 5].setTraversable(false);
-                        nodes[8, 5].setTraversable(false);
-
-                        //nodes[9, 12].setTraversable(false);
-                        //nodes[8, 12].setTraversable(false);
-                        //nodes[5, 7].setTraversable(false);
-                        nodes[4, 7].setTraversable(false);
-                        //nodes[6, 7].setTraversable(false);
-
-             
-
-                        //nodes[9, 8].setTraversable(false);
-                        //nodes[9, 7].setTraversable(false);
-
-
-                    }
-
-
-
-                }
-               
+                casemap casemap = new casemap 
+                { id_map = emp.id,
+                    mur= cell.getTraversable(),
+                    map = emp,
+                x = cell.getX(),
+                y=cell.getY()};
+                testcontext.casemap.Add(casemap);
             }
-            setCells(nodes);
-            // Définie les voisins de chaque cell (les murs ne sont pas considérés comme voisin)
-            for (int r = 0; r < hgt; r++)
-            {
-                for (int c = 0; c < wid; c++)
-                {
+            testcontext.SaveChanges();
+           // DisplayMaze(nodes); // permet l'affichage dans un picturebox
 
-                    if (r > 0) {
-
-                 
-                        if (nodes[r - 1, c].getTraversable())
-                        {
-                            nodes[r, c].Neighbors[Cell.North] = nodes[r - 1, c];
-                            nodes[r, c].setVoisinNord(nodes[r - 1, c]);
-                        }
-                        else
-                        {
-                            nodes[r, c].Neighbors[Cell.North] =null;
-                            nodes[r, c].setVoisinNord(null);
-                        }
-                      
-                       
-
-                       
-                    }
-                    if (r < hgt - 1) {
-
-                    
-
-
-                        if (nodes[r + 1, c].getTraversable())
-                        {
-                            nodes[r, c].Neighbors[Cell.South] = nodes[r + 1, c];
-                            nodes[r, c].setVoisiSud(nodes[r + 1, c]);
-                        }
-                        else
-                        {
-                            nodes[r, c].Neighbors[Cell.South] = null;
-                            nodes[r, c].setVoisiSud(null);
-                        }
-
-                       
-                        if (c < wid - 1)
-                        {
-                            if (nodes[r + 1, c + 1].getTraversable())
-                            {
-
-                                nodes[r, c].setVoisinSudEst(nodes[r + 1, c + 1]);
-                            }
-                            else
-                            {
-
-                                nodes[r, c].setVoisinSudEst(null);
-                            }
-                            if (r > 0) { 
-
-                                if (nodes[r - 1, c + 1].getTraversable())
-                                {
-
-                                    nodes[r, c].setVoisinNordEst(nodes[r - 1, c + 1]);
-                                }
-                                else
-                                {
-
-                                    nodes[r, c].setVoisinNordEst(null);
-                                }
-                            }
-
-
-                        }
-                        if (c > 0)
-                        {
-
-                            if (nodes[r + 1, c - 1].getTraversable())
-                            {
-
-                                nodes[r, c].setVoisinSudOuest(nodes[r + 1, c - 1]);
-                            }
-                            else
-                            {
-
-                                nodes[r, c].setVoisinSudOuest(null);
-                            }
-                            if (r > 0) { 
-                                if (nodes[r - 1, c -1].getTraversable())
-                                {
-
-                                    nodes[r, c].setVoisinNordOuest(nodes[r - 1, c - 1]);
-                                }
-                                else
-                                {
-
-                                    nodes[r, c].setVoisinNordOuest(null);
-                                }
-                            }
-                        }
-
-                        }
-                    if (c > 0) {
-
-                      
-
-
-                        if (nodes[r, c - 1].getTraversable())
-                        {
-                            nodes[r, c].Neighbors[Cell.West] = nodes[r, c - 1];
-                            nodes[r, c].setVoisinOuest(nodes[r, c - 1]);
-                        }
-                        else
-                        {
-                            nodes[r, c].Neighbors[Cell.West] =null;
-                            nodes[r, c].setVoisinOuest(null);
-
-                        }
-
-                    }
-                    if (c < wid - 1) {
-
-                        if (nodes[r, c + 1].getTraversable())
-                        {
-                            nodes[r, c].Neighbors[Cell.East] = nodes[r, c + 1];
-                            nodes[r, c].setVoisinEst(nodes[r, c + 1]);
-                        }
-                        else
-                        {
-                            nodes[r, c].Neighbors[Cell.East] =null;
-                            nodes[r, c].setVoisinEst(null);
-
-                        }
-
-                    }
-                    
-
-                }
-            }*/
-            DisplayMaze(nodes); // permet l'affichage dans un picturebox
-            /*var astar = new AStarSearch(nodes,startCell, endCell); // Trouve le chemin le plus court
-            Cell cell = endCell;
-            while(cell != startCell)
-            {
-                list.Add(cell);//contient la liste définie par astar
-                cell = astar.cameFrom[cell];
-            }*/
+      
         }
 
 
@@ -660,6 +457,9 @@ namespace mazeprojetynov
                                     if (cellclic == "mur") { 
                                         SolidBrush brushend = new SolidBrush(Color.Black);
                                         cell.FillRectangle(gr, brushend);
+                                        casemap map = testcontext.casemap.FirstOrDefault(i => i.id_map == emp.id && i.x == cell.getX() && i.y == cell.getY()); // pb int 32 et double mais c'est relou j'ai chnage r147 fois deja ^^^^^^^^^^^^
+                                        map.mur = true;
+                                        testcontext.SaveChanges();
                                         arraymur.Add(cell);
                                     }
                                     if (cellclic == "piège")
@@ -739,6 +539,180 @@ namespace mazeprojetynov
             cellclic = "depart";
         }
 
+        private void btn_load_Click(object sender, EventArgs e)
+        {
+            int hgt = 15;
+            int wid = 10;
+            nodes = new Cell[hgt, wid];
+            casemap casemap = new casemap();
+            var products = testcontext.casemap.Where(p => p.id_map == 10);
+            int cal = 0;
+            int cal2 = 0;
+            foreach(var produit in products)
+            {
+                Cell cell = new Cell(produit.x,produit.y);
+                cell.setTraversable(produit.mur);
+                if(cal==9)
+                {
+                    cal = 0;
+                    cal2 = cal2 + 1;
+                }
+                else { 
+                    cal = cal + 1; 
+                }
+
+                if (cal2 == 15)
+                { 
+                    cal2 = 0; 
+                }
+                
+                
+                nodes[cal2, cal] = cell;
+               
+            }
+            setCells(nodes);
+            for (int r = 0; r < hgt; r++)
+            {
+                for (int c = 0; c < wid; c++)
+                {
+
+                    if (r > 0)
+                    {
+
+
+                        if (nodes[r - 1, c].getTraversable())
+                        {
+                            nodes[r, c].Neighbors[Cell.North] = nodes[r - 1, c];
+                            nodes[r, c].setVoisinNord(nodes[r - 1, c]);
+                        }
+                        else
+                        {
+                            nodes[r, c].Neighbors[Cell.North] = null;
+                            nodes[r, c].setVoisinNord(null);
+                        }
+
+
+
+
+                    }
+                    if (r < hgt - 1)
+                    {
+
+
+
+
+                        if (nodes[r + 1, c].getTraversable())
+                        {
+                            nodes[r, c].Neighbors[Cell.South] = nodes[r + 1, c];
+                            nodes[r, c].setVoisiSud(nodes[r + 1, c]);
+                        }
+                        else
+                        {
+                            nodes[r, c].Neighbors[Cell.South] = null;
+                            nodes[r, c].setVoisiSud(null);
+                        }
+
+
+                        if (c < wid - 1)
+                        {
+                            if (nodes[r + 1, c + 1].getTraversable())
+                            {
+
+                                nodes[r, c].setVoisinSudEst(nodes[r + 1, c + 1]);
+                            }
+                            else
+                            {
+
+                                nodes[r, c].setVoisinSudEst(null);
+                            }
+                            if (r > 0)
+                            {
+
+                                if (nodes[r - 1, c + 1].getTraversable())
+                                {
+
+                                    nodes[r, c].setVoisinNordEst(nodes[r - 1, c + 1]);
+                                }
+                                else
+                                {
+
+                                    nodes[r, c].setVoisinNordEst(null);
+                                }
+                            }
+
+
+                        }
+                        if (c > 0)
+                        {
+
+                            if (nodes[r + 1, c - 1].getTraversable())
+                            {
+
+                                nodes[r, c].setVoisinSudOuest(nodes[r + 1, c - 1]);
+                            }
+                            else
+                            {
+
+                                nodes[r, c].setVoisinSudOuest(null);
+                            }
+                            if (r > 0)
+                            {
+                                if (nodes[r - 1, c - 1].getTraversable())
+                                {
+
+                                    nodes[r, c].setVoisinNordOuest(nodes[r - 1, c - 1]);
+                                }
+                                else
+                                {
+
+                                    nodes[r, c].setVoisinNordOuest(null);
+                                }
+                            }
+                        }
+
+                    }
+                    if (c > 0)
+                    {
+
+
+
+
+                        if (nodes[r, c - 1].getTraversable())
+                        {
+                            nodes[r, c].Neighbors[Cell.West] = nodes[r, c - 1];
+                            nodes[r, c].setVoisinOuest(nodes[r, c - 1]);
+                        }
+                        else
+                        {
+                            nodes[r, c].Neighbors[Cell.West] = null;
+                            nodes[r, c].setVoisinOuest(null);
+
+                        }
+
+                    }
+                    if (c < wid - 1)
+                    {
+
+                        if (nodes[r, c + 1].getTraversable())
+                        {
+                            nodes[r, c].Neighbors[Cell.East] = nodes[r, c + 1];
+                            nodes[r, c].setVoisinEst(nodes[r, c + 1]);
+                        }
+                        else
+                        {
+                            nodes[r, c].Neighbors[Cell.East] = null;
+                            nodes[r, c].setVoisinEst(null);
+
+                        }
+
+                    }
+
+
+                }
+            }
+            DisplayMaze(nodes);
+
+        }
     }
     }
 

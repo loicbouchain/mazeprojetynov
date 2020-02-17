@@ -17,6 +17,8 @@ namespace mazeprojetynov
         public int id { get; set; }
         public int id_map { get; set; }
         public bool mur { get; set; }
+        public int x { get; set; }
+        public int y { get; set; }
     
         public virtual map map { get; set; }
     }
