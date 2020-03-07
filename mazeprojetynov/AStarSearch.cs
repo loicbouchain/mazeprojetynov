@@ -27,6 +27,9 @@ namespace mazeprojetynov
             }
         }
 
+      
+
+
         public class PriorityQueue<T>
         {
             // I'm using an unsorted array for this example, but ideally this
@@ -59,12 +62,14 @@ namespace mazeprojetynov
                 {
                     if (elements[i].Item2 < elements[bestIndex].Item2)
                     {
+     
                         bestIndex = i;
                     }
                 }
 
                 T bestItem = elements[bestIndex].Item1;
                 elements.RemoveAt(bestIndex);
+            
                 return bestItem;
             }
         }
@@ -81,14 +86,20 @@ namespace mazeprojetynov
             {
                 var current = frontier.Dequeue();
 
-                if (current.Equals(goal)) 
+
+                if (current.Equals(goal) )//|| current.getPiege()) 
                 {
                     break;
                 }
 
                 foreach (var next in current.getVoisins())
                 {
-                    double newCost = costSoFar[current] + IsDiag(current,next);
+                    int ralenti = 0;
+                    if (next.getBoue())
+                    {
+                        ralenti = 150;
+                    }
+                    double newCost = costSoFar[current] + IsDiag(current,next)+ralenti;
                     if (!costSoFar.ContainsKey(next)
                         || newCost < costSoFar[next])
                     {

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.Button btn_boue;
             this.button1 = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
             this.txtHeight = new System.Windows.Forms.TextBox();
@@ -41,6 +42,7 @@
             this.btnpiege = new System.Windows.Forms.Button();
             this.btnvide = new System.Windows.Forms.Button();
             this.btn_load = new System.Windows.Forms.Button();
+            btn_boue = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picMaze)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,10 +50,9 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button1.AutoSize = true;
-            this.button1.Location = new System.Drawing.Point(20, 710);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(15, 577);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(215, 28);
+            this.button1.Size = new System.Drawing.Size(161, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "Afficher le chemin le plus court";
             this.button1.UseVisualStyleBackColor = true;
@@ -59,10 +60,9 @@
             // 
             // btnCreate
             // 
-            this.btnCreate.Location = new System.Drawing.Point(152, 25);
-            this.btnCreate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCreate.Location = new System.Drawing.Point(114, 20);
             this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(100, 28);
+            this.btnCreate.Size = new System.Drawing.Size(75, 23);
             this.btnCreate.TabIndex = 10;
             this.btnCreate.Text = "Créer";
             this.btnCreate.UseVisualStyleBackColor = true;
@@ -71,10 +71,9 @@
             // txtHeight
             // 
             this.txtHeight.Enabled = false;
-            this.txtHeight.Location = new System.Drawing.Point(79, 41);
-            this.txtHeight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtHeight.Location = new System.Drawing.Point(59, 33);
             this.txtHeight.Name = "txtHeight";
-            this.txtHeight.Size = new System.Drawing.Size(45, 22);
+            this.txtHeight.Size = new System.Drawing.Size(35, 20);
             this.txtHeight.TabIndex = 9;
             this.txtHeight.Text = "10";
             this.txtHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -82,20 +81,18 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 44);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(12, 36);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 17);
+            this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 8;
             this.label2.Text = "Hauteur";
             // 
             // txtWidth
             // 
             this.txtWidth.Enabled = false;
-            this.txtWidth.Location = new System.Drawing.Point(79, 9);
-            this.txtWidth.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtWidth.Location = new System.Drawing.Point(59, 7);
             this.txtWidth.Name = "txtWidth";
-            this.txtWidth.Size = new System.Drawing.Size(45, 22);
+            this.txtWidth.Size = new System.Drawing.Size(35, 20);
             this.txtWidth.TabIndex = 7;
             this.txtWidth.Text = "15";
             this.txtWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -103,10 +100,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 12);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(12, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 17);
+            this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "Largeur";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -118,20 +114,18 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.picMaze.BackColor = System.Drawing.Color.White;
             this.picMaze.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picMaze.Location = new System.Drawing.Point(20, 74);
-            this.picMaze.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picMaze.Location = new System.Drawing.Point(15, 60);
             this.picMaze.Name = "picMaze";
-            this.picMaze.Size = new System.Drawing.Size(1285, 628);
+            this.picMaze.Size = new System.Drawing.Size(965, 511);
             this.picMaze.TabIndex = 12;
             this.picMaze.TabStop = false;
             this.picMaze.Click += new System.EventHandler(this.picMaze_Click);
             // 
             // btndepart
             // 
-            this.btndepart.Location = new System.Drawing.Point(1377, 126);
-            this.btndepart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btndepart.Location = new System.Drawing.Point(1033, 102);
             this.btndepart.Name = "btndepart";
-            this.btndepart.Size = new System.Drawing.Size(100, 28);
+            this.btndepart.Size = new System.Drawing.Size(75, 23);
             this.btndepart.TabIndex = 13;
             this.btndepart.Text = "départ";
             this.btndepart.UseVisualStyleBackColor = true;
@@ -139,10 +133,9 @@
             // 
             // btnfin
             // 
-            this.btnfin.Location = new System.Drawing.Point(1377, 254);
-            this.btnfin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnfin.Location = new System.Drawing.Point(1033, 206);
             this.btnfin.Name = "btnfin";
-            this.btnfin.Size = new System.Drawing.Size(100, 28);
+            this.btnfin.Size = new System.Drawing.Size(75, 23);
             this.btnfin.TabIndex = 14;
             this.btnfin.Text = "fin";
             this.btnfin.UseVisualStyleBackColor = true;
@@ -150,10 +143,9 @@
             // 
             // btnmur
             // 
-            this.btnmur.Location = new System.Drawing.Point(1377, 353);
-            this.btnmur.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnmur.Location = new System.Drawing.Point(1033, 287);
             this.btnmur.Name = "btnmur";
-            this.btnmur.Size = new System.Drawing.Size(100, 28);
+            this.btnmur.Size = new System.Drawing.Size(75, 23);
             this.btnmur.TabIndex = 15;
             this.btnmur.Text = "mur";
             this.btnmur.UseVisualStyleBackColor = true;
@@ -161,10 +153,9 @@
             // 
             // btnpiege
             // 
-            this.btnpiege.Location = new System.Drawing.Point(1377, 453);
-            this.btnpiege.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnpiege.Location = new System.Drawing.Point(1033, 368);
             this.btnpiege.Name = "btnpiege";
-            this.btnpiege.Size = new System.Drawing.Size(100, 28);
+            this.btnpiege.Size = new System.Drawing.Size(75, 23);
             this.btnpiege.TabIndex = 16;
             this.btnpiege.Text = "piège";
             this.btnpiege.UseVisualStyleBackColor = true;
@@ -172,10 +163,9 @@
             // 
             // btnvide
             // 
-            this.btnvide.Location = new System.Drawing.Point(1377, 537);
-            this.btnvide.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnvide.Location = new System.Drawing.Point(1033, 436);
             this.btnvide.Name = "btnvide";
-            this.btnvide.Size = new System.Drawing.Size(100, 28);
+            this.btnvide.Size = new System.Drawing.Size(75, 23);
             this.btnvide.TabIndex = 17;
             this.btnvide.Text = "vide";
             this.btnvide.UseVisualStyleBackColor = true;
@@ -183,20 +173,30 @@
             // 
             // btn_load
             // 
-            this.btn_load.Location = new System.Drawing.Point(749, 25);
-            this.btn_load.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_load.Location = new System.Drawing.Point(562, 20);
             this.btn_load.Name = "btn_load";
-            this.btn_load.Size = new System.Drawing.Size(100, 28);
+            this.btn_load.Size = new System.Drawing.Size(75, 23);
             this.btn_load.TabIndex = 18;
             this.btn_load.Text = "load";
             this.btn_load.UseVisualStyleBackColor = true;
             this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
             // 
+            // btn_boue
+            // 
+            btn_boue.Location = new System.Drawing.Point(1033, 491);
+            btn_boue.Name = "btn_boue";
+            btn_boue.Size = new System.Drawing.Size(75, 23);
+            btn_boue.TabIndex = 19;
+            btn_boue.Text = "boue";
+            btn_boue.UseVisualStyleBackColor = true;
+            btn_boue.Click += new System.EventHandler(this.btn_boue_Click);
+            // 
             // Form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1569, 753);
+            this.ClientSize = new System.Drawing.Size(1177, 612);
+            this.Controls.Add(btn_boue);
             this.Controls.Add(this.btn_load);
             this.Controls.Add(this.btnvide);
             this.Controls.Add(this.btnpiege);
@@ -210,7 +210,6 @@
             this.Controls.Add(this.txtWidth);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form_Load);

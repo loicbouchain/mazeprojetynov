@@ -36,6 +36,8 @@ namespace mazeprojetynov
         List<Cell> arraymur = new List<Cell>();
         List<Cell> arraydepart = new List<Cell>();
         List<Cell> arrayfin = new List<Cell>();
+        List<Cell> arrayPiege = new List<Cell>();
+        List<Cell> arrayBoue = new List<Cell>();
         public string cellclic = "";
 
         public Form()
@@ -107,6 +109,32 @@ namespace mazeprojetynov
                                     if (nodes[u, w].getX() == mur.getX() && nodes[u, w].getY() == mur.getY())
                                     {
                                         nodes[u, w].setCellEnd(true);
+                                    }
+                                }
+                            }
+                        }
+                        foreach (Cell mur in arrayPiege)
+                        {
+                            for (int u = 0; u < hgt; u++)
+                            {
+                                for (int w = 0; w < wid; w++)
+                                {
+                                    if (nodes[u, w].getX() == mur.getX() && nodes[u, w].getY() == mur.getY())
+                                    {
+                                        nodes[u, w].setPiege(true);
+                                    }
+                                }
+                            }
+                        }
+                        foreach (Cell mur in arrayBoue)
+                        {
+                            for (int u = 0; u < hgt; u++)
+                            {
+                                for (int w = 0; w < wid; w++)
+                                {
+                                    if (nodes[u, w].getX() == mur.getX() && nodes[u, w].getY() == mur.getY())
+                                    {
+                                        nodes[u, w].setBoue(true);
                                     }
                                 }
                             }
@@ -354,7 +382,18 @@ namespace mazeprojetynov
                                 SolidBrush brushWall = new SolidBrush(Color.Black);
                                 nodes[r, c].FillRectangle(gr, brushWall);
                             }
-                        }
+
+                            if (nodes[r, c].getBoue() == true)
+                            {
+                                SolidBrush brushWall = new SolidBrush(Color.Maroon);
+                                nodes[r, c].FillRectangle(gr, brushWall);
+                            }
+                            if (nodes[r, c].getPiege() == true)
+                            {
+                                SolidBrush brushWall = new SolidBrush(Color.Blue);
+                                nodes[r, c].FillRectangle(gr, brushWall);
+                            }
+                    }
                     }
 
             }
@@ -381,6 +420,7 @@ namespace mazeprojetynov
             {
                 list.Add(current_cell);//contient la liste définie par astar
                 current_cell = astar.cameFrom[current_cell];
+         
             }
 
             using (Graphics gr = Graphics.FromImage(bm))
@@ -457,20 +497,16 @@ namespace mazeprojetynov
                                     if (cellclic == "mur") { 
                                         SolidBrush brushend = new SolidBrush(Color.Black);
                                         cell.FillRectangle(gr, brushend);
-                                        casemap map = testcontext.casemap.FirstOrDefault(i => i.id_map == emp.id && i.x == cell.getX() && i.y == cell.getY()); // pb int 32 et double mais c'est relou j'ai chnage r147 fois deja ^^^^^^^^^^^^
+                                      /*  casemap map = testcontext.casemap.FirstOrDefault(i => i.id_map == emp.id && i.x == cell.getX() && i.y == cell.getY()); // pb int 32 et double mais c'est relou j'ai chnage r147 fois deja ^^^^^^^^^^^^
                                         map.mur = true;
-                                        testcontext.SaveChanges();
+                                        testcontext.SaveChanges();*/
                                         arraymur.Add(cell);
                                     }
                                     if (cellclic == "piège")
                                     {
-                                        if (cell.getTraversable() == false)
-                                        {
-                                                SolidBrush brushend = new SolidBrush(Color.Gray);
-                                                cell.FillRectangle(gr, brushend);
-                                                cell.setTraversable(true);
-                                                arraymur.Remove(cell);
-                                        }
+                                        SolidBrush brushend = new SolidBrush(Color.Blue);
+                                        cell.FillRectangle(gr, brushend);
+                                        arrayPiege.Add(cell);
                                     }
                                     if (cellclic == "")
                                     {
@@ -496,6 +532,13 @@ namespace mazeprojetynov
                                         SolidBrush brushend = new SolidBrush(Color.Red);
                                         cell.FillRectangle(gr, brushend);
                                         arrayfin.Add(cell);
+
+                                    }
+                                    if (cellclic == "boue")
+                                    {
+                                        SolidBrush brushend = new SolidBrush(Color.Maroon);
+                                        cell.FillRectangle(gr, brushend);
+                                        arrayBoue.Add(cell);
 
                                     }
 
@@ -537,6 +580,10 @@ namespace mazeprojetynov
         private void btndepart_Click(object sender, EventArgs e)
         {
             cellclic = "depart";
+        }
+        private void btn_boue_Click(object sender, EventArgs e)
+        {
+            cellclic = "boue";
         }
 
         private void btn_load_Click(object sender, EventArgs e)
@@ -713,6 +760,8 @@ namespace mazeprojetynov
             DisplayMaze(nodes);
 
         }
+
+       
     }
     }
 

@@ -11,6 +11,8 @@ namespace MazeProjetYNOV
         private int x;
         private int y;
         private bool traversable;
+        private bool boue = false;
+        private bool piege= false;
         private int heuristic;
         public int gscore;
         private int fscore;
@@ -41,7 +43,9 @@ namespace MazeProjetYNOV
             this.x = x;
             this.y = y;
             traversable = true;
-            Bounds = new Rectangle(x, y, 14, 14);
+            boue = false;
+            piege = false;
+        Bounds = new Rectangle(x, y, 14, 14);
 
         }
         public Point Center
@@ -178,6 +182,22 @@ namespace MazeProjetYNOV
         public void setTraversable(bool traversable)
         {
             this.traversable = traversable;
+        }
+        public bool getBoue()
+        {
+            return this.boue;
+        }
+        public void setBoue(bool boue)
+        {
+            this.boue = boue;
+        }
+        public bool getPiege()
+        {
+            return this.piege;
+        }
+        public void setPiege(bool piege)
+        {
+            this.piege = piege;
         }
         public bool getCellDep()
         {
