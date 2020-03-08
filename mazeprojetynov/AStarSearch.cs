@@ -99,6 +99,10 @@ namespace mazeprojetynov
                     {
                         ralenti = 150;
                     }
+                    if (next.getPiege())
+                    {
+                        ralenti = 99999999;
+                    }
                     double newCost = costSoFar[current] + IsDiag(current,next)+ralenti;
                     if (!costSoFar.ContainsKey(next)
                         || newCost < costSoFar[next])

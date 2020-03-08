@@ -70,7 +70,7 @@ namespace mazeprojetynov
                     if (c == wid - 1 && r == hgt - 1)
                     {
                         //nodes[r, c] = new Fin(x, y);
-                        foreach (Cell mur in arraymur)
+                        foreach (Cell mur in arraymur) // chaque case dans la liste des murs ne peuvent pas être traversé 
                         {
                             for (int u = 0; u < hgt; u++)
                             {
@@ -420,6 +420,11 @@ namespace mazeprojetynov
             {
                 list.Add(current_cell);//contient la liste définie par astar
                 current_cell = astar.cameFrom[current_cell];
+                if (current_cell.getPiege())
+                {
+                    list.Clear();
+                    current_cell = astar.cameFrom[current_cell];
+                }
          
             }
 
