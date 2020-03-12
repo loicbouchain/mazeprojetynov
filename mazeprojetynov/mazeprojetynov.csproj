@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,8 +12,6 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -25,7 +22,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -172,6 +169,10 @@
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+=======
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+>>>>>>> parent of 20adcfe... Ajout des différents form
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -183,9 +184,12 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+<<<<<<< HEAD
     <Reference Include="Ubiety.Dns.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.19\lib\net452\Ubiety.Dns.Core.dll</HintPath>
     </Reference>
+=======
+>>>>>>> parent of 20adcfe... Ajout des différents form
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AStarSearch.cs" />
@@ -197,41 +201,11 @@
     <Compile Include="CellLink.cs" />
     <Compile Include="depart.cs" />
     <Compile Include="fin.cs" />
-    <Compile Include="frmEditeur.cs">
+    <Compile Include="Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEditeur.Designer.cs">
-      <DependentUpon>frmEditeur.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmJouer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmJouer.Designer.cs">
-      <DependentUpon>frmJouer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmMaze.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMaze.Designer.cs">
-      <DependentUpon>frmMaze.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmMenu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMenu.Designer.cs">
-      <DependentUpon>frmMenu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmNiveaux.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmNiveaux.Designer.cs">
-      <DependentUpon>frmNiveaux.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmRegles.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmRegles.Designer.cs">
-      <DependentUpon>frmRegles.cs</DependentUpon>
+    <Compile Include="Form.Designer.cs">
+      <DependentUpon>Form.cs</DependentUpon>
     </Compile>
     <Compile Include="IPriorityQueue.cs" />
     <Compile Include="map.cs">
@@ -260,9 +234,13 @@
     <Compile Include="Piege.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
     <Compile Include="test.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+=======
+    <Compile Include="Test.cs" />
+>>>>>>> parent of 20adcfe... Ajout des différents form
     <EmbeddedResource Include="Form.resx">
       <DependentUpon>Form.cs</DependentUpon>
     </EmbeddedResource>
@@ -274,8 +252,8 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
+<<<<<<< HEAD
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -284,6 +262,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+=======
+>>>>>>> parent of 20adcfe... Ajout des différents form
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -297,6 +277,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+<<<<<<< HEAD
   <ItemGroup>
     <Content Include="Bitmap1.bmp" />
     <Content Include="Model1.Context.tt">
@@ -323,3 +304,7 @@
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
 </Project>
+=======
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
+>>>>>>> parent of 20adcfe... Ajout des différents form
