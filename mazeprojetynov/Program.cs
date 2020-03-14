@@ -16,7 +16,7 @@ namespace mazeprojetynov
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMaze());
+            Application.Run(new Form());
         }
     }
 }
