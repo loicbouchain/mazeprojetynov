@@ -14,6 +14,10 @@
           <Property Name="mur" Type="bool" Nullable="false" />
           <Property Name="x" Type="int" Nullable="false" />
           <Property Name="y" Type="int" Nullable="false" />
+          <Property Name="depart" Type="bool" Nullable="false" />
+          <Property Name="fin" Type="bool" Nullable="false" />
+          <Property Name="boue" Type="bool" Nullable="false" />
+          <Property Name="piege" Type="bool" Nullable="false" />
         </EntityType>
         <EntityType Name="map">
           <Key>
@@ -85,6 +89,10 @@
           <NavigationProperty Name="map" Relationship="Self.casemap_ibfk_1" FromRole="casemap" ToRole="map" />
           <Property Name="x" Type="Int32" Nullable="false" />
           <Property Name="y" Type="Int32" Nullable="false" />
+          <Property Name="depart" Type="Boolean" Nullable="false" />
+          <Property Name="fin" Type="Boolean" Nullable="false" />
+          <Property Name="boue" Type="Boolean" Nullable="false" />
+          <Property Name="piege" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="map">
           <Key>
@@ -154,6 +162,10 @@
           <EntitySetMapping Name="casemap">
             <EntityTypeMapping TypeName="ynovprojetModel.casemap">
               <MappingFragment StoreEntitySet="casemap">
+                <ScalarProperty Name="piege" ColumnName="piege" />
+                <ScalarProperty Name="boue" ColumnName="boue" />
+                <ScalarProperty Name="fin" ColumnName="fin" />
+                <ScalarProperty Name="depart" ColumnName="depart" />
                 <ScalarProperty Name="y" ColumnName="y" />
                 <ScalarProperty Name="x" ColumnName="x" />
                 <ScalarProperty Name="id" ColumnName="id" />
