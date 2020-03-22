@@ -21,5 +21,26 @@ namespace mazeprojetynov
         {
             Application.Exit();
         }
+
+        private void btnJouer_Click(object sender, EventArgs e)
+        {
+            frmJouer frmJouer = new frmJouer();
+            frmJouer.Show();
+            this.Hide();
+        }
+
+        private void btnEditer_Click(object sender, EventArgs e)
+        {
+            frmEditeur frmEditeur = new frmEditeur();
+            frmEditeur.Show();
+            this.Hide();
+        }
+
+        private void btnRegles_Click(object sender, EventArgs e)
+        {
+            frmRegles frmRegles = new frmRegles();
+            frmRegles.Show();
+            this.Hide();
+        }
     }
 }

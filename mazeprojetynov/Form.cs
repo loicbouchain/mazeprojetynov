@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -39,6 +40,10 @@ namespace mazeprojetynov
         List<Cell> arrayBoue = new List<Cell>();
         public string cellclic = "";
 
+       /* SqlConnection cnx = new SqlConnection("Data Source=.; Integrated Security=True; Initial Catalog=projetai");
+        SqlCommand cmd;*/
+
+
         public Form()
         {
             InitializeComponent();
@@ -47,7 +52,16 @@ namespace mazeprojetynov
 
         private void Form_Load(object sender, EventArgs e)
         {
+           /* cnx.Open();
+            cmd = new SqlCommand("select nom_map from niveau", cnx);
+            SqlDataReader dr = cmd.ExecuteReader();
 
+           while (dr.Read())
+            {
+                comboBox1.Items.Add(dr[0].ToString());
+            }
+            dr.Close();
+            cnx.Close();*/
         }
         public void setEmp(map map)
         {
@@ -368,6 +382,8 @@ namespace mazeprojetynov
             return all;
 
         }
+
+
 
         private void DisplayMaze(Cell[,] nodes)
         {

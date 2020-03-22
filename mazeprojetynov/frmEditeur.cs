@@ -24,11 +24,10 @@ namespace mazeprojetynov
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            void opennewform(object obj)
-            {
-                Application.Run(new frmMenu());
-            }
-            this.Close();
+            frmMenu frmMenu = new frmMenu();
+            frmMenu.Show();
+            this.Hide();
         }
     }
 }
+
