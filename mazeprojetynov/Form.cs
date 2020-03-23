@@ -1,15 +1,10 @@
 ﻿using MazeProjetYNOV;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 
 namespace mazeprojetynov
@@ -40,10 +35,6 @@ namespace mazeprojetynov
         List<Cell> arrayBoue = new List<Cell>();
         public string cellclic = "";
 
-       /* SqlConnection cnx = new SqlConnection("Data Source=.; Integrated Security=True; Initial Catalog=projetai");
-        SqlCommand cmd;*/
-
-
         public Form()
         {
             InitializeComponent();
@@ -52,16 +43,7 @@ namespace mazeprojetynov
 
         private void Form_Load(object sender, EventArgs e)
         {
-           /* cnx.Open();
-            cmd = new SqlCommand("select nom_map from niveau", cnx);
-            SqlDataReader dr = cmd.ExecuteReader();
 
-           while (dr.Read())
-            {
-                comboBox1.Items.Add(dr[0].ToString());
-            }
-            dr.Close();
-            cnx.Close();*/
         }
         public void setEmp(map map)
         {
@@ -306,7 +288,12 @@ namespace mazeprojetynov
         }
         private void btnCreate_Click(object sender, EventArgs e)
         {
-
+            list.Clear();
+            arrayBoue.Clear();
+            arrayPiege.Clear();
+            arraymur.Clear();
+            arraydepart.Clear();
+            arrayfin.Clear();
             emp = new map
             {
                 nom_map = "map3"
@@ -458,71 +445,82 @@ namespace mazeprojetynov
 
         private void button1_Click(object sender, EventArgs e)
         {
+           
             list.Clear();
             //   DisplayMaze(getCells()); // permet l'affichage dans un picturebox
             makemap(15, 10);
-            var astar = new AStarSearch(getCells(), startCell, endCell); // Trouve le chemin le plus court
-            Console.WriteLine(astar);
-            Cell current_cell = endCell;
-            while (current_cell != startCell)
+            if (startCell != null && endCell != null)
             {
-                list.Add(current_cell);//contient la liste définie par astar
-
-                current_cell = astar.cameFrom[current_cell];
-                if (current_cell.getPiege())
+                var astar = new AStarSearch(getCells(), startCell, endCell); // Trouve le chemin le plus court
+                Console.WriteLine(astar);
+                Cell current_cell = endCell;
+                while (current_cell != startCell)
                 {
-                    list.Clear();
+                    list.Add(current_cell);//contient la liste définie par astar
+
                     current_cell = astar.cameFrom[current_cell];
-                }
-
-            }
-
-            using (Graphics gr = Graphics.FromImage(bm))
-            {
-                gr.SmoothingMode = SmoothingMode.AntiAlias;
-
-                int u = 0;
-                foreach (Cell i in list) //affiche le chemin le plus court
-                {
-                    u = u + 1;
-                    //Console.WriteLine(u+" liste "+i.getX() + "  " + i.getY());
-                    //i.DrawBoundingBox(gr, Pens.Black);
-                    SolidBrush brush = new SolidBrush(Color.RoyalBlue);
-                    i.FillRectangle(gr, brush);
-
-                }
-                SolidBrush brushend = new SolidBrush(Color.Red);
-                endCell.FillRectangle(gr, brushend);
-            }
-            picMaze.Image = bm;
-
-            //bm.Save("ez.bmp");
-
-            Bitmap image1 = bm;
-            int x, y;
-            int count = 0;
-
-            for (x = 0; x < image1.Width; x++)
-            {
-                for (y = 0; y < image1.Height; y++)
-                {
-
-
-                    Color pixelColor = image1.GetPixel(x, y);
-
-                    //    Console.WriteLine(x + " " + y + "   " +pixelColor);
-                    if (pixelColor.ToArgb() == Color.Red.ToArgb())
+                    if (current_cell.getPiege())
                     {
-                        count = count + 1;
-                        // Console.WriteLine(x + " " + y);
+                        list.Clear();
+                        current_cell = astar.cameFrom[current_cell];
                     }
 
                 }
+
+                using (Graphics gr = Graphics.FromImage(bm))
+                {
+                    gr.SmoothingMode = SmoothingMode.AntiAlias;
+
+                    int u = 0;
+                    foreach (Cell i in list) //affiche le chemin le plus court
+                    {
+                        u = u + 1;
+                        //Console.WriteLine(u+" liste "+i.getX() + "  " + i.getY());
+                        //i.DrawBoundingBox(gr, Pens.Black);
+                        SolidBrush brush = new SolidBrush(Color.RoyalBlue);
+                        i.FillRectangle(gr, brush);
+
+                    }
+                    SolidBrush brushend = new SolidBrush(Color.Red);
+                    endCell.FillRectangle(gr, brushend);
+                }
+                picMaze.Image = bm;
+
+                //bm.Save("ez.bmp");
+
+                Bitmap image1 = bm;
+                int x, y;
+                int count = 0;
+
+                for (x = 0; x < image1.Width; x++)
+                {
+                    for (y = 0; y < image1.Height; y++)
+                    {
+
+
+                        Color pixelColor = image1.GetPixel(x, y);
+
+                        //    Console.WriteLine(x + " " + y + "   " +pixelColor);
+                        if (pixelColor.ToArgb() == Color.Red.ToArgb())
+                        {
+                            count = count + 1;
+                            // Console.WriteLine(x + " " + y);
+                        }
+
+                    }
+                }
+                // Console.WriteLine(" C L A F IN " + endCell.getX() + " " + endCell.getY());
+                image1.Save("ez_1.bmp");
+      
+                list.Clear();
+                arrayBoue.Clear();
+                arraydepart.Clear();
+                arrayfin.Clear();
+                arraymur.Clear();
+                arrayPiege.Clear();
+                startCell = null;
+                endCell = null;
             }
-            // Console.WriteLine(" C L A F IN " + endCell.getX() + " " + endCell.getY());
-            image1.Save("ez_1.bmp");
-
-
         }
 
 
@@ -577,18 +575,20 @@ namespace mazeprojetynov
                                     }
                                     if (cellclic == "depart")
                                     {
-                                        SolidBrush brushend = new SolidBrush(Color.Green);
-                                        cell.FillRectangle(gr, brushend);
+                                        if (arraydepart.Count == 0) { 
+                                            SolidBrush brushend = new SolidBrush(Color.Green);
+                                            cell.FillRectangle(gr, brushend);
 
-                                        arraydepart.Add(cell);
-
+                                            arraydepart.Add(cell);
+                                        }
                                     }
                                     if (cellclic == "fin")
                                     {
-                                        SolidBrush brushend = new SolidBrush(Color.Red);
-                                        cell.FillRectangle(gr, brushend);
-                                        arrayfin.Add(cell);
-
+                                        if (arrayfin.Count == 0) { 
+                                            SolidBrush brushend = new SolidBrush(Color.Red);
+                                            cell.FillRectangle(gr, brushend);
+                                            arrayfin.Add(cell);
+                                        }
                                     }
                                     if (cellclic == "boue")
                                     {
@@ -655,7 +655,7 @@ namespace mazeprojetynov
             else CellHgt = CellWid;
             Xmin = (picMaze.ClientSize.Width - wid * CellWid) / 2;
             Ymin = (picMaze.ClientSize.Height - hgt * CellHgt) / 2;
-       
+
             arrayBoue.Clear();
             arraydepart.Clear();
             arrayfin.Clear();
@@ -668,7 +668,7 @@ namespace mazeprojetynov
             var map = testcontext.map.Where(p => p.id == 31).First<map>();
             setEmp(map);
             Console.WriteLine(emp.id);
-            
+
             int cal = 0;
             int cal2 = 0;
             foreach (var produit in products)
@@ -702,7 +702,7 @@ namespace mazeprojetynov
                 {
                     arraymur.Add(cell);
                 }
-                
+
                 if (cal == wid - 1)
                 {
                     cal = 0;
@@ -720,12 +720,12 @@ namespace mazeprojetynov
 
 
                 nodes[cal2, cal] = cell;
-                
+
             }
-   
+
             setCells(nodes);
 
-          
+
             for (int r = 0; r < hgt; r++)
             {
                 for (int c = 0; c < wid; c++)
@@ -868,8 +868,8 @@ namespace mazeprojetynov
             DisplayMaze(nodes);
 
         }
-        
-        }
+
     }
+}
 
 

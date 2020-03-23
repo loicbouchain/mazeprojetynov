@@ -43,6 +43,7 @@
             this.btnJouer.Size = new System.Drawing.Size(192, 77);
             this.btnJouer.TabIndex = 0;
             this.btnJouer.Text = "JOUER";
+            this.btnJouer.Click += new System.EventHandler(this.btnJouer_Click);
             // 
             // btnEditer
             // 
@@ -52,6 +53,7 @@
             this.btnEditer.Size = new System.Drawing.Size(192, 77);
             this.btnEditer.TabIndex = 1;
             this.btnEditer.Text = "EDITEUR DE NIVEAU";
+            this.btnEditer.Click += new System.EventHandler(this.btnEditer_Click);
             // 
             // btnRegles
             // 
@@ -61,6 +63,7 @@
             this.btnRegles.Size = new System.Drawing.Size(192, 77);
             this.btnRegles.TabIndex = 2;
             this.btnRegles.Text = "REGLES";
+            this.btnRegles.Click += new System.EventHandler(this.btnRegles_Click);
             // 
             // btnQuitter
             // 
