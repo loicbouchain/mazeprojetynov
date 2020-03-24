@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-
+using System.Windows.Forms;
 
 namespace mazeprojetynov
 {
@@ -285,7 +285,14 @@ namespace mazeprojetynov
 
                 }
             }
-            DisplayMaze(nodes);
+            //DisplayMaze(nodes);
+            foreach(Cell cell in nodes)
+            {
+                picMaze = new PictureBox();
+                picMaze.Location = new Point(cell.getX(), cell.getY());
+                picMaze.Size = new Size(14, 14);
+               // picMaze.ImageLocation = Properties.Resources.
+            }
         }
         private void btnCreate_Click(object sender, EventArgs e)
         {
@@ -520,13 +527,13 @@ namespace mazeprojetynov
                 image1.Save("ez_1.bmp");
 
                 list.Clear();
-                arrayBoue.Clear();
+             /*   arrayBoue.Clear();
                 arraydepart.Clear();
                 arrayfin.Clear();
                 arraymur.Clear();
                 arrayPiege.Clear();
                 startCell = null;
-                endCell = null;
+                endCell = null;*/
             }
         }
 
@@ -562,6 +569,7 @@ namespace mazeprojetynov
                                           map.mur = true;
                                           testcontext.SaveChanges();*/
                                         arraymur.Add(cell);
+
                                     }
                                     if (cellclic == "piège")
                                     {
@@ -569,16 +577,47 @@ namespace mazeprojetynov
                                         cell.FillRectangle(gr, brushend);
                                         arrayPiege.Add(cell);
                                     }
-                                    if (cellclic == "")
+                                    if (cellclic == "rien")
                                     {
-                                        if (cell.getTraversable() == false)
+                                        
+                                        if (arraymur.Contains(cell) == true)
                                         {
                                             arraymur.Remove(cell);
-                                            SolidBrush brushend = new SolidBrush(Color.Gray);
+                                            SolidBrush brushend = new SolidBrush(Color.White);
                                             cell.FillRectangle(gr, brushend);
+                                            cell.DrawBoundingBox(gr, Pens.Blue);
                                             cell.setTraversable(true);
 
                                         }
+                                        if (arrayBoue.Contains(cell) == true)
+                                        {
+                                            arrayBoue.Remove(cell);
+                                            SolidBrush brushend = new SolidBrush(Color.White);
+                                            cell.FillRectangle(gr, brushend);
+                                            cell.DrawBoundingBox(gr, Pens.Blue);
+                                        }
+                                        if (arrayPiege.Contains(cell) == true)
+                                        {
+                                            arrayPiege.Remove(cell);
+                                            SolidBrush brushend = new SolidBrush(Color.White);
+                                            cell.FillRectangle(gr, brushend);
+                                            cell.DrawBoundingBox(gr, Pens.Blue);
+                                        }
+                                        if (arraydepart.Contains(cell) == true)
+                                        {
+                                            arraydepart.Remove(cell);
+                                            SolidBrush brushend = new SolidBrush(Color.White);
+                                            cell.FillRectangle(gr, brushend);
+                                            cell.DrawBoundingBox(gr, Pens.Blue);
+                                        }
+                                        if (arrayfin.Contains(cell) == true)
+                                        {
+                                            arrayfin.Remove(cell);
+                                            SolidBrush brushend = new SolidBrush(Color.White);
+                                            cell.FillRectangle(gr, brushend);
+                                            cell.DrawBoundingBox(gr, Pens.Blue);
+                                        }
+
                                     }
                                     if (cellclic == "depart")
                                     {
@@ -624,7 +663,7 @@ namespace mazeprojetynov
 
         private void btnvide_Click(object sender, EventArgs e)
         {
-            cellclic = "";
+            cellclic = "rien";
 
         }
 
