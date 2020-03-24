@@ -34,6 +34,7 @@ namespace mazeprojetynov
         List<Cell> arrayPiege = new List<Cell>();
         List<Cell> arrayBoue = new List<Cell>();
         public string cellclic = "";
+        public string resultat = "Passé";
 
         public Form()
         {
@@ -442,6 +443,7 @@ namespace mazeprojetynov
 
         }
 
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -457,14 +459,19 @@ namespace mazeprojetynov
                 while (current_cell != startCell)
                 {
                     list.Add(current_cell);//contient la liste définie par astar
-
-                    current_cell = astar.cameFrom[current_cell];
-                    if (current_cell.getPiege())
-                    {
-                        list.Clear();
+                    if (astar.cameFrom.ContainsKey(current_cell)) { 
                         current_cell = astar.cameFrom[current_cell];
+                        if (current_cell.getPiege())
+                        {
+                            resultat = "piégé";
+                            list.Clear();
+                            current_cell = astar.cameFrom[current_cell];
+                        }
                     }
-
+                    else {
+                        resultat = "non passé";
+                        break;
+                    }
                 }
 
                 using (Graphics gr = Graphics.FromImage(bm))
