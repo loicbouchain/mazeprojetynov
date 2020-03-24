@@ -73,7 +73,7 @@ namespace mazeprojetynov
                     if (c == wid - 1 && r == hgt - 1)
                     {
                         //nodes[r, c] = new Fin(x, y);
-                        foreach (Cell mur in arraymur) // chaque case dans la liste des murs ne peuvent pas être traversé 
+                        foreach (Cell mur in arraymur) // chaque case dans la liste des murs ne peuvent pas être traversé
                         {
                             for (int u = 0; u < hgt; u++)
                             {
@@ -310,8 +310,8 @@ namespace mazeprojetynov
 
             /* testcontext.map.Add(emp);
              testcontext.SaveChanges();*/
-            // Console.WriteLine("ici jjdj "+testcontext.map.Find(1).nom_map); 
-            //taille du labyrinthe 
+            // Console.WriteLine("ici jjdj "+testcontext.map.Find(1).nom_map);
+            //taille du labyrinthe
             int wid = Int16.Parse(txtWidth.Text);
             int hgt = Int16.Parse(txtHeight.Text);
 
@@ -324,7 +324,7 @@ namespace mazeprojetynov
             makemap(wid, hgt);
             /*foreach(Cell cell in getCells())
             {
-                casemap casemap = new casemap 
+                casemap casemap = new casemap
                 { id_map = emp.id,
                     mur= cell.getTraversable(),
                     map = emp,
@@ -450,7 +450,7 @@ namespace mazeprojetynov
 
         }
 
-        
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -466,7 +466,7 @@ namespace mazeprojetynov
                 while (current_cell != startCell)
                 {
                     list.Add(current_cell);//contient la liste définie par astar
-                    if (astar.cameFrom.ContainsKey(current_cell)) { 
+                    if (astar.cameFrom.ContainsKey(current_cell)) {
                         current_cell = astar.cameFrom[current_cell];
                         if (current_cell.getPiege())
                         {
@@ -693,7 +693,7 @@ namespace mazeprojetynov
 
         public void btn_load_Click(object sender, EventArgs e)
         {
-            //taille du labyrinthe 
+            //taille du labyrinthe
             int wid = Int16.Parse(txtWidth.Text);
             int hgt = Int16.Parse(txtHeight.Text);
 
@@ -919,5 +919,3 @@ namespace mazeprojetynov
 
     }
 }
-
-

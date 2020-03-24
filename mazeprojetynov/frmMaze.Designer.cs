@@ -1,6 +1,6 @@
 ﻿namespace mazeprojetynov
 {
-    partial class Form
+    partial class frmMaze
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Button btn_boue;
             this.button1 = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
             this.txtHeight = new System.Windows.Forms.TextBox();
@@ -36,33 +35,14 @@
             this.txtWidth = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.picMaze = new System.Windows.Forms.PictureBox();
-            this.btndepart = new System.Windows.Forms.Button();
-            this.btnfin = new System.Windows.Forms.Button();
-            this.btnmur = new System.Windows.Forms.Button();
-            this.btnpiege = new System.Windows.Forms.Button();
-            this.btnvide = new System.Windows.Forms.Button();
-            this.btn_load = new System.Windows.Forms.Button();
-            this.btn_save = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            btn_boue = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picMaze)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btn_boue
-            // 
-            btn_boue.Location = new System.Drawing.Point(1033, 491);
-            btn_boue.Name = "btn_boue";
-            btn_boue.Size = new System.Drawing.Size(75, 23);
-            btn_boue.TabIndex = 19;
-            btn_boue.Text = "boue";
-            btn_boue.UseVisualStyleBackColor = true;
-            btn_boue.Click += new System.EventHandler(this.btn_boue_Click);
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button1.AutoSize = true;
-            this.button1.Location = new System.Drawing.Point(15, 577);
+            this.button1.Location = new System.Drawing.Point(15, 576);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(161, 23);
             this.button1.TabIndex = 0;
@@ -128,103 +108,16 @@
             this.picMaze.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picMaze.Location = new System.Drawing.Point(15, 60);
             this.picMaze.Name = "picMaze";
-            this.picMaze.Size = new System.Drawing.Size(965, 511);
+            this.picMaze.Size = new System.Drawing.Size(858, 510);
             this.picMaze.TabIndex = 12;
             this.picMaze.TabStop = false;
             this.picMaze.Click += new System.EventHandler(this.picMaze_Click);
             // 
-            // btndepart
-            // 
-            this.btndepart.Location = new System.Drawing.Point(1033, 102);
-            this.btndepart.Name = "btndepart";
-            this.btndepart.Size = new System.Drawing.Size(75, 23);
-            this.btndepart.TabIndex = 13;
-            this.btndepart.Text = "départ";
-            this.btndepart.UseVisualStyleBackColor = true;
-            this.btndepart.Click += new System.EventHandler(this.btndepart_Click);
-            // 
-            // btnfin
-            // 
-            this.btnfin.Location = new System.Drawing.Point(1033, 206);
-            this.btnfin.Name = "btnfin";
-            this.btnfin.Size = new System.Drawing.Size(75, 23);
-            this.btnfin.TabIndex = 14;
-            this.btnfin.Text = "fin";
-            this.btnfin.UseVisualStyleBackColor = true;
-            this.btnfin.Click += new System.EventHandler(this.btnfin_Click);
-            // 
-            // btnmur
-            // 
-            this.btnmur.Location = new System.Drawing.Point(1033, 287);
-            this.btnmur.Name = "btnmur";
-            this.btnmur.Size = new System.Drawing.Size(75, 23);
-            this.btnmur.TabIndex = 15;
-            this.btnmur.Text = "mur";
-            this.btnmur.UseVisualStyleBackColor = true;
-            this.btnmur.Click += new System.EventHandler(this.btnmur_Click);
-            // 
-            // btnpiege
-            // 
-            this.btnpiege.Location = new System.Drawing.Point(1033, 368);
-            this.btnpiege.Name = "btnpiege";
-            this.btnpiege.Size = new System.Drawing.Size(75, 23);
-            this.btnpiege.TabIndex = 16;
-            this.btnpiege.Text = "piège";
-            this.btnpiege.UseVisualStyleBackColor = true;
-            this.btnpiege.Click += new System.EventHandler(this.btnpiege_Click);
-            // 
-            // btnvide
-            // 
-            this.btnvide.Location = new System.Drawing.Point(1033, 436);
-            this.btnvide.Name = "btnvide";
-            this.btnvide.Size = new System.Drawing.Size(75, 23);
-            this.btnvide.TabIndex = 17;
-            this.btnvide.Text = "vide";
-            this.btnvide.UseVisualStyleBackColor = true;
-            this.btnvide.Click += new System.EventHandler(this.btnvide_Click);
-            // 
-            // btn_load
-            // 
-            this.btn_load.Location = new System.Drawing.Point(562, 20);
-            this.btn_load.Name = "btn_load";
-            this.btn_load.Size = new System.Drawing.Size(75, 23);
-            this.btn_load.TabIndex = 18;
-            this.btn_load.Text = "load";
-            this.btn_load.UseVisualStyleBackColor = true;
-            this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
-            // 
-            // btn_save
-            // 
-            this.btn_save.Location = new System.Drawing.Point(781, 20);
-            this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(75, 23);
-            this.btn_save.TabIndex = 20;
-            this.btn_save.Text = "enregistrer";
-            this.btn_save.UseVisualStyleBackColor = true;
-            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(402, 20);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 21;
-            // 
-            // Form
+            // frmMaze
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1177, 612);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.btn_save);
-            this.Controls.Add(btn_boue);
-            this.Controls.Add(this.btn_load);
-            this.Controls.Add(this.btnvide);
-            this.Controls.Add(this.btnpiege);
-            this.Controls.Add(this.btnmur);
-            this.Controls.Add(this.btnfin);
-            this.Controls.Add(this.btndepart);
+            this.ClientSize = new System.Drawing.Size(884, 611);
             this.Controls.Add(this.picMaze);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.txtHeight);
@@ -232,7 +125,7 @@
             this.Controls.Add(this.txtWidth);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
-            this.Name = "Form";
+            this.Name = "frmMaze";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picMaze)).EndInit();
@@ -250,14 +143,6 @@
         private System.Windows.Forms.TextBox txtWidth;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox picMaze;
-        private System.Windows.Forms.Button btndepart;
-        private System.Windows.Forms.Button btnfin;
-        private System.Windows.Forms.Button btnmur;
-        private System.Windows.Forms.Button btnpiege;
-        private System.Windows.Forms.Button btnvide;
-        private System.Windows.Forms.Button btn_load;
-        private System.Windows.Forms.Button btn_save;
-        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 
