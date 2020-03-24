@@ -26,6 +26,7 @@ namespace mazeprojetynov
         public Cell[,] nodes;
         public Cell[,] all;
         public map emp;
+        public test res;
         ynovprojetEntities testcontext = new ynovprojetEntities();
         List<Cell> list = new List<Cell>();
         List<Cell> arraymur = new List<Cell>();
@@ -34,7 +35,8 @@ namespace mazeprojetynov
         List<Cell> arrayPiege = new List<Cell>();
         List<Cell> arrayBoue = new List<Cell>();
         public string cellclic = "";
-        public string resultat = "Passé";
+        public string resultat = "réussi";
+        public string nomCreateur = "letesteur";
 
         public Form()
         {
@@ -42,11 +44,10 @@ namespace mazeprojetynov
 
         }
 
-        ynovprojetEntities d = new ynovprojetEntities();
 
         private void Form_Load(object sender, EventArgs e)
         {
-            comboBox1.DataSource = d.map.Select(c => new { Num = c.id, Nom = c.nom_map }).ToList();
+            comboBox1.DataSource = testcontext.map.Select(c => new { Num = c.id, Nom = c.nom_map }).ToList();
             comboBox1.DisplayMember = "Nom";
             comboBox1.ValueMember = "Num";
             comboBox1.Text = "--Nom de la map--";
@@ -62,6 +63,8 @@ namespace mazeprojetynov
         {
             return emp;
         }
+
+
         public void makemap(int wid, int hgt)
         {
             nodes = new Cell[hgt, wid];
@@ -303,11 +306,7 @@ namespace mazeprojetynov
             arraymur.Clear();
             arraydepart.Clear();
             arrayfin.Clear();
-            emp = new map
-            {
-                nom_map = "map3"
-
-            };
+            txtBxNomMap.Visible = true;
 
             /* testcontext.map.Add(emp);
              testcontext.SaveChanges();*/
@@ -342,6 +341,12 @@ namespace mazeprojetynov
         {
             makemap(15, 10);
             emp = getEmp();
+
+            emp = new map
+            {
+                nom_map = txtBxNomMap.Text
+
+            };
             foreach (Cell cell in getCells())
             {
                 casemap casemap = new casemap
@@ -535,6 +540,20 @@ namespace mazeprojetynov
                 arrayPiege.Clear();
                 startCell = null;
                 endCell = null;
+
+                emp = getEmp();
+
+                test test = new test
+                {
+                    id_map = emp.id,
+                    resultat = resultat,
+                    nom_createur = nomCreateur,
+                    date = DateTime.Now
+                };
+                testcontext.test.Add(test);
+                testcontext.SaveChanges();
+
+
             }
         }
 
