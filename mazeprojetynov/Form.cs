@@ -42,10 +42,18 @@ namespace mazeprojetynov
 
         }
 
+        ynovprojetEntities d = new ynovprojetEntities();
+
         private void Form_Load(object sender, EventArgs e)
         {
-
+            comboBox1.DataSource = d.map.Select(c => new { Num = c.id, Nom = c.nom_map }).ToList();
+            comboBox1.DisplayMember = "Nom";
+            comboBox1.ValueMember = "Num";
+            comboBox1.Text = "--Nom de la map--";
         }
+    
+
+
         public void setEmp(map map)
         {
             emp = map;
@@ -672,9 +680,13 @@ namespace mazeprojetynov
             arraymur.Clear();
             nodes = new Cell[hgt, wid];
             casemap casemap = new casemap();
-            var products = testcontext.casemap.Where(p => p.id_map == 31);
+            int idmap;
+            String idmapstring;
+            idmapstring = comboBox1.SelectedValue.ToString();
+            idmap = Convert.ToInt32(idmapstring);
+            var products = testcontext.casemap.Where(p => p.id_map == idmap);
             map emp = new map();
-            var map = testcontext.map.Where(p => p.id == 31).First<map>();
+            var map = testcontext.map.Where(p => p.id == idmap).First<map>();
             setEmp(map);
             Console.WriteLine(emp.id);
 
