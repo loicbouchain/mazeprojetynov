@@ -34,6 +34,7 @@ namespace mazeprojetynov
         List<Cell> arrayPiege = new List<Cell>();
         List<Cell> arrayBoue = new List<Cell>();
         public string cellclic = "";
+        public string resultat = "Passé";
 
         public Form()
         {
@@ -72,7 +73,7 @@ namespace mazeprojetynov
                     if (c == wid - 1 && r == hgt - 1)
                     {
                         //nodes[r, c] = new Fin(x, y);
-                        foreach (Cell mur in arraymur) // chaque case dans la liste des murs ne peuvent pas être traversé 
+                        foreach (Cell mur in arraymur) // chaque case dans la liste des murs ne peuvent pas être traversé
                         {
                             for (int u = 0; u < hgt; u++)
                             {
@@ -302,8 +303,8 @@ namespace mazeprojetynov
 
             /* testcontext.map.Add(emp);
              testcontext.SaveChanges();*/
-            // Console.WriteLine("ici jjdj "+testcontext.map.Find(1).nom_map); 
-            //taille du labyrinthe 
+            // Console.WriteLine("ici jjdj "+testcontext.map.Find(1).nom_map);
+            //taille du labyrinthe
             int wid = Int16.Parse(txtWidth.Text);
             int hgt = Int16.Parse(txtHeight.Text);
 
@@ -316,7 +317,7 @@ namespace mazeprojetynov
             makemap(wid, hgt);
             /*foreach(Cell cell in getCells())
             {
-                casemap casemap = new casemap 
+                casemap casemap = new casemap
                 { id_map = emp.id,
                     mur= cell.getTraversable(),
                     map = emp,
@@ -443,9 +444,10 @@ namespace mazeprojetynov
         }
 
 
+
         private void button1_Click(object sender, EventArgs e)
         {
-           
+
             list.Clear();
             //   DisplayMaze(getCells()); // permet l'affichage dans un picturebox
             makemap(15, 10);
@@ -457,14 +459,19 @@ namespace mazeprojetynov
                 while (current_cell != startCell)
                 {
                     list.Add(current_cell);//contient la liste définie par astar
-
-                    current_cell = astar.cameFrom[current_cell];
-                    if (current_cell.getPiege())
-                    {
-                        list.Clear();
+                    if (astar.cameFrom.ContainsKey(current_cell)) {
                         current_cell = astar.cameFrom[current_cell];
+                        if (current_cell.getPiege())
+                        {
+                            resultat = "piégé";
+                            list.Clear();
+                            current_cell = astar.cameFrom[current_cell];
+                        }
                     }
-
+                    else {
+                        resultat = "non passé";
+                        break;
+                    }
                 }
 
                 using (Graphics gr = Graphics.FromImage(bm))
@@ -511,7 +518,7 @@ namespace mazeprojetynov
                 }
                 // Console.WriteLine(" C L A F IN " + endCell.getX() + " " + endCell.getY());
                 image1.Save("ez_1.bmp");
-      
+
                 list.Clear();
                 arrayBoue.Clear();
                 arraydepart.Clear();
@@ -575,7 +582,8 @@ namespace mazeprojetynov
                                     }
                                     if (cellclic == "depart")
                                     {
-                                        if (arraydepart.Count == 0) { 
+                                        if (arraydepart.Count == 0)
+                                        {
                                             SolidBrush brushend = new SolidBrush(Color.Green);
                                             cell.FillRectangle(gr, brushend);
 
@@ -584,7 +592,8 @@ namespace mazeprojetynov
                                     }
                                     if (cellclic == "fin")
                                     {
-                                        if (arrayfin.Count == 0) { 
+                                        if (arrayfin.Count == 0)
+                                        {
                                             SolidBrush brushend = new SolidBrush(Color.Red);
                                             cell.FillRectangle(gr, brushend);
                                             arrayfin.Add(cell);
@@ -645,7 +654,7 @@ namespace mazeprojetynov
 
         public void btn_load_Click(object sender, EventArgs e)
         {
-            //taille du labyrinthe 
+            //taille du labyrinthe
             int wid = Int16.Parse(txtWidth.Text);
             int hgt = Int16.Parse(txtHeight.Text);
 
@@ -871,5 +880,3 @@ namespace mazeprojetynov
 
     }
 }
-
-
