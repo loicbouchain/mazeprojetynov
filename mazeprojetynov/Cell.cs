@@ -39,13 +39,13 @@ namespace MazeProjetYNOV
         public Cell(int x,int y)
         {
             voisins = new List<Cell>();
-            taille_cell  = 14;
+            taille_cell  = 40;
             this.x = x;
             this.y = y;
             traversable = true;
             boue = false;
             piege = false;
-        Bounds = new Rectangle(x, y, 14, 14);
+            Bounds = new Rectangle(x, y, taille_cell, taille_cell);
 
         }
         public Point Center
@@ -57,7 +57,28 @@ namespace MazeProjetYNOV
                 return new Point(x, y);
             }
         }
-    
+        public List<int> getAllX()
+        {
+            List<int> array = new List<int>();
+   
+            for (int i = 0; i<taille_cell+1; i++)
+            {
+                array.Add(this.x + i);
+            }   
+            return array;
+
+        }
+        public List<int> getAllY()
+        {
+            List<int> array = new List<int>();
+            for (int i = 0; i < taille_cell + 1; i++)
+            {
+                array.Add(this.y + i);
+            }
+            return array;
+
+        }
+
 
         public void DrawWalls(Graphics gr, Pen pen)
         {

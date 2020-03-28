@@ -62,14 +62,9 @@ namespace mazeprojetynov
                 int y = Ymin + CellHgt * r;
                 for (int c = 0; c < wid; c++)
                 {
-
                     int x = Xmin + CellWid * c;
                     nodes[r, c] = new Cell(x, y);
-                    if (c == 0 && r == 0)
-                    {
-                        //nodes[r, c] = new Depart(x, y);
-
-                    }
+             
                     if (c == wid - 1 && r == hgt - 1)
                     {
                         //nodes[r, c] = new Fin(x, y);
@@ -285,15 +280,23 @@ namespace mazeprojetynov
 
                 }
             }
-            //DisplayMaze(nodes);
-            foreach(Cell cell in nodes)
+            DisplayMaze(nodes);
+           /* foreach(Cell cell in nodes)
             {
                 picMaze = new PictureBox();
+
                 picMaze.Location = new Point(cell.getX(), cell.getY());
                 picMaze.Size = new Size(14, 14);
-               // picMaze.ImageLocation = Properties.Resources.
-            }
+                picMaze.Image = Properties.Resources.bear_trap;
+                picMaze.SizeMode = PictureBoxSizeMode.StretchImage;
+                picMaze.BringToFront();
+                picMaze.Click += new EventHandler(picMaze_Click);
+                Controls.Add(picMaze);
+            }*/
         }
+
+       
+
         private void btnCreate_Click(object sender, EventArgs e)
         {
             list.Clear();
@@ -543,21 +546,23 @@ namespace mazeprojetynov
         private void picMaze_Click(object sender, EventArgs e)
         {
             list.Clear();
-
+           
             Point topLeft = PointToScreen(new Point(picMaze.Left, picMaze.Top));
             int x = MousePosition.X - topLeft.X;
             int y = MousePosition.Y - topLeft.Y;
+            
             foreach (Cell cell in getCells())
             {
                 int cell_x = cell.getX();
                 int cell_y = cell.getY();
+
                 for (int c = 0; c < 11; c++)
                 {
-                    if (x == (cell_x + c))
+                    if (cell.getAllX().Contains(x))
                     {
                         for (int u = 0; u < 11; u++)
                         {
-                            if (y == (cell_y + u))
+                            if (cell.getAllY().Contains(y))
                             {
                                 using (Graphics gr = Graphics.FromImage(bm))
                                 {
