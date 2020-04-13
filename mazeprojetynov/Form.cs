@@ -16,13 +16,11 @@ namespace mazeprojetynov
         private int Xmin;
         private int Ymin;
         private Graphics graphicsObj;
-        private Niveau niv;
         public Bitmap bm;
         private Cell endCell;
         private Cell startCell;
         private List<Cell> cellList;
         private int frmgscore = 0;
-        private Pathfinder path;
         public Cell[,] nodes;
         public Cell[,] all;
         public map emp;
@@ -35,6 +33,14 @@ namespace mazeprojetynov
         List<Cell> arrayBoue = new List<Cell>();
         public string cellclic = "";
         public string resultat = "Passé";
+        Image depart = Properties.Resources.depart1;
+        Image fin = Properties.Resources.iconfinder_exit_enter_leave_out_door_2931188;
+        Image piege = Properties.Resources.piege;
+        Image boue = Properties.Resources.boue;
+        Image herbe = Properties.Resources.herbe;
+        Image mur = Properties.Resources.mur;
+        Image chemin = Properties.Resources.chemin;
+
 
         public Form()
         {
@@ -281,16 +287,16 @@ namespace mazeprojetynov
                 }
             }
             DisplayMaze(nodes);
-           /* foreach(Cell cell in nodes)
+            /*foreach(Cell cell in nodes)
             {
                 picMaze = new PictureBox();
 
                 picMaze.Location = new Point(cell.getX(), cell.getY());
-                picMaze.Size = new Size(14, 14);
+                picMaze.Size = new Size(40, 40);
                 picMaze.Image = Properties.Resources.bear_trap;
                 picMaze.SizeMode = PictureBoxSizeMode.StretchImage;
                 picMaze.BringToFront();
-                picMaze.Click += new EventHandler(picMaze_Click);
+                picMaze.Click += new EventHandler(pic_Click);
                 Controls.Add(picMaze);
             }*/
         }
@@ -311,10 +317,6 @@ namespace mazeprojetynov
 
             };
 
-            /* testcontext.map.Add(emp);
-             testcontext.SaveChanges();*/
-            // Console.WriteLine("ici jjdj "+testcontext.map.Find(1).nom_map);
-            //taille du labyrinthe
             int wid = Int16.Parse(txtWidth.Text);
             int hgt = Int16.Parse(txtHeight.Text);
 
@@ -325,18 +327,7 @@ namespace mazeprojetynov
             Xmin = (picMaze.ClientSize.Width - wid * CellWid) / 2;
             Ymin = (picMaze.ClientSize.Height - hgt * CellHgt) / 2;
             makemap(wid, hgt);
-            /*foreach(Cell cell in getCells())
-            {
-                casemap casemap = new casemap
-                { id_map = emp.id,
-                    mur= cell.getTraversable(),
-                    map = emp,
-                x = cell.getX(),
-                y=cell.getY()};
-                testcontext.casemap.Add(casemap);
-            }
-            testcontext.SaveChanges();*/
-            // DisplayMaze(nodes); // permet l'affichage dans un picturebox
+    
 
 
         }
@@ -399,44 +390,30 @@ namespace mazeprojetynov
                 {
                     for (int c = 0; c < wid; c++)
                     {
-                        //Console.WriteLine("le début du truc "+r+" "+c+" " + nodes[r, c].getX() + "   " + nodes[r, c].getY());
-                        //nodes[r, c].DrawCenter(gr, Brushes.Red);
-                        //nodes[r, c].DrawWalls(gr, Pens.Black);
-                        nodes[r, c].DrawBoundingBox(gr, Pens.Blue);
+                        nodes[r, c].FillRectangleWithImage(gr, herbe);
 
-
-                        //Console.WriteLine(r + " " + c + " heuristic : " + heuristic(nodes[r,c]));
-
-                        // Console.WriteLine(c+"  "+nodes[r, c].getCellDep());
                         if (nodes[r, c].getCellDep() == true)
                         {
-                            //       Console.WriteLine("le début du truc " + nodes[r, c].getX() + "   " + nodes[r, c].getY());
-                            SolidBrush brush = new SolidBrush(Color.Green);
-                            nodes[r, c].FillRectangle(gr, brush);
+                            nodes[r, c].FillRectangleWithImage(gr, depart);
                             startCell = nodes[r, c];
                         }
                         if (nodes[r, c].getCellEnd() == true)
                         {
-                            SolidBrush brush = new SolidBrush(Color.Red);
-                            nodes[r, c].FillRectangle(gr, brush);
-                            //  Console.WriteLine("la fin du truc "+nodes[r, c].getX() + "   " + nodes[r, c].getY());
+                            nodes[r, c].FillRectangleWithImage(gr, fin);
                             endCell = nodes[r, c];
                         }
                         if (nodes[r, c].getTraversable() == false)
                         {
-                            SolidBrush brushWall = new SolidBrush(Color.Black);
-                            nodes[r, c].FillRectangle(gr, brushWall);
+                            nodes[r, c].FillRectangleWithImage(gr, mur);
                         }
 
                         if (nodes[r, c].getBoue() == true)
                         {
-                            SolidBrush brushWall = new SolidBrush(Color.Maroon);
-                            nodes[r, c].FillRectangle(gr, brushWall);
+                            nodes[r, c].FillRectangleWithImage(gr, boue);
                         }
                         if (nodes[r, c].getPiege() == true)
                         {
-                            SolidBrush brushWall = new SolidBrush(Color.Blue);
-                            nodes[r, c].FillRectangle(gr, brushWall);
+                            nodes[r, c].FillRectangleWithImage(gr, piege);
                         }
                     }
                 }
@@ -492,10 +469,7 @@ namespace mazeprojetynov
                     foreach (Cell i in list) //affiche le chemin le plus court
                     {
                         u = u + 1;
-                        //Console.WriteLine(u+" liste "+i.getX() + "  " + i.getY());
-                        //i.DrawBoundingBox(gr, Pens.Black);
-                        SolidBrush brush = new SolidBrush(Color.RoyalBlue);
-                        i.FillRectangle(gr, brush);
+                        i.FillRectangleWithImage(gr, chemin);
 
                     }
                     SolidBrush brushend = new SolidBrush(Color.Red);
@@ -541,16 +515,30 @@ namespace mazeprojetynov
         }
 
 
+        private void pic_Click(object sender, EventArgs e)
+        {
+           
+            foreach (Cell cell in getCells())
+            {
+                if (cell.getAllX().Contains(MousePosition.X))
+                {
+                    if (cell.getAllY().Contains(MousePosition.Y))
+                    {
+                        Console.WriteLine("" + cell.getX());
+                        
+                    }
+                }
+            }
+        }
 
-
-        private void picMaze_Click(object sender, EventArgs e)
+            private void picMaze_Click(object sender, EventArgs e)
         {
             list.Clear();
-           
             Point topLeft = PointToScreen(new Point(picMaze.Left, picMaze.Top));
             int x = MousePosition.X - topLeft.X;
             int y = MousePosition.Y - topLeft.Y;
-            
+
+            Console.WriteLine(""+ MousePosition.X + "   "+ MousePosition.Y);
             foreach (Cell cell in getCells())
             {
                 int cell_x = cell.getX();
@@ -564,22 +552,19 @@ namespace mazeprojetynov
                         {
                             if (cell.getAllY().Contains(y))
                             {
+                                Console.WriteLine("" + cell.getX() + " " + cell.getY());
                                 using (Graphics gr = Graphics.FromImage(bm))
                                 {
                                     if (cellclic == "mur")
                                     {
-                                        SolidBrush brushend = new SolidBrush(Color.Black);
-                                        cell.FillRectangle(gr, brushend);
-                                        /*  casemap map = testcontext.casemap.FirstOrDefault(i => i.id_map == emp.id && i.x == cell.getX() && i.y == cell.getY()); // pb int 32 et double mais c'est relou j'ai chnage r147 fois deja ^^^^^^^^^^^^
-                                          map.mur = true;
-                                          testcontext.SaveChanges();*/
+                                        cell.FillRectangleWithImage(gr, mur);
                                         arraymur.Add(cell);
 
                                     }
                                     if (cellclic == "piège")
                                     {
-                                        SolidBrush brushend = new SolidBrush(Color.Blue);
-                                        cell.FillRectangle(gr, brushend);
+                                       
+                                        cell.FillRectangleWithImage(gr, piege);
                                         arrayPiege.Add(cell);
                                     }
                                     if (cellclic == "rien")
@@ -588,8 +573,7 @@ namespace mazeprojetynov
                                         if (arraymur.Contains(cell) == true)
                                         {
                                             arraymur.Remove(cell);
-                                            SolidBrush brushend = new SolidBrush(Color.White);
-                                            cell.FillRectangle(gr, brushend);
+                                            cell.FillRectangleWithImage(gr, herbe);
                                             cell.DrawBoundingBox(gr, Pens.Blue);
                                             cell.setTraversable(true);
 
@@ -597,29 +581,25 @@ namespace mazeprojetynov
                                         if (arrayBoue.Contains(cell) == true)
                                         {
                                             arrayBoue.Remove(cell);
-                                            SolidBrush brushend = new SolidBrush(Color.White);
-                                            cell.FillRectangle(gr, brushend);
+                                            cell.FillRectangleWithImage(gr, boue);
                                             cell.DrawBoundingBox(gr, Pens.Blue);
                                         }
                                         if (arrayPiege.Contains(cell) == true)
                                         {
                                             arrayPiege.Remove(cell);
-                                            SolidBrush brushend = new SolidBrush(Color.White);
-                                            cell.FillRectangle(gr, brushend);
+                                            cell.FillRectangleWithImage(gr, piege);
                                             cell.DrawBoundingBox(gr, Pens.Blue);
                                         }
                                         if (arraydepart.Contains(cell) == true)
                                         {
                                             arraydepart.Remove(cell);
-                                            SolidBrush brushend = new SolidBrush(Color.White);
-                                            cell.FillRectangle(gr, brushend);
+                                            cell.FillRectangleWithImage(gr, depart);
                                             cell.DrawBoundingBox(gr, Pens.Blue);
                                         }
                                         if (arrayfin.Contains(cell) == true)
                                         {
                                             arrayfin.Remove(cell);
-                                            SolidBrush brushend = new SolidBrush(Color.White);
-                                            cell.FillRectangle(gr, brushend);
+                                            cell.FillRectangleWithImage(gr, fin);
                                             cell.DrawBoundingBox(gr, Pens.Blue);
                                         }
 
@@ -628,9 +608,7 @@ namespace mazeprojetynov
                                     {
                                         if (arraydepart.Count == 0)
                                         {
-                                            SolidBrush brushend = new SolidBrush(Color.Green);
-                                            cell.FillRectangle(gr, brushend);
-
+                                            cell.FillRectangleWithImage(gr, depart);
                                             arraydepart.Add(cell);
                                         }
                                     }
@@ -638,17 +616,14 @@ namespace mazeprojetynov
                                     {
                                         if (arrayfin.Count == 0)
                                         {
-                                            SolidBrush brushend = new SolidBrush(Color.Red);
-                                            cell.FillRectangle(gr, brushend);
                                             arrayfin.Add(cell);
+                                            cell.FillRectangleWithImage(gr, fin);
                                         }
                                     }
                                     if (cellclic == "boue")
                                     {
-                                        SolidBrush brushend = new SolidBrush(Color.Maroon);
-                                        cell.FillRectangle(gr, brushend);
                                         arrayBoue.Add(cell);
-
+                                        cell.FillRectangleWithImage(gr, boue);
                                     }
 
                                     Console.WriteLine(cellclic);

@@ -200,14 +200,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AStarSearch.cs" />
-    <Compile Include="Boue.cs" />
     <Compile Include="casemap.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Cell.cs" />
-    <Compile Include="CellLink.cs" />
-    <Compile Include="depart.cs" />
-    <Compile Include="fin.cs" />
     <Compile Include="Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,12 +221,6 @@
     </Compile>
     <Compile Include="frmJouer.Designer.cs">
       <DependentUpon>frmJouer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmMaze.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMaze.Designer.cs">
-      <DependentUpon>frmMaze.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMenu.cs">
       <SubType>Form</SubType>
@@ -271,10 +261,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Mur.cs" />
-    <Compile Include="Niveau.cs" />
-    <Compile Include="PathFinder.cs" />
-    <Compile Include="Piege.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="test.cs">
@@ -288,9 +274,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmJouer.resx">
       <DependentUpon>frmJouer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMaze.resx">
-      <DependentUpon>frmMaze.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMenu.resx">
       <DependentUpon>frmMenu.cs</DependentUpon>
@@ -333,7 +316,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Bitmap1.bmp" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
@@ -344,6 +326,13 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Resources\boue.png" />
+    <None Include="Resources\Road_01_Tile_05.png" />
+    <None Include="Resources\Water_Tile.png" />
+    <None Include="Resources\depart.bmp" />
+    <Content Include="Resources\depart.png" />
+    <Content Include="Resources\herbe.png" />
+    <Content Include="Resources\piege.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

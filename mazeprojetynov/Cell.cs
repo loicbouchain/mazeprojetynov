@@ -111,6 +111,14 @@ namespace MazeProjetYNOV
             gr.FillRectangle(brush,
                 Bounds.Left + 1, Bounds.Y + 1,
                 Bounds.Width - 2, Bounds.Height - 2);
+           
+        }
+        public void FillRectangleWithImage(Graphics gr, Image brush)
+        {
+
+             gr.DrawImage(brush,
+                Bounds.Left + 1, Bounds.Y + 1,
+                Bounds.Width - 2, Bounds.Height - 2);
         }
         public void DrawPredecessorLink(Graphics gr, Pen pen)
         {
