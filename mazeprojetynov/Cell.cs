@@ -33,6 +33,7 @@ namespace MazeProjetYNOV
         public Cell voisinSud;
         public Cell voisinOuest;
         public Cell voisinEst;
+        public int id;
         // The node's neighbors in order North, South, East, West.
         public Cell[] Neighbors = new Cell[4];
 
@@ -174,6 +175,14 @@ namespace MazeProjetYNOV
         public int getX()
         {
             return this.x;
+        }
+        public void setId(int id)
+        {
+            this.id = id;
+        }
+        public int getId()
+        {
+            return this.id;
         }
         public void setX(int x)
         {

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
-
+using System.Data.Entity.Migrations;
 namespace mazeprojetynov
 {
     public partial class Form : System.Windows.Forms.Form
@@ -303,7 +303,7 @@ namespace mazeprojetynov
 
        
 
-        private void btnCreate_Click(object sender, EventArgs e)
+        private void btnCreate_Click(object sender, EventArgs e) // création de la carte
         {
             list.Clear();
             arrayBoue.Clear();
@@ -331,14 +331,21 @@ namespace mazeprojetynov
 
 
         }
-        private void btn_save_Click(object sender, EventArgs e)
+        private void btn_save_Click(object sender, EventArgs e) //enregistrement de la carte dans la base de données
         {
             makemap(15, 10);
             emp = getEmp();
+            var cells = testcontext.casemap.Where(p => p.id_map == 35);
+            foreach (var cellule in cells)
+            {
+                testcontext.casemap.Remove(cellule);
+            }
             foreach (Cell cell in getCells())
             {
+                Console.WriteLine(cell.getId());
                 casemap casemap = new casemap
                 {
+          
                     id_map = emp.id,
                     mur = cell.getTraversable(),
                     depart = cell.getCellDep(),
@@ -349,6 +356,8 @@ namespace mazeprojetynov
                     x = cell.getX(),
                     y = cell.getY()
                 };
+
+               
                 testcontext.casemap.Add(casemap);
             }
             testcontext.SaveChanges();
@@ -374,7 +383,7 @@ namespace mazeprojetynov
 
 
 
-        private void DisplayMaze(Cell[,] nodes)
+        private void DisplayMaze(Cell[,] nodes) // Affiche la carte
         {
 
             int hgt = nodes.GetUpperBound(0) + 1;
@@ -399,6 +408,8 @@ namespace mazeprojetynov
                         }
                         if (nodes[r, c].getCellEnd() == true)
                         {
+                            SolidBrush brushend = new SolidBrush(Color.Red);
+                            nodes[r, c].FillRectangle(gr, brushend);
                             nodes[r, c].FillRectangleWithImage(gr, fin);
                             endCell = nodes[r, c];
                         }
@@ -432,16 +443,15 @@ namespace mazeprojetynov
 
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) // trouve le chemin le plus cours
         {
-
             list.Clear();
             //   DisplayMaze(getCells()); // permet l'affichage dans un picturebox
             makemap(15, 10);
             if (startCell != null && endCell != null)
             {
                 var astar = new AStarSearch(getCells(), startCell, endCell); // Trouve le chemin le plus court
-                Console.WriteLine(astar);
+        
                 Cell current_cell = endCell;
                 while (current_cell != startCell)
                 {
@@ -470,10 +480,10 @@ namespace mazeprojetynov
                     {
                         u = u + 1;
                         i.FillRectangleWithImage(gr, chemin);
-
                     }
                     SolidBrush brushend = new SolidBrush(Color.Red);
                     endCell.FillRectangle(gr, brushend);
+                    endCell.FillRectangleWithImage(gr, fin);
                 }
                 picMaze.Image = bm;
 
@@ -503,7 +513,7 @@ namespace mazeprojetynov
                 // Console.WriteLine(" C L A F IN " + endCell.getX() + " " + endCell.getY());
                 image1.Save("ez_1.bmp");
 
-                list.Clear();
+             
              /*   arrayBoue.Clear();
                 arraydepart.Clear();
                 arrayfin.Clear();
@@ -531,113 +541,195 @@ namespace mazeprojetynov
             }
         }
 
-            private void picMaze_Click(object sender, EventArgs e)
+        private void picMaze_Click(object sender, EventArgs e) //gère le clic sur les cases
         {
-            list.Clear();
-            Point topLeft = PointToScreen(new Point(picMaze.Left, picMaze.Top));
-            int x = MousePosition.X - topLeft.X;
-            int y = MousePosition.Y - topLeft.Y;
 
-            Console.WriteLine(""+ MousePosition.X + "   "+ MousePosition.Y);
-            foreach (Cell cell in getCells())
+        list.Clear();
+        Point topLeft = PointToScreen(new Point(picMaze.Left, picMaze.Top));
+        int x = MousePosition.X - topLeft.X;
+        int y = MousePosition.Y - topLeft.Y;
+        foreach (Cell cell in getCells())
+        {
+            Cell[,] newArray;
+            int cell_x = cell.getX();
+            int cell_y = cell.getY();
+            if (cell.getAllX().Contains(x))
             {
-                int cell_x = cell.getX();
-                int cell_y = cell.getY();
-
-                for (int c = 0; c < 11; c++)
-                {
-                    if (cell.getAllX().Contains(x))
+                if (cell.getAllY().Contains(y))
                     {
-                        for (int u = 0; u < 11; u++)
+                    Console.WriteLine("" + cell.getX() + " " + cell.getY());
+                    using (Graphics gr = Graphics.FromImage(bm))
+                    {
+                        if (cellclic == "mur")
                         {
-                            if (cell.getAllY().Contains(y))
-                            {
-                                Console.WriteLine("" + cell.getX() + " " + cell.getY());
-                                using (Graphics gr = Graphics.FromImage(bm))
-                                {
-                                    if (cellclic == "mur")
-                                    {
-                                        cell.FillRectangleWithImage(gr, mur);
-                                        arraymur.Add(cell);
-
-                                    }
-                                    if (cellclic == "piège")
-                                    {
+                            cell.FillRectangleWithImage(gr, mur);
+                            arraymur.Add(cell);
+                        }
+                        if (cellclic == "piège")
+                        {
                                        
-                                        cell.FillRectangleWithImage(gr, piege);
-                                        arrayPiege.Add(cell);
-                                    }
-                                    if (cellclic == "rien")
-                                    {
-                                        
-                                        if (arraymur.Contains(cell) == true)
+                            cell.FillRectangleWithImage(gr, piege);
+                            arrayPiege.Add(cell);
+                        }
+                        if (cellclic == "rien")
+                        {
+                            Console.WriteLine(cell.getX()+" "+cell.getY());
+                                if (arraymur.Contains(cell) == true)
+                                {
+                                    arraymur.Remove(cell);
+                                    cell.FillRectangleWithImage(gr, herbe);
+                                    cell.DrawBoundingBox(gr, Pens.Blue);
+                                    cell.setTraversable(true);
+                                }
+                                else
+                                {
+                                    foreach(Cell caseCell in arraymur){
+                                        if(caseCell.getX()==cell.getX() && caseCell.getY() == cell.getY())
                                         {
-                                            arraymur.Remove(cell);
+                                            arraymur.Remove(caseCell);
                                             cell.FillRectangleWithImage(gr, herbe);
                                             cell.DrawBoundingBox(gr, Pens.Blue);
                                             cell.setTraversable(true);
-
+                                            break;
                                         }
-                                        if (arrayBoue.Contains(cell) == true)
-                                        {
-                                            arrayBoue.Remove(cell);
-                                            cell.FillRectangleWithImage(gr, boue);
-                                            cell.DrawBoundingBox(gr, Pens.Blue);
-                                        }
-                                        if (arrayPiege.Contains(cell) == true)
-                                        {
-                                            arrayPiege.Remove(cell);
-                                            cell.FillRectangleWithImage(gr, piege);
-                                            cell.DrawBoundingBox(gr, Pens.Blue);
-                                        }
-                                        if (arraydepart.Contains(cell) == true)
-                                        {
-                                            arraydepart.Remove(cell);
-                                            cell.FillRectangleWithImage(gr, depart);
-                                            cell.DrawBoundingBox(gr, Pens.Blue);
-                                        }
-                                        if (arrayfin.Contains(cell) == true)
-                                        {
-                                            arrayfin.Remove(cell);
-                                            cell.FillRectangleWithImage(gr, fin);
-                                            cell.DrawBoundingBox(gr, Pens.Blue);
-                                        }
-
+                                        
                                     }
-                                    if (cellclic == "depart")
-                                    {
-                                        if (arraydepart.Count == 0)
-                                        {
-                                            cell.FillRectangleWithImage(gr, depart);
-                                            arraydepart.Add(cell);
-                                        }
-                                    }
-                                    if (cellclic == "fin")
-                                    {
-                                        if (arrayfin.Count == 0)
-                                        {
-                                            arrayfin.Add(cell);
-                                            cell.FillRectangleWithImage(gr, fin);
-                                        }
-                                    }
-                                    if (cellclic == "boue")
-                                    {
-                                        arrayBoue.Add(cell);
-                                        cell.FillRectangleWithImage(gr, boue);
-                                    }
-
-                                    Console.WriteLine(cellclic);
 
                                 }
-                                picMaze.Image = bm;
+                            if (arrayBoue.Contains(cell) == true)
+                            {
+                                arrayBoue.Remove(cell);
+                                cell.FillRectangleWithImage(gr, herbe);
+                                cell.DrawBoundingBox(gr, Pens.Blue);
+                            }
+                            else
+                            {
+                                foreach (Cell caseCell in arrayBoue)
+                                {
+                                    if (caseCell.getX() == cell.getX() && caseCell.getY() == cell.getY())
+                                    {
+                                        arrayBoue.Remove(caseCell);
+                                        cell.FillRectangleWithImage(gr, herbe);
+                                        cell.DrawBoundingBox(gr, Pens.Blue);
+                                        cell.setTraversable(true);
+                                        break;
+                                    }
+                                }
+                            }
+
+
+                            if (arrayPiege.Contains(cell) == true)
+                            {
+                                arrayPiege.Remove(cell);
+                                cell.FillRectangleWithImage(gr, herbe);
+                                cell.DrawBoundingBox(gr, Pens.Blue);
+                            }
+                            else
+                            {
+                                foreach (Cell caseCell in arrayPiege)
+                                {
+                                    if (caseCell.getX() == cell.getX() && caseCell.getY() == cell.getY())
+                                    {
+                                        arrayPiege.Remove(caseCell);
+                                        cell.FillRectangleWithImage(gr, herbe);
+                                        cell.DrawBoundingBox(gr, Pens.Blue);
+                                        cell.setTraversable(true);
+                                        break;
+                                    }
+
+                                }
+
+                            }
+                                if (arraydepart.Contains(cell) == true)
+                            {
+                                arraydepart.Remove(cell);
+                                cell.FillRectangleWithImage(gr, herbe);
+                                cell.DrawBoundingBox(gr, Pens.Blue);
+                            }
+                            else
+                            {
+                                foreach (Cell caseCell in arraydepart)
+                                {
+                                    if (caseCell.getX() == cell.getX() && caseCell.getY() == cell.getY())
+                                    {
+                                        arraydepart.Remove(caseCell);
+                                        cell.FillRectangleWithImage(gr, herbe);
+                                        cell.DrawBoundingBox(gr, Pens.Blue);
+                                        cell.setTraversable(true);
+                                        break;
+                                    }
+
+                                }
+
+                            }
+                                if (arrayfin.Contains(cell) == true)
+                            {
+                                arrayfin.Remove(cell);
+                                cell.FillRectangleWithImage(gr, herbe);
+                                cell.DrawBoundingBox(gr, Pens.Blue);
+                            }
+                            else
+                            {
+                                foreach (Cell caseCell in arrayfin)
+                                {
+                                    if (caseCell.getX() == cell.getX() && caseCell.getY() == cell.getY())
+                                    {
+                                        arrayfin.Remove(caseCell);
+                                        cell.FillRectangleWithImage(gr, herbe);
+                                        cell.DrawBoundingBox(gr, Pens.Blue);
+                                        cell.setTraversable(true);
+                                        break;
+                                    }
+
+                                }
+
+                            }
+
+                            }
+                        if (cellclic == "depart")
+                        {
+                            if (arraydepart.Count == 0)
+                            {
+                                cell.FillRectangleWithImage(gr, depart);
+                                arraydepart.Add(cell);
                             }
                         }
+                        if (cellclic == "fin")
+                        {
+                            if (arrayfin.Count == 0)
+                            {
+                                arrayfin.Add(cell);
+                                SolidBrush brushend = new SolidBrush(Color.Red);
+                                cell.FillRectangle(gr, brushend);
+                                cell.FillRectangleWithImage(gr, fin);
+                            }
+                            else 
+                            {
+                                arrayfin[0].FillRectangleWithImage(gr, herbe);
+                                arrayfin.Clear();
+                                SolidBrush brushend = new SolidBrush(Color.Red);
+                                cell.FillRectangle(gr, brushend);
+                                cell.FillRectangleWithImage(gr, fin);
+                                arrayfin.Add(cell);
+                            }
+                        }
+                        if (cellclic == "boue")
+                        {
+                            arrayBoue.Add(cell);
+                            cell.FillRectangleWithImage(gr, boue);
+                        }
 
+                                
                     }
+                    picMaze.Image = bm;
+                       
+                            
                 }
 
-
             }
+     
+
+        }
 
         }
 
@@ -671,19 +763,17 @@ namespace mazeprojetynov
             cellclic = "boue";
         }
 
-        public void btn_load_Click(object sender, EventArgs e)
+        public void btn_load_Click(object sender, EventArgs e) // gère le chargement depuis la base de données
         {
             //taille du labyrinthe
             int wid = Int16.Parse(txtWidth.Text);
             int hgt = Int16.Parse(txtHeight.Text);
-
             CellWid = picMaze.ClientSize.Width / (wid + 2);
             CellHgt = picMaze.ClientSize.Height / (hgt + 2);
             if (CellWid > CellHgt) CellWid = CellHgt;
             else CellHgt = CellWid;
             Xmin = (picMaze.ClientSize.Width - wid * CellWid) / 2;
             Ymin = (picMaze.ClientSize.Height - hgt * CellHgt) / 2;
-
             arrayBoue.Clear();
             arraydepart.Clear();
             arrayfin.Clear();
@@ -691,17 +781,20 @@ namespace mazeprojetynov
             arraymur.Clear();
             nodes = new Cell[hgt, wid];
             casemap casemap = new casemap();
-            var products = testcontext.casemap.Where(p => p.id_map == 31);
+            var products = testcontext.casemap.Where(p => p.id_map == 35);
             map emp = new map();
-            var map = testcontext.map.Where(p => p.id == 31).First<map>();
+            var map = testcontext.map.Where(p => p.id == 35).First<map>();
             setEmp(map);
-            Console.WriteLine(emp.id);
-
+   
             int cal = 0;
             int cal2 = 0;
             foreach (var produit in products)
             {
+
                 Cell cell = new Cell(produit.x, produit.y);
+                cell.setId(produit.id);
+                Console.WriteLine(produit.id);
+                Console.WriteLine(cell.getId());
                 cell.setTraversable(produit.mur);
                 cell.setBoue(produit.boue);
                 cell.setCellDep(produit.depart);
@@ -730,7 +823,6 @@ namespace mazeprojetynov
                 {
                     arraymur.Add(cell);
                 }
-
                 if (cal == wid - 1)
                 {
                     cal = 0;
@@ -745,8 +837,6 @@ namespace mazeprojetynov
                 {
                     cal2 = 0;
                 }
-
-
                 nodes[cal2, cal] = cell;
 
             }
@@ -830,12 +920,10 @@ namespace mazeprojetynov
 
                             if (nodes[r + 1, c - 1].getTraversable())
                             {
-
                                 nodes[r, c].setVoisinSudOuest(nodes[r + 1, c - 1]);
                             }
                             else
                             {
-
                                 nodes[r, c].setVoisinSudOuest(null);
                             }
                             if (r > 0)
