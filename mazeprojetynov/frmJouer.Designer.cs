@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnJouerAleatoire = new MetroFramework.Controls.MetroButton();
             this.btnJouerExistant = new MetroFramework.Controls.MetroButton();
             this.metroComboBox1 = new MetroFramework.Controls.MetroComboBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -37,17 +36,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnJouerAleatoire
-            // 
-            this.btnJouerAleatoire.Location = new System.Drawing.Point(279, 130);
-            this.btnJouerAleatoire.Name = "btnJouerAleatoire";
-            this.btnJouerAleatoire.Size = new System.Drawing.Size(333, 144);
-            this.btnJouerAleatoire.TabIndex = 0;
-            this.btnJouerAleatoire.Text = "JOUER NIVEAU ALÉATOIRE";
-            // 
             // btnJouerExistant
             // 
-            this.btnJouerExistant.Location = new System.Drawing.Point(279, 361);
+            this.btnJouerExistant.Location = new System.Drawing.Point(284, 192);
             this.btnJouerExistant.Name = "btnJouerExistant";
             this.btnJouerExistant.Size = new System.Drawing.Size(333, 144);
             this.btnJouerExistant.TabIndex = 1;
@@ -57,7 +48,7 @@
             // 
             this.metroComboBox1.FormattingEnabled = true;
             this.metroComboBox1.ItemHeight = 23;
-            this.metroComboBox1.Location = new System.Drawing.Point(382, 460);
+            this.metroComboBox1.Location = new System.Drawing.Point(388, 283);
             this.metroComboBox1.Name = "metroComboBox1";
             this.metroComboBox1.Size = new System.Drawing.Size(121, 29);
             this.metroComboBox1.TabIndex = 4;
@@ -93,7 +84,6 @@
             this.Controls.Add(this.metroComboBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnJouerExistant);
-            this.Controls.Add(this.btnJouerAleatoire);
             this.Name = "frmJouer";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -102,8 +92,6 @@
         }
 
         #endregion
-
-        private MetroFramework.Controls.MetroButton btnJouerAleatoire;
         private MetroFramework.Controls.MetroButton btnJouerExistant;
         private System.Windows.Forms.PictureBox pictureBox1;
         private MetroFramework.Controls.MetroComboBox metroComboBox1;

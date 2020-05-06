@@ -331,6 +331,7 @@
     <None Include="Resources\Water_Tile.png" />
     <None Include="Resources\depart.bmp" />
     <Content Include="Resources\depart.png" />
+    <None Include="Resources\gomme.png" />
     <Content Include="Resources\herbe.png" />
     <Content Include="Resources\piege.png" />
   </ItemGroup>
