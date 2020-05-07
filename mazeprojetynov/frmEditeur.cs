@@ -292,12 +292,6 @@ namespace mazeprojetynov
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-           /* 
-            frmMenu frmMenu = new frmMenu();
-            this.Hide();
-            frmMenu.Show();
-            */
-
             var t = new Thread(() => Application.Run(new frmMenu()));
             t.Start();
             this.Close();
