@@ -342,7 +342,7 @@ namespace mazeprojetynov
         {
             makemap(15, 10);
             emp = getEmp();
-            var cells = testcontext.casemap.Where(p => p.id_map == 35);
+            var cells = testcontext.casemap.Where(p => p.id_map == emp.id);
             foreach (var cellule in cells)
             {
                 testcontext.casemap.Remove(cellule);

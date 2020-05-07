@@ -7,6 +7,8 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 using System.Data.Entity.Migrations;
+using System.Threading;
+
 namespace mazeprojetynov
 {
     public partial class frmEditeur : MetroFramework.Forms.MetroForm
@@ -40,12 +42,12 @@ namespace mazeprojetynov
         Image herbe = Properties.Resources.herbe;
         Image mur = Properties.Resources.mur;
         Image chemin = Properties.Resources.chemin;
-
+        public int idmap;
         public frmEditeur()
         {
             InitializeComponent();
         }
-        public void btn_load_Click(object sender, EventArgs e) // gère le chargement depuis la base de données
+        private void loadMap()
         {
             //taille du labyrinthe
             int wid = 10;
@@ -63,9 +65,9 @@ namespace mazeprojetynov
             arraymur.Clear();
             nodes = new Cell[hgt, wid];
             casemap casemap = new casemap();
-            var products = testcontext.casemap.Where(p => p.id_map == 35);
+            var products = testcontext.casemap.Where(p => p.id_map == idmap);
             map emp = new map();
-            var map = testcontext.map.Where(p => p.id == 35).First<map>();
+            var map = testcontext.map.Where(p => p.id == idmap).First<map>();
             setEmp(map);
 
             int cal = 0;
@@ -75,8 +77,6 @@ namespace mazeprojetynov
 
                 Cell cell = new Cell(produit.x, produit.y);
                 cell.setId(produit.id);
-                Console.WriteLine(produit.id);
-                Console.WriteLine(cell.getId());
                 cell.setTraversable(produit.mur);
                 cell.setBoue(produit.boue);
                 cell.setCellDep(produit.depart);
@@ -264,9 +264,9 @@ namespace mazeprojetynov
                 }
             }
             DisplayMaze(nodes);
-
         }
-        private void btnCreate_Click(object sender, EventArgs e) // création de la carte
+     
+        private void CreateMap()
         {
             list.Clear();
             arrayBoue.Clear();
@@ -276,23 +276,13 @@ namespace mazeprojetynov
             arrayfin.Clear();
             emp = new map
             {
-                nom_map = "map3"
+                nom_map = "Sans Titre"
 
             };
 
             int wid = 15;
             int hgt = 10;
-
-            CellWid = picMaze.ClientSize.Width / (wid + 2);
-            CellHgt = picMaze.ClientSize.Height / (hgt + 2);
-            if (CellWid > CellHgt) CellWid = CellHgt;
-            else CellHgt = CellWid;
-            Xmin = (picMaze.ClientSize.Width - wid * CellWid) / 2;
-            Ymin = (picMaze.ClientSize.Height - hgt * CellHgt) / 2;
             makemap(wid, hgt);
-
-
-
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -302,9 +292,16 @@ namespace mazeprojetynov
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+           /* 
             frmMenu frmMenu = new frmMenu();
-            frmMenu.Show();
             this.Hide();
+            frmMenu.Show();
+            */
+
+            var t = new Thread(() => Application.Run(new frmMenu()));
+            t.Start();
+            this.Close();
+
         }
         public void setEmp(map map)
         {
@@ -345,16 +342,26 @@ namespace mazeprojetynov
         }
         private void btn_save_Click(object sender, EventArgs e) //enregistrement de la carte dans la base de données
         {
+
+            int wid = 15;
+            int hgt = 10;
+
+            CellWid = picMaze.ClientSize.Width / (wid + 2);
+            CellHgt = picMaze.ClientSize.Height / (hgt + 2);
+            if (CellWid > CellHgt) CellWid = CellHgt;
+            else CellHgt = CellWid;
+            Xmin = (picMaze.ClientSize.Width - wid * CellWid) / 2;
+            Ymin = (picMaze.ClientSize.Height - hgt * CellHgt) / 2;
             makemap(15, 10);
             emp = getEmp();
-            var cells = testcontext.casemap.Where(p => p.id_map == 35);
+            var cells = testcontext.casemap.Where(p => p.id_map == emp.id);
             foreach (var cellule in cells)
             {
                 testcontext.casemap.Remove(cellule);
             }
             foreach (Cell cell in getCells())
             {
-                Console.WriteLine(cell.getId());
+                
                 casemap casemap = new casemap
                 {
 
@@ -533,6 +540,12 @@ namespace mazeprojetynov
 
         public void makemap(int wid, int hgt)
         {
+            CellWid = picMaze.ClientSize.Width / (wid + 2);
+            CellHgt = picMaze.ClientSize.Height / (hgt + 2);
+            if (CellWid > CellHgt) CellWid = CellHgt;
+            else CellHgt = CellWid;
+            Xmin = (picMaze.ClientSize.Width - wid * CellWid) / 2;
+            Ymin = (picMaze.ClientSize.Height - hgt * CellHgt) / 2;
             nodes = new Cell[hgt, wid];
             for (int r = 0; r < hgt; r++)
             {
@@ -758,18 +771,6 @@ namespace mazeprojetynov
                 }
             }
             DisplayMaze(nodes);
-            /*foreach(Cell cell in nodes)
-            {
-                picMaze = new PictureBox();
-
-                picMaze.Location = new Point(cell.getX(), cell.getY());
-                picMaze.Size = new Size(40, 40);
-                picMaze.Image = Properties.Resources.bear_trap;
-                picMaze.SizeMode = PictureBoxSizeMode.StretchImage;
-                picMaze.BringToFront();
-                picMaze.Click += new EventHandler(pic_Click);
-                Controls.Add(picMaze);
-            }*/
         }
 
         private void picMaze_Click(object sender, EventArgs e)
@@ -962,6 +963,36 @@ namespace mazeprojetynov
 
 
             }
+
+        }
+
+        private void frmEditeur_Load(object sender, EventArgs e)
+        {
+            if (frmJouer.idmap != 0)
+            {
+                idmap = frmJouer.idmap;
+                map map = new map();
+                map = testcontext.map.Where(p => p.id == idmap).First<map>();
+                setEmp(map);
+                loadMap();
+            }
+            else
+            {
+                CreateMap();
+            }
+        }
+
+
+        private void frmEditeur_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            frmJouer.idmap = 0;
+            idmap = 0;
+        }
+
+        private void frmEditeur_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmJouer.idmap = 0;
+            idmap = 0;
 
         }
     }

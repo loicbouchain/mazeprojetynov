@@ -28,30 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnJouerExistant = new MetroFramework.Controls.MetroButton();
-            this.metroComboBox1 = new MetroFramework.Controls.MetroComboBox();
+            this.btnLoadMap = new MetroFramework.Controls.MetroButton();
+            this.cbxMap = new MetroFramework.Controls.MetroComboBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnJouerExistant
+            // btnLoadMap
             // 
-            this.btnJouerExistant.Location = new System.Drawing.Point(284, 192);
-            this.btnJouerExistant.Name = "btnJouerExistant";
-            this.btnJouerExistant.Size = new System.Drawing.Size(333, 144);
-            this.btnJouerExistant.TabIndex = 1;
-            this.btnJouerExistant.Text = "JOUER NIVEAU CRÉÉ";
+            this.btnLoadMap.Location = new System.Drawing.Point(336, 328);
+            this.btnLoadMap.Name = "btnLoadMap";
+            this.btnLoadMap.Size = new System.Drawing.Size(233, 44);
+            this.btnLoadMap.TabIndex = 1;
+            this.btnLoadMap.Text = "JOUER NIVEAU CRÉÉ";
+            this.btnLoadMap.Click += new System.EventHandler(this.btnLoadMap_Click);
             // 
-            // metroComboBox1
+            // cbxMap
             // 
-            this.metroComboBox1.FormattingEnabled = true;
-            this.metroComboBox1.ItemHeight = 23;
-            this.metroComboBox1.Location = new System.Drawing.Point(388, 283);
-            this.metroComboBox1.Name = "metroComboBox1";
-            this.metroComboBox1.Size = new System.Drawing.Size(121, 29);
-            this.metroComboBox1.TabIndex = 4;
+            this.cbxMap.FormattingEnabled = true;
+            this.cbxMap.ItemHeight = 23;
+            this.cbxMap.Location = new System.Drawing.Point(336, 182);
+            this.cbxMap.Name = "cbxMap";
+            this.cbxMap.Size = new System.Drawing.Size(233, 29);
+            this.cbxMap.TabIndex = 4;
             // 
             // pictureBox2
             // 
@@ -83,9 +84,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 611);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.metroComboBox1);
+            this.Controls.Add(this.cbxMap);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.btnJouerExistant);
+            this.Controls.Add(this.btnLoadMap);
             this.Name = "frmJouer";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -94,9 +95,9 @@
         }
 
         #endregion
-        private MetroFramework.Controls.MetroButton btnJouerExistant;
+        private MetroFramework.Controls.MetroButton btnLoadMap;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private MetroFramework.Controls.MetroComboBox metroComboBox1;
+        private MetroFramework.Controls.MetroComboBox cbxMap;
         private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
