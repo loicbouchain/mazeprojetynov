@@ -24,6 +24,7 @@ namespace mazeprojetynov
         public Cell[,] nodes;
         public Cell[,] all;
         public map emp;
+        public test res;
         ynovprojetEntities testcontext = new ynovprojetEntities();
         List<Cell> list = new List<Cell>();
         List<Cell> arraymur = new List<Cell>();
@@ -40,6 +41,7 @@ namespace mazeprojetynov
         Image herbe = Properties.Resources.herbe;
         Image mur = Properties.Resources.mur;
         Image chemin = Properties.Resources.chemin;
+        public string nomCreateur = "letesteur";
 
 
         public Form()
@@ -48,10 +50,17 @@ namespace mazeprojetynov
 
         }
 
+
         private void Form_Load(object sender, EventArgs e)
         {
-
+            comboBox1.DataSource = testcontext.map.Select(c => new { Num = c.id, Nom = c.nom_map }).ToList();
+            comboBox1.DisplayMember = "Nom";
+            comboBox1.ValueMember = "Num";
+            comboBox1.Text = "--Nom de la map--";
         }
+
+
+
         public void setEmp(map map)
         {
             emp = map;
@@ -60,6 +69,8 @@ namespace mazeprojetynov
         {
             return emp;
         }
+
+
         public void makemap(int wid, int hgt)
         {
             nodes = new Cell[hgt, wid];
@@ -70,7 +81,7 @@ namespace mazeprojetynov
                 {
                     int x = Xmin + CellWid * c;
                     nodes[r, c] = new Cell(x, y);
-             
+
                     if (c == wid - 1 && r == hgt - 1)
                     {
                         //nodes[r, c] = new Fin(x, y);
@@ -301,7 +312,7 @@ namespace mazeprojetynov
             }*/
         }
 
-       
+
 
         private void btnCreate_Click(object sender, EventArgs e) // création de la carte
         {
@@ -311,11 +322,7 @@ namespace mazeprojetynov
             arraymur.Clear();
             arraydepart.Clear();
             arrayfin.Clear();
-            emp = new map
-            {
-                nom_map = "map3"
-
-            };
+            txtBxNomMap.Visible = true;
 
             int wid = Int16.Parse(txtWidth.Text);
             int hgt = Int16.Parse(txtHeight.Text);
@@ -327,7 +334,7 @@ namespace mazeprojetynov
             Xmin = (picMaze.ClientSize.Width - wid * CellWid) / 2;
             Ymin = (picMaze.ClientSize.Height - hgt * CellHgt) / 2;
             makemap(wid, hgt);
-    
+
 
 
         }
@@ -340,12 +347,17 @@ namespace mazeprojetynov
             {
                 testcontext.casemap.Remove(cellule);
             }
+            emp = new map
+            {
+                nom_map = txtBxNomMap.Text
+
+            };
             foreach (Cell cell in getCells())
             {
                 Console.WriteLine(cell.getId());
                 casemap casemap = new casemap
                 {
-          
+
                     id_map = emp.id,
                     mur = cell.getTraversable(),
                     depart = cell.getCellDep(),
@@ -357,7 +369,7 @@ namespace mazeprojetynov
                     y = cell.getY()
                 };
 
-               
+
                 testcontext.casemap.Add(casemap);
             }
             testcontext.SaveChanges();
@@ -451,7 +463,7 @@ namespace mazeprojetynov
             if (startCell != null && endCell != null)
             {
                 var astar = new AStarSearch(getCells(), startCell, endCell); // Trouve le chemin le plus court
-        
+
                 Cell current_cell = endCell;
                 while (current_cell != startCell)
                 {
@@ -513,7 +525,7 @@ namespace mazeprojetynov
                 // Console.WriteLine(" C L A F IN " + endCell.getX() + " " + endCell.getY());
                 image1.Save("ez_1.bmp");
 
-             
+
              /*   arrayBoue.Clear();
                 arraydepart.Clear();
                 arrayfin.Clear();
@@ -521,13 +533,27 @@ namespace mazeprojetynov
                 arrayPiege.Clear();
                 startCell = null;
                 endCell = null;*/
+
+                emp = getEmp();
+
+                test test = new test
+                {
+                    id_map = emp.id,
+                    resultat = resultat,
+                    nom_createur = nomCreateur,
+                    date = DateTime.Now
+                };
+                testcontext.test.Add(test);
+                testcontext.SaveChanges();
+
+
             }
         }
 
 
         private void pic_Click(object sender, EventArgs e)
         {
-           
+
             foreach (Cell cell in getCells())
             {
                 if (cell.getAllX().Contains(MousePosition.X))
@@ -535,7 +561,7 @@ namespace mazeprojetynov
                     if (cell.getAllY().Contains(MousePosition.Y))
                     {
                         Console.WriteLine("" + cell.getX());
-                        
+
                     }
                 }
             }
@@ -567,7 +593,7 @@ namespace mazeprojetynov
                         }
                         if (cellclic == "piège")
                         {
-                                       
+
                             cell.FillRectangleWithImage(gr, piege);
                             arrayPiege.Add(cell);
                         }
@@ -592,7 +618,7 @@ namespace mazeprojetynov
                                             cell.setTraversable(true);
                                             break;
                                         }
-                                        
+
                                     }
 
                                 }
@@ -703,7 +729,7 @@ namespace mazeprojetynov
                                 cell.FillRectangle(gr, brushend);
                                 cell.FillRectangleWithImage(gr, fin);
                             }
-                            else 
+                            else
                             {
                                 arrayfin[0].FillRectangleWithImage(gr, herbe);
                                 arrayfin.Clear();
@@ -719,15 +745,15 @@ namespace mazeprojetynov
                             cell.FillRectangleWithImage(gr, boue);
                         }
 
-                                
+
                     }
                     picMaze.Image = bm;
-                       
-                            
+
+
                 }
 
             }
-     
+
 
         }
 
@@ -781,11 +807,19 @@ namespace mazeprojetynov
             arraymur.Clear();
             nodes = new Cell[hgt, wid];
             casemap casemap = new casemap();
-            var products = testcontext.casemap.Where(p => p.id_map == 35);
+          /*  var products = testcontext.casemap.Where(p => p.id_map == 35);
             map emp = new map();
-            var map = testcontext.map.Where(p => p.id == 35).First<map>();
+            var map = testcontext.map.Where(p => p.id == 35).First<map>();*/
+
+            int idmap;
+            String idmapstring;
+            idmapstring = comboBox1.SelectedValue.ToString();
+            idmap = Convert.ToInt32(idmapstring);
+            var products = testcontext.casemap.Where(p => p.id_map == idmap);
+            map emp = new map();
+            var map = testcontext.map.Where(p => p.id == idmap).First<map>();
             setEmp(map);
-   
+
             int cal = 0;
             int cal2 = 0;
             foreach (var produit in products)

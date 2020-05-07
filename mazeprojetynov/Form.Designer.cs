@@ -44,6 +44,7 @@
             this.btn_load = new System.Windows.Forms.Button();
             this.btn_save = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.txtBxNomMap = new System.Windows.Forms.TextBox();
             btn_boue = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picMaze)).BeginInit();
             this.SuspendLayout();
@@ -185,7 +186,7 @@
             // 
             // btn_load
             // 
-            this.btn_load.Location = new System.Drawing.Point(562, 20);
+            this.btn_load.Location = new System.Drawing.Point(748, 22);
             this.btn_load.Name = "btn_load";
             this.btn_load.Size = new System.Drawing.Size(75, 23);
             this.btn_load.TabIndex = 18;
@@ -195,7 +196,7 @@
             // 
             // btn_save
             // 
-            this.btn_save.Location = new System.Drawing.Point(781, 20);
+            this.btn_save.Location = new System.Drawing.Point(946, 22);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(75, 23);
             this.btn_save.TabIndex = 20;
@@ -206,16 +207,25 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(402, 20);
+            this.comboBox1.Location = new System.Drawing.Point(588, 22);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 21;
+            // 
+            // txtBxNomMap
+            // 
+            this.txtBxNomMap.Location = new System.Drawing.Point(219, 22);
+            this.txtBxNomMap.Name = "txtBxNomMap";
+            this.txtBxNomMap.Size = new System.Drawing.Size(127, 20);
+            this.txtBxNomMap.TabIndex = 22;
+            this.txtBxNomMap.Visible = false;
             // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1177, 612);
+            this.Controls.Add(this.txtBxNomMap);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.btn_save);
             this.Controls.Add(btn_boue);
@@ -258,6 +268,7 @@
         private System.Windows.Forms.Button btn_load;
         private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox txtBxNomMap;
     }
 }
 
