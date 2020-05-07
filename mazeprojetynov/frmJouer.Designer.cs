@@ -42,7 +42,7 @@
             this.btnLoadMap.Name = "btnLoadMap";
             this.btnLoadMap.Size = new System.Drawing.Size(233, 44);
             this.btnLoadMap.TabIndex = 1;
-            this.btnLoadMap.Text = "JOUER NIVEAU CRÉÉ";
+            this.btnLoadMap.Text = "CHARGER";
             this.btnLoadMap.Click += new System.EventHandler(this.btnLoadMap_Click);
             // 
             // cbxMap
@@ -87,7 +87,11 @@
             this.Controls.Add(this.cbxMap);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnLoadMap);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmJouer";
+            this.Resizable = false;
+            this.Style = MetroFramework.MetroColorStyle.Red;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

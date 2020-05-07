@@ -43,7 +43,6 @@
             this.btnTester = new MetroFramework.Controls.MetroButton();
             this.btnEnregitrer = new MetroFramework.Controls.MetroButton();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.picMaze = new System.Windows.Forms.PictureBox();
             this.pct_gomme = new System.Windows.Forms.PictureBox();
             this.pct_sortie = new System.Windows.Forms.PictureBox();
@@ -69,7 +68,7 @@
             this.lblEditeurTitre.AutoSize = true;
             this.lblEditeurTitre.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.lblEditeurTitre.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.lblEditeurTitre.Location = new System.Drawing.Point(442, 24);
+            this.lblEditeurTitre.Location = new System.Drawing.Point(628, 35);
             this.lblEditeurTitre.Name = "lblEditeurTitre";
             this.lblEditeurTitre.Size = new System.Drawing.Size(87, 25);
             this.lblEditeurTitre.TabIndex = 8;
@@ -81,13 +80,13 @@
             this.panel1.BackColor = System.Drawing.Color.Black;
             this.panel1.Location = new System.Drawing.Point(0, 76);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(884, 3);
+            this.panel1.Size = new System.Drawing.Size(1263, 3);
             this.panel1.TabIndex = 9;
             // 
             // metroLabel3
             // 
             this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(127, 125);
+            this.metroLabel3.Location = new System.Drawing.Point(128, 243);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(50, 19);
             this.metroLabel3.TabIndex = 16;
@@ -96,7 +95,7 @@
             // metroLabel4
             // 
             this.metroLabel4.AutoSize = true;
-            this.metroLabel4.Location = new System.Drawing.Point(127, 185);
+            this.metroLabel4.Location = new System.Drawing.Point(128, 303);
             this.metroLabel4.Name = "metroLabel4";
             this.metroLabel4.Size = new System.Drawing.Size(33, 19);
             this.metroLabel4.TabIndex = 17;
@@ -105,7 +104,7 @@
             // metroLabel5
             // 
             this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(127, 245);
+            this.metroLabel5.Location = new System.Drawing.Point(128, 363);
             this.metroLabel5.Name = "metroLabel5";
             this.metroLabel5.Size = new System.Drawing.Size(42, 19);
             this.metroLabel5.TabIndex = 18;
@@ -114,7 +113,7 @@
             // metroLabel6
             // 
             this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(127, 305);
+            this.metroLabel6.Location = new System.Drawing.Point(128, 423);
             this.metroLabel6.Name = "metroLabel6";
             this.metroLabel6.Size = new System.Drawing.Size(39, 19);
             this.metroLabel6.TabIndex = 19;
@@ -123,7 +122,7 @@
             // metroLabel7
             // 
             this.metroLabel7.AutoSize = true;
-            this.metroLabel7.Location = new System.Drawing.Point(127, 365);
+            this.metroLabel7.Location = new System.Drawing.Point(128, 483);
             this.metroLabel7.Name = "metroLabel7";
             this.metroLabel7.Size = new System.Drawing.Size(44, 19);
             this.metroLabel7.TabIndex = 20;
@@ -132,7 +131,7 @@
             // lblNom
             // 
             this.lblNom.AutoSize = true;
-            this.lblNom.Location = new System.Drawing.Point(507, 99);
+            this.lblNom.Location = new System.Drawing.Point(813, 99);
             this.lblNom.Name = "lblNom";
             this.lblNom.Size = new System.Drawing.Size(110, 19);
             this.lblNom.TabIndex = 27;
@@ -143,13 +142,13 @@
             this.panel4.BackColor = System.Drawing.Color.Black;
             this.panel4.Location = new System.Drawing.Point(205, 79);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(3, 532);
+            this.panel4.Size = new System.Drawing.Size(3, 659);
             this.panel4.TabIndex = 28;
             // 
             // lblCreateur
             // 
             this.lblCreateur.AutoSize = true;
-            this.lblCreateur.Location = new System.Drawing.Point(71, 686);
+            this.lblCreateur.Location = new System.Drawing.Point(276, 99);
             this.lblCreateur.Name = "lblCreateur";
             this.lblCreateur.Size = new System.Drawing.Size(121, 19);
             this.lblCreateur.TabIndex = 29;
@@ -157,14 +156,14 @@
             // 
             // txtBxNom
             // 
-            this.txtBxNom.Location = new System.Drawing.Point(635, 99);
+            this.txtBxNom.Location = new System.Drawing.Point(952, 99);
             this.txtBxNom.Name = "txtBxNom";
             this.txtBxNom.Size = new System.Drawing.Size(150, 23);
             this.txtBxNom.TabIndex = 30;
             // 
             // txtBxCreateur
             // 
-            this.txtBxCreateur.Location = new System.Drawing.Point(216, 686);
+            this.txtBxCreateur.Location = new System.Drawing.Point(428, 99);
             this.txtBxCreateur.Name = "txtBxCreateur";
             this.txtBxCreateur.Size = new System.Drawing.Size(150, 23);
             this.txtBxCreateur.TabIndex = 31;
@@ -190,19 +189,11 @@
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(127, 427);
+            this.metroLabel1.Location = new System.Drawing.Point(128, 545);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(51, 19);
             this.metroLabel1.TabIndex = 35;
             this.metroLabel1.Text = "Enlever";
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.Black;
-            this.panel3.Location = new System.Drawing.Point(-2, 527);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(210, 3);
-            this.panel3.TabIndex = 15;
             // 
             // picMaze
             // 
@@ -222,7 +213,7 @@
             // 
             this.pct_gomme.BackgroundImage = global::mazeprojetynov.Properties.Resources.gomme;
             this.pct_gomme.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pct_gomme.Location = new System.Drawing.Point(35, 412);
+            this.pct_gomme.Location = new System.Drawing.Point(36, 530);
             this.pct_gomme.Name = "pct_gomme";
             this.pct_gomme.Size = new System.Drawing.Size(50, 50);
             this.pct_gomme.TabIndex = 36;
@@ -233,7 +224,7 @@
             // 
             this.pct_sortie.BackgroundImage = global::mazeprojetynov.Properties.Resources.iconfinder_exit_enter_leave_out_door_2931188;
             this.pct_sortie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pct_sortie.Location = new System.Drawing.Point(35, 350);
+            this.pct_sortie.Location = new System.Drawing.Point(36, 468);
             this.pct_sortie.Name = "pct_sortie";
             this.pct_sortie.Size = new System.Drawing.Size(50, 50);
             this.pct_sortie.TabIndex = 25;
@@ -244,7 +235,7 @@
             // 
             this.pct_boue.BackgroundImage = global::mazeprojetynov.Properties.Resources.boue;
             this.pct_boue.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pct_boue.Location = new System.Drawing.Point(35, 290);
+            this.pct_boue.Location = new System.Drawing.Point(36, 408);
             this.pct_boue.Name = "pct_boue";
             this.pct_boue.Size = new System.Drawing.Size(50, 50);
             this.pct_boue.TabIndex = 24;
@@ -255,7 +246,7 @@
             // 
             this.pct_piege.BackgroundImage = global::mazeprojetynov.Properties.Resources.piege;
             this.pct_piege.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pct_piege.Location = new System.Drawing.Point(35, 231);
+            this.pct_piege.Location = new System.Drawing.Point(36, 349);
             this.pct_piege.Name = "pct_piege";
             this.pct_piege.Size = new System.Drawing.Size(50, 50);
             this.pct_piege.TabIndex = 23;
@@ -266,7 +257,7 @@
             // 
             this.pct_mur.BackgroundImage = global::mazeprojetynov.Properties.Resources.mur;
             this.pct_mur.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pct_mur.Location = new System.Drawing.Point(35, 171);
+            this.pct_mur.Location = new System.Drawing.Point(36, 289);
             this.pct_mur.Name = "pct_mur";
             this.pct_mur.Size = new System.Drawing.Size(50, 50);
             this.pct_mur.TabIndex = 22;
@@ -277,7 +268,7 @@
             // 
             this.pct_depart.BackgroundImage = global::mazeprojetynov.Properties.Resources.depart1;
             this.pct_depart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pct_depart.Location = new System.Drawing.Point(35, 112);
+            this.pct_depart.Location = new System.Drawing.Point(36, 230);
             this.pct_depart.Name = "pct_depart";
             this.pct_depart.Size = new System.Drawing.Size(50, 50);
             this.pct_depart.TabIndex = 21;
@@ -333,12 +324,14 @@
             this.Controls.Add(this.metroLabel5);
             this.Controls.Add(this.metroLabel4);
             this.Controls.Add(this.metroLabel3);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblEditeurTitre);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmEditeur";
+            this.Resizable = false;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmEditeur_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmEditeur_FormClosed);
             this.Load += new System.EventHandler(this.frmEditeur_Load);
@@ -381,7 +374,6 @@
         private MetroFramework.Controls.MetroButton btnEnregitrer;
         private System.Windows.Forms.PictureBox pct_gomme;
         private MetroFramework.Controls.MetroLabel metroLabel1;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox picMaze;
     }
 }

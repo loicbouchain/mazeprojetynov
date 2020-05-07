@@ -89,7 +89,11 @@
             this.Controls.Add(this.lblNiveauxTitre);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmRegles";
+            this.Resizable = false;
+            this.Style = MetroFramework.MetroColorStyle.Pink;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
