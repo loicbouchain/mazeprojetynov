@@ -14,6 +14,7 @@ namespace mazeprojetynov
     {
         ynovprojetEntities testcontext = new ynovprojetEntities();
         public user user;
+        public Hashing hash;
         public frmAjouterUtilisateur()
         {
             InitializeComponent();
@@ -21,10 +22,12 @@ namespace mazeprojetynov
 
         private void btn_Enregistrer_Click(object sender, EventArgs e)
         {
+            hash = new Hashing();
+           
             user = new user
             {
                 user_name = txtBoxUsername.Text,
-                user_mdp = txtBoxPassword.Text
+                user_mdp = hash.HashPassword(txtBoxPassword.Text)
 
             };
             testcontext.user.Add(user);

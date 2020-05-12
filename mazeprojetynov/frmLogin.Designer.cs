@@ -33,10 +33,10 @@
             this.txtbox_password = new MetroFramework.Controls.MetroTextBox();
             this.btnLogin = new MetroFramework.Controls.MetroButton();
             this.lblError = new System.Windows.Forms.Label();
-            this.pctLogin = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.pctLogin = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pctLogin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -62,8 +62,9 @@
             // 
             // txtbox_password
             // 
-            this.txtbox_password.Location = new System.Drawing.Point(119, 414);
+            this.txtbox_password.Location = new System.Drawing.Point(118, 414);
             this.txtbox_password.Name = "txtbox_password";
+            this.txtbox_password.PasswordChar = '*';
             this.txtbox_password.Size = new System.Drawing.Size(179, 23);
             this.txtbox_password.TabIndex = 11;
             // 
@@ -79,15 +80,37 @@
             // lblError
             // 
             this.lblError.AutoSize = true;
-            this.lblError.Location = new System.Drawing.Point(131, 424);
+            this.lblError.Location = new System.Drawing.Point(141, 457);
             this.lblError.Name = "lblError";
             this.lblError.Size = new System.Drawing.Size(0, 13);
             this.lblError.TabIndex = 13;
             // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel1.Location = new System.Drawing.Point(118, 327);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(133, 19);
+            this.metroLabel1.TabIndex = 15;
+            this.metroLabel1.Text = "Nom d\'utilisateur :";
+            this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel2.Location = new System.Drawing.Point(134, 392);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(106, 19);
+            this.metroLabel2.TabIndex = 16;
+            this.metroLabel2.Text = "Mot de passe :";
+            this.metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // pctLogin
             // 
             this.pctLogin.Image = global::mazeprojetynov.Properties.Resources.user;
-            this.pctLogin.Location = new System.Drawing.Point(120, 103);
+            this.pctLogin.Location = new System.Drawing.Point(107, 108);
             this.pctLogin.Name = "pctLogin";
             this.pctLogin.Size = new System.Drawing.Size(195, 191);
             this.pctLogin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -105,28 +128,6 @@
             this.pictureBox2.TabIndex = 7;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.metroLabel1.Location = new System.Drawing.Point(118, 327);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(170, 25);
-            this.metroLabel1.TabIndex = 15;
-            this.metroLabel1.Text = "Nom d\'utilisateur :";
-            this.metroLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // metroLabel2
-            // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.metroLabel2.Location = new System.Drawing.Point(134, 392);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(106, 19);
-            this.metroLabel2.TabIndex = 16;
-            this.metroLabel2.Text = "Mot de passe :";
-            this.metroLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmLogin
             // 

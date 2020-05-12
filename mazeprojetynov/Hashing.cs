@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
+using BCrypt.Net;
+using BCrypt;
 namespace mazeprojetynov
 {
 	public class Hashing
-	{/*
-		private static string GetRandomSalt()
+	{
+		private  string GetRandomSalt()
 		{
-			return BCrypt.GenerateSalt(12);
+			
+			return BCrypt.Net.BCrypt.GenerateSalt(12);
 		}
 
-		public static string HashPassword(string password)
+		public  string HashPassword(string password)
 		{
-			return BCrypt.HashPassword(password, GetRandomSalt());
+			return BCrypt.Net.BCrypt.HashPassword(password, GetRandomSalt());
 		}
 
-		public static bool ValidatePassword(string password, string correctHash)
+		public  bool ValidatePassword(string password, string correctHash)
 		{
-			return BCrypt.Verify(password, correctHash);
-		}*/
+			return BCrypt.Net.BCrypt.Verify(password, correctHash);
+		}
 	}
 }

@@ -15,18 +15,21 @@ namespace mazeprojetynov
         public int id;
         ynovprojetEntities testcontext = new ynovprojetEntities();
         public user user;
+        public Hashing hash;
         public frmModifierUtilisateur()
         {
             InitializeComponent();
             cbxUser.DataSource = testcontext.user.Select(c => new { Num = c.id, Nom = c.user_name, password = c.user_mdp }).ToList();
             cbxUser.DisplayMember = "Nom";
             cbxUser.ValueMember = "Num";
+          
             cbxUser.Text = "--Nom de la map--";
 
         }
 
         private void btn_Enregistrer_Click(object sender, EventArgs e)
         {
+            hash = new Hashing;
             String iduserstring;
             iduserstring = cbxUser.SelectedValue.ToString();
             id = Convert.ToInt32(iduserstring);
@@ -35,7 +38,7 @@ namespace mazeprojetynov
             foreach (var utilisateur in user)
             {
                 utilisateur.user_name = txtBoxUsername.Text;
-                utilisateur.user_mdp = txtBoxPassword.Text;
+                utilisateur.user_mdp = hash.HashPassword(txtBoxPassword.Text);
             }
 
             testcontext.SaveChanges();
@@ -61,7 +64,7 @@ namespace mazeprojetynov
             foreach (var utilisateur in user)
             {
                 txtBoxUsername.Text = utilisateur.user_name;
-                txtBoxPassword.Text = utilisateur.user_mdp;
+    
             }
         }
     }
