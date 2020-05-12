@@ -69,7 +69,7 @@ namespace mazeprojetynov
             map emp = new map();
             var map = testcontext.map.Where(p => p.id == idmap).First<map>();
             setEmp(map);
-
+            txtBxNom.Text = map.nom_map;
             int cal = 0;
             int cal2 = 0;
             foreach (var produit in products)
@@ -279,7 +279,7 @@ namespace mazeprojetynov
                 nom_map = "Sans Titre"
 
             };
-
+            txtBxNom.Text = emp.nom_map;
             int wid = 15;
             int hgt = 10;
             makemap(wid, hgt);
@@ -355,7 +355,7 @@ namespace mazeprojetynov
             }
             foreach (Cell cell in getCells())
             {
-                
+             
                 casemap casemap = new casemap
                 {
 
@@ -373,6 +373,7 @@ namespace mazeprojetynov
 
                 testcontext.casemap.Add(casemap);
             }
+            emp.nom_map = txtBxNom.Text;
             testcontext.SaveChanges();
 
         }
