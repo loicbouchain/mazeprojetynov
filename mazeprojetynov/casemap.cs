@@ -19,6 +19,10 @@ namespace mazeprojetynov
         public bool mur { get; set; }
         public int x { get; set; }
         public int y { get; set; }
+        public bool depart { get; set; }
+        public bool fin { get; set; }
+        public bool boue { get; set; }
+        public bool piege { get; set; }
     
         public virtual map map { get; set; }
     }

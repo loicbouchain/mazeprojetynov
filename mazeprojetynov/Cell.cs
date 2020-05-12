@@ -33,19 +33,20 @@ namespace MazeProjetYNOV
         public Cell voisinSud;
         public Cell voisinOuest;
         public Cell voisinEst;
+        public int id;
         // The node's neighbors in order North, South, East, West.
         public Cell[] Neighbors = new Cell[4];
 
         public Cell(int x,int y)
         {
             voisins = new List<Cell>();
-            taille_cell  = 14;
+            taille_cell  = 40;
             this.x = x;
             this.y = y;
             traversable = true;
             boue = false;
             piege = false;
-        Bounds = new Rectangle(x, y, 14, 14);
+            Bounds = new Rectangle(x, y, taille_cell, taille_cell);
 
         }
         public Point Center
@@ -57,7 +58,28 @@ namespace MazeProjetYNOV
                 return new Point(x, y);
             }
         }
-    
+        public List<int> getAllX()
+        {
+            List<int> array = new List<int>();
+   
+            for (int i = 0; i<taille_cell+1; i++)
+            {
+                array.Add(this.x + i);
+            }   
+            return array;
+
+        }
+        public List<int> getAllY()
+        {
+            List<int> array = new List<int>();
+            for (int i = 0; i < taille_cell + 1; i++)
+            {
+                array.Add(this.y + i);
+            }
+            return array;
+
+        }
+
 
         public void DrawWalls(Graphics gr, Pen pen)
         {
@@ -88,6 +110,14 @@ namespace MazeProjetYNOV
         {
            
             gr.FillRectangle(brush,
+                Bounds.Left + 1, Bounds.Y + 1,
+                Bounds.Width - 2, Bounds.Height - 2);
+           
+        }
+        public void FillRectangleWithImage(Graphics gr, Image brush)
+        {
+
+             gr.DrawImage(brush,
                 Bounds.Left + 1, Bounds.Y + 1,
                 Bounds.Width - 2, Bounds.Height - 2);
         }
@@ -145,6 +175,14 @@ namespace MazeProjetYNOV
         public int getX()
         {
             return this.x;
+        }
+        public void setId(int id)
+        {
+            this.id = id;
+        }
+        public int getId()
+        {
+            return this.id;
         }
         public void setX(int x)
         {

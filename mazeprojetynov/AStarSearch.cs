@@ -78,7 +78,7 @@ namespace mazeprojetynov
         {
             var frontier = new PriorityQueue<Cell>();
             frontier.Enqueue(start, 0);
-
+            
             cameFrom[start] = start;
             costSoFar[start] = 0;
 
