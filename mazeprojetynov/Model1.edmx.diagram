@@ -11,6 +11,7 @@
         <AssociationConnector Association="ynovprojetModel.casemap_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="ynovprojetModel.test_ibfk_1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ynovprojetModel.user" Width="1.5" PointX="5.375" PointY="0.75" />
+        <AssociationConnector Association="ynovprojetModel.map_ibfk_1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -13,12 +13,14 @@ namespace mazeprojetynov
     public partial class frmLogin : MetroFramework.Forms.MetroForm
     {
         public static int iduser;
-
+        public static string username;
         ynovprojetEntities testcontext = new ynovprojetEntities();
+        
         public Hashing hash;
         public frmLogin()
         {
             InitializeComponent();
+      
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -30,18 +32,18 @@ namespace mazeprojetynov
         private void btnLogin_Click(object sender, EventArgs e)
         {
             hash = new Hashing();
-            var users = testcontext.user.Select(c => new { Num = c.id, username = c.user_name, password = c.user_mdp, role = c.role }).ToList();
 
+
+            var users = testcontext.user.Select(c => new { Num = c.id, username = c.user_name, password = c.user_mdp, role = c.role }).ToList();
+            
             foreach (var utilisateur in users)
             {
                 if (utilisateur.username == txtBox_username.Text)
                 {
                     if (hash.ValidatePassword(txtbox_password.Text,utilisateur.password))
                     {
-
                         iduser = Convert.ToInt32(utilisateur.Num);
-
-
+                        username = utilisateur.username;
                         frmMenu frmMenu = new frmMenu();
                         frmMenu.Show();
                         this.Hide();

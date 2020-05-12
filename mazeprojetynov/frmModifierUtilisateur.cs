@@ -29,7 +29,7 @@ namespace mazeprojetynov
 
         private void btn_Enregistrer_Click(object sender, EventArgs e)
         {
-            hash = new Hashing;
+            hash = new Hashing();
             String iduserstring;
             iduserstring = cbxUser.SelectedValue.ToString();
             id = Convert.ToInt32(iduserstring);

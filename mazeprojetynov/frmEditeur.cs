@@ -24,9 +24,10 @@ namespace mazeprojetynov
         private List<Cell> cellList;
         private int frmgscore = 0;
         public Cell[,] nodes;
-
+        public int iduser;
         public Cell[,] all;
         public map emp;
+        public user userMap;
         ynovprojetEntities testcontext = new ynovprojetEntities();
         List<Cell> list = new List<Cell>();
         List<Cell> arraymur = new List<Cell>();
@@ -270,6 +271,7 @@ namespace mazeprojetynov
      
         private void CreateMap()
         {
+            
             list.Clear();
             arrayBoue.Clear();
             arrayPiege.Clear();
@@ -278,7 +280,10 @@ namespace mazeprojetynov
             arrayfin.Clear();
             emp = new map
             {
-                nom_map = "Sans Titre"
+                nom_map = "Sans Titre",
+                createurId = frmLogin.iduser,
+                createurName = frmLogin.username
+         
 
             };
 
@@ -306,6 +311,14 @@ namespace mazeprojetynov
         public map getEmp()
         {
             return emp;
+        }
+        public void setUtilisateur(user user)
+        {
+            userMap = user;
+        }
+        public user getUtilisateur()
+        {
+            return userMap;
         }
         private void btnvide_Click(object sender, EventArgs e)
         {
@@ -973,11 +986,18 @@ namespace mazeprojetynov
                 setEmp(map);
                 loadMap();
                 txtBxNom.Text = map.nom_map;
+                txtBxCreateur.Text = map.createurName;
             }
             else
             {
                 CreateMap();
+                iduser = frmLogin.iduser;
+                user user = new user();
+                
+                user = testcontext.user.Where(p => p.id == iduser).First<user>();
+                setUtilisateur(user);
                 txtBxNom.Text = "Sans Titre";
+                txtBxCreateur.Text = frmLogin.username;
             }
         }
 

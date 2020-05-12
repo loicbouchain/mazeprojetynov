@@ -25,6 +25,8 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nom_map" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="createurId" Type="int" Nullable="false" />
+          <Property Name="createurName" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="test">
           <Key>
@@ -112,6 +114,10 @@
           <Property Name="nom_map" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="casemap" Relationship="Self.casemap_ibfk_1" FromRole="map" ToRole="casemap" />
           <NavigationProperty Name="test" Relationship="Self.test_ibfk_1" FromRole="map" ToRole="test" />
+          <Property Name="createurId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="map1" Relationship="ynovprojetModel.map_ibfk_1" FromRole="map" ToRole="map1" />
+          <NavigationProperty Name="map2" Relationship="ynovprojetModel.map_ibfk_1" FromRole="map1" ToRole="map" />
+          <Property Name="createurName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="test">
           <Key>
@@ -163,6 +169,10 @@
             <End Role="test" EntitySet="test" />
           </AssociationSet>
           <EntitySet Name="user" EntityType="ynovprojetModel.user" />
+          <AssociationSet Name="map_ibfk_1" Association="ynovprojetModel.map_ibfk_1">
+            <End Role="map" EntitySet="map" />
+            <End Role="map1" EntitySet="map" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -173,6 +183,18 @@
           <Property Name="user_mdp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="role" Type="String" FixedLength="false" Unicode="false" MaxLength="Max" />
         </EntityType>
+        <Association Name="map_ibfk_1">
+          <End Type="ynovprojetModel.map" Role="map" Multiplicity="1" />
+          <End Type="ynovprojetModel.map" Role="map1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="map">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="map1">
+              <PropertyRef Name="createurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -197,6 +219,8 @@
           <EntitySetMapping Name="map">
             <EntityTypeMapping TypeName="ynovprojetModel.map">
               <MappingFragment StoreEntitySet="map">
+                <ScalarProperty Name="createurName" ColumnName="createurName" />
+                <ScalarProperty Name="createurId" ColumnName="createurId" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nom_map" ColumnName="nom_map" />
               </MappingFragment>

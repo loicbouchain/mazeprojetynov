@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEditeur));
             this.lblEditeurTitre = new MetroFramework.Controls.MetroLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
@@ -163,6 +164,7 @@
             // 
             // txtBxCreateur
             // 
+            this.txtBxCreateur.Enabled = false;
             this.txtBxCreateur.Location = new System.Drawing.Point(428, 99);
             this.txtBxCreateur.Name = "txtBxCreateur";
             this.txtBxCreateur.Size = new System.Drawing.Size(150, 23);
@@ -211,7 +213,7 @@
             // 
             // pct_gomme
             // 
-            this.pct_gomme.BackgroundImage = global::mazeprojetynov.Properties.Resources.gomme;
+            this.pct_gomme.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pct_gomme.BackgroundImage")));
             this.pct_gomme.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pct_gomme.Location = new System.Drawing.Point(36, 530);
             this.pct_gomme.Name = "pct_gomme";
@@ -222,7 +224,7 @@
             // 
             // pct_sortie
             // 
-            this.pct_sortie.BackgroundImage = global::mazeprojetynov.Properties.Resources.iconfinder_exit_enter_leave_out_door_2931188;
+            this.pct_sortie.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pct_sortie.BackgroundImage")));
             this.pct_sortie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pct_sortie.Location = new System.Drawing.Point(36, 468);
             this.pct_sortie.Name = "pct_sortie";
@@ -233,7 +235,7 @@
             // 
             // pct_boue
             // 
-            this.pct_boue.BackgroundImage = global::mazeprojetynov.Properties.Resources.boue;
+            this.pct_boue.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pct_boue.BackgroundImage")));
             this.pct_boue.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pct_boue.Location = new System.Drawing.Point(36, 408);
             this.pct_boue.Name = "pct_boue";
@@ -244,7 +246,7 @@
             // 
             // pct_piege
             // 
-            this.pct_piege.BackgroundImage = global::mazeprojetynov.Properties.Resources.piege;
+            this.pct_piege.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pct_piege.BackgroundImage")));
             this.pct_piege.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pct_piege.Location = new System.Drawing.Point(36, 349);
             this.pct_piege.Name = "pct_piege";
@@ -255,7 +257,7 @@
             // 
             // pct_mur
             // 
-            this.pct_mur.BackgroundImage = global::mazeprojetynov.Properties.Resources.mur;
+            this.pct_mur.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pct_mur.BackgroundImage")));
             this.pct_mur.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pct_mur.Location = new System.Drawing.Point(36, 289);
             this.pct_mur.Name = "pct_mur";
@@ -266,7 +268,7 @@
             // 
             // pct_depart
             // 
-            this.pct_depart.BackgroundImage = global::mazeprojetynov.Properties.Resources.depart1;
+            this.pct_depart.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pct_depart.BackgroundImage")));
             this.pct_depart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pct_depart.Location = new System.Drawing.Point(36, 230);
             this.pct_depart.Name = "pct_depart";
@@ -277,7 +279,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BackgroundImage = global::mazeprojetynov.Properties.Resources.iconfinder_exit_delete_remove_close_x_2931151;
+            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox2.Location = new System.Drawing.Point(1211, 10);
@@ -289,7 +291,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackgroundImage = global::mazeprojetynov.Properties.Resources.iconfinder_undo_back_arrow_2931166;
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Location = new System.Drawing.Point(10, 10);
