@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace mazeprojetynov
 {
-    public partial class frmRegles : MetroFramework.Forms.MetroForm
+    public partial class frmAdministration : MetroFramework.Forms.MetroForm
     {
-        public frmRegles()
+        public frmAdministration()
         {
             InitializeComponent();
         }
@@ -27,6 +27,21 @@ namespace mazeprojetynov
             frmMenu frmMenu = new frmMenu();
             frmMenu.Show();
             this.Hide();
+        }
+
+        private void btnLoadMap_Click(object sender, EventArgs e)
+        {
+            frmListeCartes frmListeCartes = new frmListeCartes();
+            frmListeCartes.Show();
+            this.Hide();
+        }
+
+        private void btnUtilisateur_Click(object sender, EventArgs e)
+        {
+            frmUtilisateur frmUtilisateur = new frmUtilisateur();
+            frmUtilisateur.Show();
+            this.Hide();
+
         }
     }
 }

@@ -24,6 +24,7 @@ namespace mazeprojetynov
         private List<Cell> cellList;
         private int frmgscore = 0;
         public Cell[,] nodes;
+
         public Cell[,] all;
         public map emp;
         ynovprojetEntities testcontext = new ynovprojetEntities();
@@ -46,6 +47,7 @@ namespace mazeprojetynov
         public frmEditeur()
         {
             InitializeComponent();
+            txtBxNom.Text = "Sans Titre";
         }
         private void loadMap()
         {
@@ -348,6 +350,7 @@ namespace mazeprojetynov
             Ymin = (picMaze.ClientSize.Height - hgt * CellHgt) / 2;
             makemap(15, 10);
             emp = getEmp();
+            emp.nom_map = txtBxNom.Text;
             var cells = testcontext.casemap.Where(p => p.id_map == emp.id);
             foreach (var cellule in cells)
             {
@@ -969,10 +972,12 @@ namespace mazeprojetynov
                 map = testcontext.map.Where(p => p.id == idmap).First<map>();
                 setEmp(map);
                 loadMap();
+                txtBxNom.Text = map.nom_map;
             }
             else
             {
                 CreateMap();
+                txtBxNom.Text = "Sans Titre";
             }
         }
 
