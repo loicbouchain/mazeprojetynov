@@ -33,7 +33,6 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_map" Type="int" Nullable="false" />
           <Property Name="resultat" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="nom_createur" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
         </EntityType>
         <Association Name="casemap_ibfk_1">
@@ -113,7 +112,6 @@
           <Property Name="id_map" Type="Int32" Nullable="false" />
           <Property Name="resultat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="map" Relationship="Self.test_ibfk_1" FromRole="test" ToRole="map" />
-          <Property Name="nom_createur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="date" Type="DateTime" Nullable="false" />
         </EntityType>
         <Association Name="casemap_ibfk_1">
@@ -190,7 +188,6 @@
             <EntityTypeMapping TypeName="ynovprojetModel.test">
               <MappingFragment StoreEntitySet="test">
                 <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="nom_createur" ColumnName="nom_createur" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_map" ColumnName="id_map" />
                 <ScalarProperty Name="resultat" ColumnName="resultat" />

@@ -41,7 +41,6 @@ namespace mazeprojetynov
         Image herbe = Properties.Resources.herbe;
         Image mur = Properties.Resources.mur;
         Image chemin = Properties.Resources.chemin;
-        public string nomCreateur = "letesteur";
 
 
         public Form()
@@ -540,11 +539,9 @@ namespace mazeprojetynov
                 {
                     id_map = emp.id,
                     resultat = resultat,
-                    nom_createur = nomCreateur,
                     date = DateTime.Now
                 };
                 testcontext.test.Add(test);
-                testcontext.SaveChanges();
 
 
             }

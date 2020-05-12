@@ -216,6 +216,12 @@
     <Compile Include="frmEditeur.Designer.cs">
       <DependentUpon>frmEditeur.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmInfoMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInfoMap.Designer.cs">
+      <DependentUpon>frmInfoMap.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmJouer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -239,6 +245,12 @@
     </Compile>
     <Compile Include="frmRegles.Designer.cs">
       <DependentUpon>frmRegles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmResultat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmResultat.Designer.cs">
+      <DependentUpon>frmResultat.cs</DependentUpon>
     </Compile>
     <Compile Include="IPriorityQueue.cs" />
     <Compile Include="map.cs">
@@ -272,6 +284,9 @@
     <EmbeddedResource Include="frmEditeur.resx">
       <DependentUpon>frmEditeur.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmInfoMap.resx">
+      <DependentUpon>frmInfoMap.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmJouer.resx">
       <DependentUpon>frmJouer.cs</DependentUpon>
     </EmbeddedResource>
@@ -283,6 +298,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmRegles.resx">
       <DependentUpon>frmRegles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmResultat.resx">
+      <DependentUpon>frmResultat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
