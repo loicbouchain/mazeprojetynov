@@ -23,6 +23,8 @@ namespace mazeprojetynov
     
         public int id { get; set; }
         public string nom_map { get; set; }
+        public int createurId { get; set; }
+        public string createurName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<casemap> casemap { get; set; }

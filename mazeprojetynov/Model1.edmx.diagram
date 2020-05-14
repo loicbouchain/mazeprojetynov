@@ -7,9 +7,10 @@
       <Diagram DiagramId="6b55987b65bc476bb7a44abaa65a67cf" Name="Diagram1">
         <EntityTypeShape EntityType="ynovprojetModel.casemap" Width="1.5" PointX="3" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ynovprojetModel.map" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ynovprojetModel.test" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ynovprojetModel.test" Width="1.5" PointX="8" PointY="3.5" IsExpanded="true" />
         <AssociationConnector Association="ynovprojetModel.casemap_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="ynovprojetModel.test_ibfk_1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ynovprojetModel.user" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
