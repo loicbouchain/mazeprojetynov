@@ -17,7 +17,11 @@ namespace mazeprojetynov
         public int id { get; set; }
         public int id_map { get; set; }
         public string resultat { get; set; }
-        public System.DateTime date { get; set; }
+
+        public string nom_createur { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
+
+
 
         public virtual map map { get; set; }
     }
