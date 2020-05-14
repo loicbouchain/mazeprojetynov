@@ -12,7 +12,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_map" Type="int" Nullable="false" />
           <Property Name="mur" Type="bool" Nullable="false" />
-         <Property Name="x" Type="int" Nullable="false" />
+          <Property Name="x" Type="int" Nullable="false" />
           <Property Name="y" Type="int" Nullable="false" />
           <Property Name="depart" Type="bool" Nullable="false" />
           <Property Name="fin" Type="bool" Nullable="false" />
