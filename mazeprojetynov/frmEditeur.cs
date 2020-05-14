@@ -37,6 +37,8 @@ namespace mazeprojetynov
         List<Cell> arrayBoue = new List<Cell>();
         public string cellclic = "";
         public static string resultat = "Passé";
+        public static int nbBoueinParcours = 0;
+        public static int nbCaseParcours = 0;
         Image depart = Properties.Resources.depart1;
         Image fin = Properties.Resources.iconfinder_exit_enter_leave_out_door_2931188;
         Image piege = Properties.Resources.piege;
@@ -468,28 +470,43 @@ namespace mazeprojetynov
                 }
           
                 emp = getEmp();
-
-                test test = new test
+                if(emp.id !=0) { 
+                    test test = new test
+                    {
+                        id_map = emp.id,
+                        resultat = resultat,
+                        date = DateTime.Now
+                    };
+                    testcontext.test.Add(test);
+                    testcontext.SaveChanges();
+                    nbCaseParcours = list.Count();
+                    foreach (Cell cell in list)
+                    {
+                        if (cell.getBoue() == true)
+                        {
+                            nbBoueinParcours = nbBoueinParcours + 1;
+                        }
+                    }
+                    frmResultat frmResultat = new frmResultat();
+                    frmResultat.Show();
+                    nbBoueinParcours = 0;
+                    nbCaseParcours = 0;
+                }
+                else
                 {
-                    id_map = emp.id,
-                    resultat = resultat,
-                    date = DateTime.Now
-                };
-                testcontext.test.Add(test);
-                testcontext.SaveChanges();
-                frmResultat frmResultat = new frmResultat();
-                frmResultat.Show();
-
-
-
-                /*   arrayBoue.Clear();
-                   arraydepart.Clear();
-                   arrayfin.Clear();
-                   arraymur.Clear();
-                   arrayPiege.Clear();
-                   startCell = null;
-                   endCell = null;*/
-
+                    nbCaseParcours = list.Count();
+                    foreach (Cell cell in list)
+                    {
+                        if (cell.getBoue() == true)
+                        {
+                            nbBoueinParcours = nbBoueinParcours + 1;
+                        }
+                    }
+                    frmResultat frmResultat = new frmResultat();
+                    frmResultat.Show();
+                    nbBoueinParcours = 0;
+                    nbCaseParcours = 0;
+                }
 
             }
         }

@@ -16,7 +16,7 @@ namespace mazeprojetynov
         public frmResultat()
         {
             InitializeComponent();
-            lblResultat.Text = "Le parcours est : " + frmEditeur.resultat;
+            lblResultat.Text = "Résultat du parcours : " + frmEditeur.resultat + Environment.NewLine + "Le parcours traverse " + frmEditeur.nbBoueinParcours + " case.s de boue." + Environment.NewLine + "Le parcours total comptabilise " + frmEditeur.nbCaseParcours + " cases.";
         }
 
     }

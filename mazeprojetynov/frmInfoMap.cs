@@ -22,7 +22,13 @@ namespace mazeprojetynov
             lblObstacle.Text = "Nombre de boues : " + testcontext.casemap.Where(c => c.id_map == idmap && c.boue == true).Count().ToString();
             lblPiege.Text = "Nombre de pièges : " + testcontext.casemap.Where(c => c.id_map == idmap && c.piege == true).Count().ToString();
 
-            lblResultat.Text = "Résultat du dernier test : " + testcontext.test.Where(c => c.id_map == idmap).Select(c => c.resultat).FirstOrDefault().ToString();
+            if(testcontext.test.Where(c => c.id_map == idmap).Select(c => c.resultat).FirstOrDefault() != null) { 
+                lblResultat.Text = "Résultat du dernier test : " + testcontext.test.Where(c => c.id_map == idmap).Select(c => c.resultat).FirstOrDefault().ToString();
+            }
+            else
+            {
+                lblResultat.Visible = false; 
+            }
 
 
 

@@ -79,6 +79,7 @@
             this.lblDate.Size = new System.Drawing.Size(125, 19);
             this.lblDate.TabIndex = 13;
             this.lblDate.Text = "Date du dernier test";
+            this.lblDate.Visible = false;
             // 
             // frmInfoMap
             // 
