@@ -24,8 +24,10 @@ namespace mazeprojetynov
         private List<Cell> cellList;
         private int frmgscore = 0;
         public Cell[,] nodes;
+        public int iduser;
         public Cell[,] all;
         public map emp;
+        public user userMap;
         ynovprojetEntities testcontext = new ynovprojetEntities();
         List<Cell> list = new List<Cell>();
         List<Cell> arraymur = new List<Cell>();
@@ -46,6 +48,7 @@ namespace mazeprojetynov
         public frmEditeur()
         {
             InitializeComponent();
+            txtBxNom.Text = "Sans Titre";
         }
         private void loadMap()
         {
@@ -268,6 +271,7 @@ namespace mazeprojetynov
      
         private void CreateMap()
         {
+            
             list.Clear();
             arrayBoue.Clear();
             arrayPiege.Clear();
@@ -276,7 +280,10 @@ namespace mazeprojetynov
             arrayfin.Clear();
             emp = new map
             {
-                nom_map = "Sans Titre"
+                nom_map = "Sans Titre",
+                createurId = frmLogin.iduser,
+                createurName = frmLogin.username
+         
 
             };
             txtBxNom.Text = emp.nom_map;
@@ -304,6 +311,14 @@ namespace mazeprojetynov
         public map getEmp()
         {
             return emp;
+        }
+        public void setUtilisateur(user user)
+        {
+            userMap = user;
+        }
+        public user getUtilisateur()
+        {
+            return userMap;
         }
         private void btnvide_Click(object sender, EventArgs e)
         {
@@ -336,7 +351,7 @@ namespace mazeprojetynov
         }
         private void btn_save_Click(object sender, EventArgs e) //enregistrement de la carte dans la base de données
         {
-
+            
             int wid = 15;
             int hgt = 10;
 
@@ -348,6 +363,11 @@ namespace mazeprojetynov
             Ymin = (picMaze.ClientSize.Height - hgt * CellHgt) / 2;
             makemap(15, 10);
             emp = getEmp();
+            emp.nom_map = txtBxNom.Text;
+            if (txtBxNom.Text == "")
+            {
+                emp.nom_map = "Sans Titre";
+            }
             var cells = testcontext.casemap.Where(p => p.id_map == emp.id);
             foreach (var cellule in cells)
             {
@@ -921,6 +941,13 @@ namespace mazeprojetynov
                                     cell.FillRectangleWithImage(gr, depart);
                                     arraydepart.Add(cell);
                                 }
+                                else
+                                {
+                                    arraydepart[0].FillRectangleWithImage(gr, herbe);
+                                    arraydepart.Clear();
+                                    cell.FillRectangleWithImage(gr, depart);
+                                    arraydepart.Add(cell);
+                                }
                             }
                             if (cellclic == "fin")
                             {
@@ -970,10 +997,19 @@ namespace mazeprojetynov
                 map = testcontext.map.Where(p => p.id == idmap).First<map>();
                 setEmp(map);
                 loadMap();
+                txtBxNom.Text = map.nom_map;
+                txtBxCreateur.Text = map.createurName;
             }
             else
             {
                 CreateMap();
+                iduser = frmLogin.iduser;
+                user user = new user();
+                
+                user = testcontext.user.Where(p => p.id == iduser).First<user>();
+                setUtilisateur(user);
+                txtBxNom.Text = "Sans Titre";
+                txtBxCreateur.Text = frmLogin.username;
             }
         }
 

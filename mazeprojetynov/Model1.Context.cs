@@ -28,5 +28,6 @@ namespace mazeprojetynov
         public virtual DbSet<casemap> casemap { get; set; }
         public virtual DbSet<map> map { get; set; }
         public virtual DbSet<test> test { get; set; }
+        public virtual DbSet<user> user { get; set; }
     }
 }

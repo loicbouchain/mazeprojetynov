@@ -12,12 +12,11 @@ namespace mazeprojetynov
     using System;
     using System.Collections.Generic;
     
-    public partial class test
+    public partial class user
     {
         public int id { get; set; }
-        public int id_map { get; set; }
-        public string resultat { get; set; }
-    
-        public virtual map map { get; set; }
+        public string user_name { get; set; }
+        public string user_mdp { get; set; }
+        public string role { get; set; }
     }
 }

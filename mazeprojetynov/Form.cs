@@ -540,8 +540,6 @@ namespace mazeprojetynov
                 {
                     id_map = emp.id,
                     resultat = resultat,
-                    nom_createur = nomCreateur,
-                    date = DateTime.Now
                 };
                 testcontext.test.Add(test);
                 testcontext.SaveChanges();
