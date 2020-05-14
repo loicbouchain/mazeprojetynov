@@ -38,7 +38,7 @@ namespace mazeprojetynov
 
         private void btnRegles_Click(object sender, EventArgs e)
         {
-            frmRegles frmRegles = new frmRegles();
+            frmAdministration frmRegles = new frmAdministration();
             frmRegles.Show();
             this.Hide();
         }

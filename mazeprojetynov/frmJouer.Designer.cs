@@ -32,6 +32,10 @@
             this.cbxMap = new MetroFramework.Controls.MetroComboBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblMur = new MetroFramework.Controls.MetroLabel();
+            this.lblObstacle = new MetroFramework.Controls.MetroLabel();
+            this.lblPiege = new MetroFramework.Controls.MetroLabel();
+            this.btnRaf = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -78,11 +82,54 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // lblMur
+            // 
+            this.lblMur.AutoSize = true;
+            this.lblMur.Location = new System.Drawing.Point(47, 182);
+            this.lblMur.Name = "lblMur";
+            this.lblMur.Size = new System.Drawing.Size(111, 19);
+            this.lblMur.TabIndex = 6;
+            this.lblMur.Text = "Nombre de murs";
+            this.lblMur.Visible = false;
+            // 
+            // lblObstacle
+            // 
+            this.lblObstacle.AutoSize = true;
+            this.lblObstacle.Location = new System.Drawing.Point(47, 271);
+            this.lblObstacle.Name = "lblObstacle";
+            this.lblObstacle.Size = new System.Drawing.Size(127, 19);
+            this.lblObstacle.TabIndex = 7;
+            this.lblObstacle.Text = "Nombre d\'obstacles";
+            this.lblObstacle.Visible = false;
+            // 
+            // lblPiege
+            // 
+            this.lblPiege.AutoSize = true;
+            this.lblPiege.Location = new System.Drawing.Point(47, 357);
+            this.lblPiege.Name = "lblPiege";
+            this.lblPiege.Size = new System.Drawing.Size(120, 19);
+            this.lblPiege.TabIndex = 8;
+            this.lblPiege.Text = "Nombre de pièges";
+            this.lblPiege.Visible = false;
+            // 
+            // btnRaf
+            // 
+            this.btnRaf.Location = new System.Drawing.Point(666, 328);
+            this.btnRaf.Name = "btnRaf";
+            this.btnRaf.Size = new System.Drawing.Size(145, 44);
+            this.btnRaf.TabIndex = 9;
+            this.btnRaf.Text = "Informations de la map";
+            this.btnRaf.Click += new System.EventHandler(this.btnRaf_Click);
+            // 
             // frmJouer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 611);
+            this.Controls.Add(this.btnRaf);
+            this.Controls.Add(this.lblPiege);
+            this.Controls.Add(this.lblObstacle);
+            this.Controls.Add(this.lblMur);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.cbxMap);
             this.Controls.Add(this.pictureBox1);
@@ -95,6 +142,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -103,5 +151,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private MetroFramework.Controls.MetroComboBox cbxMap;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private MetroFramework.Controls.MetroLabel lblMur;
+        private MetroFramework.Controls.MetroLabel lblObstacle;
+        private MetroFramework.Controls.MetroLabel lblPiege;
+        private MetroFramework.Controls.MetroButton btnRaf;
     }
 }

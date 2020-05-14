@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ynovprojetModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ynovprojetModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="casemap">
           <Key>
             <PropertyRef Name="id" />
@@ -12,7 +12,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_map" Type="int" Nullable="false" />
           <Property Name="mur" Type="bool" Nullable="false" />
-          <Property Name="x" Type="int" Nullable="false" />
+         <Property Name="x" Type="int" Nullable="false" />
           <Property Name="y" Type="int" Nullable="false" />
           <Property Name="depart" Type="bool" Nullable="false" />
           <Property Name="fin" Type="bool" Nullable="false" />
@@ -25,6 +25,8 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nom_map" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="createurId" Type="int" Nullable="false" />
+          <Property Name="createurName" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="test">
           <Key>
@@ -33,8 +35,15 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_map" Type="int" Nullable="false" />
           <Property Name="resultat" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="nom_createur" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="user_mdp" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="role" Type="varchar" MaxLength="30" />
         </EntityType>
         <Association Name="casemap_ibfk_1">
           <End Role="map" Type="Self.map" Multiplicity="1">
@@ -68,6 +77,7 @@
           <EntitySet Name="casemap" EntityType="Self.casemap" Schema="ynovprojet" store:Type="Tables" />
           <EntitySet Name="map" EntityType="Self.map" Schema="ynovprojet" store:Type="Tables" />
           <EntitySet Name="test" EntityType="Self.test" Schema="ynovprojet" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="ynovprojet" store:Type="Tables" />
           <AssociationSet Name="casemap_ibfk_1" Association="Self.casemap_ibfk_1">
             <End Role="map" EntitySet="map" />
             <End Role="casemap" EntitySet="casemap" />
@@ -77,7 +87,8 @@
             <End Role="test" EntitySet="test" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ynovprojetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -104,6 +115,10 @@
           <Property Name="nom_map" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="casemap" Relationship="Self.casemap_ibfk_1" FromRole="map" ToRole="casemap" />
           <NavigationProperty Name="test" Relationship="Self.test_ibfk_1" FromRole="map" ToRole="test" />
+          <Property Name="createurId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="map1" Relationship="ynovprojetModel.map_ibfk_1" FromRole="map" ToRole="map1" />
+          <NavigationProperty Name="map2" Relationship="ynovprojetModel.map_ibfk_1" FromRole="map1" ToRole="map" />
+          <Property Name="createurName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="test">
           <Key>
@@ -113,8 +128,6 @@
           <Property Name="id_map" Type="Int32" Nullable="false" />
           <Property Name="resultat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="map" Relationship="Self.test_ibfk_1" FromRole="test" ToRole="map" />
-          <Property Name="nom_createur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="date" Type="DateTime" Nullable="false" />
         </EntityType>
         <Association Name="casemap_ibfk_1">
           <End Role="map" Type="Self.map" Multiplicity="1">
@@ -156,7 +169,33 @@
             <End Role="map" EntitySet="map" />
             <End Role="test" EntitySet="test" />
           </AssociationSet>
+          <EntitySet Name="user" EntityType="ynovprojetModel.user" />
+          <AssociationSet Name="map_ibfk_1" Association="ynovprojetModel.map_ibfk_1">
+            <End Role="map" EntitySet="map" />
+            <End Role="map1" EntitySet="map" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="user_mdp" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="String" FixedLength="false" Unicode="false" MaxLength="Max" />
+        </EntityType>
+        <Association Name="map_ibfk_1">
+          <End Type="ynovprojetModel.map" Role="map" Multiplicity="1" />
+          <End Type="ynovprojetModel.map" Role="map1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="map">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="map1">
+              <PropertyRef Name="createurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -181,6 +220,8 @@
           <EntitySetMapping Name="map">
             <EntityTypeMapping TypeName="ynovprojetModel.map">
               <MappingFragment StoreEntitySet="map">
+                <ScalarProperty Name="createurName" ColumnName="createurName" />
+                <ScalarProperty Name="createurId" ColumnName="createurId" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nom_map" ColumnName="nom_map" />
               </MappingFragment>
@@ -189,11 +230,19 @@
           <EntitySetMapping Name="test">
             <EntityTypeMapping TypeName="ynovprojetModel.test">
               <MappingFragment StoreEntitySet="test">
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="nom_createur" ColumnName="nom_createur" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_map" ColumnName="id_map" />
                 <ScalarProperty Name="resultat" ColumnName="resultat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user">
+            <EntityTypeMapping TypeName="ynovprojetModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="user_mdp" ColumnName="user_mdp" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

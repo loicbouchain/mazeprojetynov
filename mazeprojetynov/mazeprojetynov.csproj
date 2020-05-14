@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -37,6 +36,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net, Version=0.1.5073.29922, Culture=neutral, PublicKeyToken=6bcd409ee6bc9292, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -98,12 +106,6 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Google.Protobuf, Version=3.11.2.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.11.2\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
@@ -144,7 +146,6 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -210,11 +211,23 @@
     <Compile Include="Form.Designer.cs">
       <DependentUpon>Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAjouterUtilisateur.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAjouterUtilisateur.Designer.cs">
+      <DependentUpon>frmAjouterUtilisateur.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmEditeur.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmEditeur.Designer.cs">
       <DependentUpon>frmEditeur.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInfoMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInfoMap.Designer.cs">
+      <DependentUpon>frmInfoMap.cs</DependentUpon>
     </Compile>
     <Compile Include="frmJouer.cs">
       <SubType>Form</SubType>
@@ -222,24 +235,55 @@
     <Compile Include="frmJouer.Designer.cs">
       <DependentUpon>frmJouer.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmListeCartes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListeCartes.Designer.cs">
+      <DependentUpon>frmListeCartes.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMenu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMenu.Designer.cs">
       <DependentUpon>frmMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmNiveaux.cs">
+    <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmNiveaux.Designer.cs">
-      <DependentUpon>frmNiveaux.cs</DependentUpon>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmRegles.cs">
+    <Compile Include="frmAdministration.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmRegles.Designer.cs">
-      <DependentUpon>frmRegles.cs</DependentUpon>
+    <Compile Include="frmAdministration.Designer.cs">
+      <DependentUpon>frmAdministration.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmModifierUtilisateur.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmModifierUtilisateur.Designer.cs">
+      <DependentUpon>frmModifierUtilisateur.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmResultat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmResultat.Designer.cs">
+      <DependentUpon>frmResultat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSupprimerUtilisateur.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSupprimerUtilisateur.Designer.cs">
+      <DependentUpon>frmSupprimerUtilisateur.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUtilisateur.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUtilisateur.Designer.cs">
+      <DependentUpon>frmUtilisateur.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hashing.cs" />
     <Compile Include="IPriorityQueue.cs" />
     <Compile Include="map.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -266,23 +310,47 @@
     <Compile Include="test.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="user.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form.resx">
       <DependentUpon>Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAjouterUtilisateur.resx">
+      <DependentUpon>frmAjouterUtilisateur.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditeur.resx">
       <DependentUpon>frmEditeur.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmInfoMap.resx">
+      <DependentUpon>frmInfoMap.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmJouer.resx">
       <DependentUpon>frmJouer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListeCartes.resx">
+      <DependentUpon>frmListeCartes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMenu.resx">
       <DependentUpon>frmMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNiveaux.resx">
-      <DependentUpon>frmNiveaux.cs</DependentUpon>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmRegles.resx">
-      <DependentUpon>frmRegles.cs</DependentUpon>
+    <EmbeddedResource Include="frmAdministration.resx">
+      <DependentUpon>frmAdministration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmModifierUtilisateur.resx">
+      <DependentUpon>frmModifierUtilisateur.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmResultat.resx">
+      <DependentUpon>frmResultat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSupprimerUtilisateur.resx">
+      <DependentUpon>frmSupprimerUtilisateur.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUtilisateur.resx">
+      <DependentUpon>frmUtilisateur.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -316,6 +384,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="LICENSE.txt" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
@@ -326,12 +395,16 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\Remove_User-80_icon-icons.com_57283.png" />
+    <None Include="Resources\Add_User-80_icon-icons.com_57380.png" />
     <Content Include="Resources\boue.png" />
+    <None Include="Resources\user.png" />
     <None Include="Resources\Road_01_Tile_05.png" />
     <None Include="Resources\Water_Tile.png" />
     <None Include="Resources\depart.bmp" />
     <Content Include="Resources\depart.png" />
     <None Include="Resources\gomme.png" />
+    <None Include="Resources\Edit_User-80_icon-icons.com_57329.png" />
     <Content Include="Resources\herbe.png" />
     <Content Include="Resources\piege.png" />
   </ItemGroup>
@@ -347,12 +420,4 @@
     <None Include="Resources\iconfinder_undo-back-arrow_2931166.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
-  </Target>
-  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
 </Project>

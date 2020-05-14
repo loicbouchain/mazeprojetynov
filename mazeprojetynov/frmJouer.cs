@@ -21,6 +21,13 @@ namespace mazeprojetynov
             cbxMap.DisplayMember = "Nom";
             cbxMap.ValueMember = "Num";
             cbxMap.Text = "--Nom de la map--";
+            String idmapstring;
+            idmapstring = cbxMap.SelectedValue.ToString();
+            idmap = Convert.ToInt32(idmapstring);
+            lblMur.Text = "Nombre de murs : " + testcontext.casemap.Where(c => c.id_map == idmap && c.mur == false).Count().ToString();
+            lblObstacle.Text = "Nombre d'obstacles : " + testcontext.casemap.Where(c => c.id_map == idmap && c.boue == true).Count().ToString();
+            lblPiege.Text = "Nombre de pièges : " + testcontext.casemap.Where(c => c.id_map == idmap && c.piege == true).Count().ToString();
+
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -43,6 +50,20 @@ namespace mazeprojetynov
             frmEditeur frmEditeur = new frmEditeur();
             frmEditeur.Show();
             this.Hide();
+            
+        }
+
+
+        private void btnRaf_Click(object sender, EventArgs e)
+        {
+            String idmapstring;
+            idmapstring = cbxMap.SelectedValue.ToString();
+            idmap = Convert.ToInt32(idmapstring);
+            lblMur.Text = "Nombre de murs : " + testcontext.casemap.Where(c => c.id_map == idmap && c.mur == false).Count().ToString();
+            lblObstacle.Text = "Nombre d'obstacles : " + testcontext.casemap.Where(c => c.id_map == idmap && c.boue == true).Count().ToString();
+            lblPiege.Text = "Nombre de pièges : " + testcontext.casemap.Where(c => c.id_map == idmap && c.piege == true).Count().ToString();
+            frmInfoMap frmInfoMap = new frmInfoMap();
+            frmInfoMap.Show();
         }
     }
 }
