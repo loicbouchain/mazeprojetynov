@@ -63,7 +63,7 @@
             this.btnRegles.Name = "btnRegles";
             this.btnRegles.Size = new System.Drawing.Size(192, 77);
             this.btnRegles.TabIndex = 2;
-            this.btnRegles.Text = "Règles";
+            this.btnRegles.Text = "Administration";
             this.btnRegles.Click += new System.EventHandler(this.btnRegles_Click);
             // 
             // lblTitre

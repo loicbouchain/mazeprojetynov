@@ -11,6 +11,10 @@
         <AssociationConnector Association="ynovprojetModel.casemap_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="ynovprojetModel.test_ibfk_1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ynovprojetModel.user" Width="1.5" PointX="5.375" PointY="0.75" />
+<<<<<<< HEAD
+=======
+        <AssociationConnector Association="ynovprojetModel.map_ibfk_1" />
+>>>>>>> 939e0dc262e6e701e480d588f1ab271c154ce027
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
