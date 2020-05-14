@@ -49,9 +49,9 @@
             this.lblObstacle.AutoSize = true;
             this.lblObstacle.Location = new System.Drawing.Point(64, 108);
             this.lblObstacle.Name = "lblObstacle";
-            this.lblObstacle.Size = new System.Drawing.Size(127, 19);
+            this.lblObstacle.Size = new System.Drawing.Size(112, 19);
             this.lblObstacle.TabIndex = 10;
-            this.lblObstacle.Text = "Nombre d\'obstacles";
+            this.lblObstacle.Text = "Nombre de boue";
             // 
             // lblMur
             // 
@@ -70,7 +70,6 @@
             this.lblResultat.Size = new System.Drawing.Size(54, 19);
             this.lblResultat.TabIndex = 12;
             this.lblResultat.Text = "Resultat";
-            this.lblResultat.Visible = false;
             // 
             // lblDate
             // 
@@ -80,7 +79,6 @@
             this.lblDate.Size = new System.Drawing.Size(125, 19);
             this.lblDate.TabIndex = 13;
             this.lblDate.Text = "Date du dernier test";
-            this.lblDate.Visible = false;
             // 
             // frmInfoMap
             // 

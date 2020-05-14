@@ -19,7 +19,7 @@ namespace mazeprojetynov
         public string resultat { get; set; }
 
         public string nom_createur { get; set; }
-        public Nullable<System.DateTime> date { get; set; }
+        public System.DateTime date { get; set; }
 
 
 

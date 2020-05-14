@@ -466,8 +466,7 @@ namespace mazeprojetynov
 
                     }
                 }
-                // Console.WriteLine(" C L A F IN " + endCell.getX() + " " + endCell.getY());
-                image1.Save("ez_1.bmp");
+          
                 emp = getEmp();
 
                 test test = new test
