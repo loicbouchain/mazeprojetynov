@@ -351,7 +351,7 @@ namespace mazeprojetynov
         }
         private void btn_save_Click(object sender, EventArgs e) //enregistrement de la carte dans la base de données
         {
-
+            
             int wid = 15;
             int hgt = 10;
 
@@ -364,6 +364,10 @@ namespace mazeprojetynov
             makemap(15, 10);
             emp = getEmp();
             emp.nom_map = txtBxNom.Text;
+            if (txtBxNom.Text == "")
+            {
+                emp.nom_map = "Sans Titre";
+            }
             var cells = testcontext.casemap.Where(p => p.id_map == emp.id);
             foreach (var cellule in cells)
             {
@@ -933,6 +937,13 @@ namespace mazeprojetynov
                             {
                                 if (arraydepart.Count == 0)
                                 {
+                                    cell.FillRectangleWithImage(gr, depart);
+                                    arraydepart.Add(cell);
+                                }
+                                else
+                                {
+                                    arraydepart[0].FillRectangleWithImage(gr, herbe);
+                                    arraydepart.Clear();
                                     cell.FillRectangleWithImage(gr, depart);
                                     arraydepart.Add(cell);
                                 }
