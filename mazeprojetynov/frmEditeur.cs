@@ -36,7 +36,7 @@ namespace mazeprojetynov
         List<Cell> arrayPiege = new List<Cell>();
         List<Cell> arrayBoue = new List<Cell>();
         public string cellclic = "";
-        public string resultat = "Passé";
+        public static string resultat = "Passé";
         Image depart = Properties.Resources.depart1;
         Image fin = Properties.Resources.iconfinder_exit_enter_leave_out_door_2931188;
         Image piege = Properties.Resources.piege;
@@ -468,6 +468,19 @@ namespace mazeprojetynov
                 }
                 // Console.WriteLine(" C L A F IN " + endCell.getX() + " " + endCell.getY());
                 image1.Save("ez_1.bmp");
+                emp = getEmp();
+
+                test test = new test
+                {
+                    id_map = emp.id,
+                    resultat = resultat,
+                    date = DateTime.Now
+                };
+                testcontext.test.Add(test);
+                testcontext.SaveChanges();
+                frmResultat frmResultat = new frmResultat();
+                frmResultat.Show();
+
 
 
                 /*   arrayBoue.Clear();
@@ -477,6 +490,8 @@ namespace mazeprojetynov
                    arrayPiege.Clear();
                    startCell = null;
                    endCell = null;*/
+
+
             }
         }
 

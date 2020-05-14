@@ -11,13 +11,14 @@ namespace mazeprojetynov
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class test
     {
         public int id { get; set; }
         public int id_map { get; set; }
         public string resultat { get; set; }
-    
+        public System.DateTime date { get; set; }
+
         public virtual map map { get; set; }
     }
 }
