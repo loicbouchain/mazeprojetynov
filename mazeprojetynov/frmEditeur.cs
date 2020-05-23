@@ -52,7 +52,7 @@ namespace mazeprojetynov
             InitializeComponent();
             txtBxNom.Text = "Sans Titre";
         }
-        private void loadMap()
+        private void loadMap() // permet le chargement de la carte a partir de la base de données
         {
             //taille du labyrinthe
             int wid = 10;
@@ -77,7 +77,7 @@ namespace mazeprojetynov
             txtBxNom.Text = map.nom_map;
             int cal = 0;
             int cal2 = 0;
-            foreach (var produit in products)
+            foreach (var produit in products) //Défini le type des cases et ses coordonnées
             {
 
                 Cell cell = new Cell(produit.x, produit.y);
@@ -131,7 +131,7 @@ namespace mazeprojetynov
             setCells(nodes);
 
 
-            for (int r = 0; r < hgt; r++)
+            for (int r = 0; r < hgt; r++) //Défini les voisins de chaque cases
             {
                 for (int c = 0; c < wid; c++)
                 {
@@ -271,7 +271,7 @@ namespace mazeprojetynov
             DisplayMaze(nodes);
         }
      
-        private void CreateMap()
+        private void CreateMap() //permet de créer une carte
         {
             
             list.Clear();
@@ -584,7 +584,7 @@ namespace mazeprojetynov
 
         }
 
-        public void makemap(int wid, int hgt)
+        public void makemap(int wid, int hgt)//permet de définir les voisins de chaque cases ainsi que de définir le type de chaque cases
         {
             CellWid = picMaze.ClientSize.Width / (wid + 2);
             CellHgt = picMaze.ClientSize.Height / (hgt + 2);
@@ -819,7 +819,7 @@ namespace mazeprojetynov
             DisplayMaze(nodes);
         }
 
-        private void picMaze_Click(object sender, EventArgs e)
+        private void picMaze_Click(object sender, EventArgs e) //quand on clic sur une case , change type de la case et son image
         {
       
             list.Clear();

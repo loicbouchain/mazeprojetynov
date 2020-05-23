@@ -18,7 +18,7 @@ namespace mazeprojetynov
         {
             InitializeComponent();
             idmap = frmJouer.idmap;
-            lblMur.Text = "Nombre de murs : " + testcontext.casemap.Where(c => c.id_map == idmap && c.mur == false).Count().ToString();
+            lblMur.Text = "Nombre de murs : " + testcontext.casemap.Where(c => c.id_map == idmap && c.mur == false).Count().ToString(); //requete pour avoir les informations de la carte dans la base de données
             lblObstacle.Text = "Nombre de boues : " + testcontext.casemap.Where(c => c.id_map == idmap && c.boue == true).Count().ToString();
             lblPiege.Text = "Nombre de pièges : " + testcontext.casemap.Where(c => c.id_map == idmap && c.piege == true).Count().ToString();
 

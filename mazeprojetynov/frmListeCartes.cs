@@ -27,7 +27,7 @@ namespace mazeprojetynov
 
         private void frmListeCartes_Load(object sender, EventArgs e)
         {
-            cbxMap.DataSource = testcontext.map.Select(c => new { Num = c.id, Nom = c.nom_map }).ToList();
+            cbxMap.DataSource = testcontext.map.Select(c => new { Num = c.id, Nom = c.nom_map }).ToList(); //charge toutes les cartes de la bdd
             cbxMap.DisplayMember = "Nom";
             cbxMap.ValueMember = "Num";
             cbxMap.Text = "--Nom de la map--";

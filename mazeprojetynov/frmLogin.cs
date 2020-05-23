@@ -40,7 +40,7 @@ namespace mazeprojetynov
             {
                 if (utilisateur.username == txtBox_username.Text)
                 {
-                    if (hash.ValidatePassword(txtbox_password.Text,utilisateur.password))
+                    if (hash.ValidatePassword(txtbox_password.Text,utilisateur.password)) //vérifie si bon identifiants
                     {
                         iduser = Convert.ToInt32(utilisateur.Num);
                         username = utilisateur.username;
@@ -55,7 +55,9 @@ namespace mazeprojetynov
                         lblError.Text = "Mauvais mot de passe";
                     }
                 }
+               
             }
+
 
            
         }

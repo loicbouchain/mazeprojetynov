@@ -27,11 +27,11 @@ namespace mazeprojetynov
             user = new user
             {
                 user_name = txtBoxUsername.Text,
-                user_mdp = hash.HashPassword(txtBoxPassword.Text)
+                user_mdp = hash.HashPassword(txtBoxPassword.Text) //hash le password en bcrypt
 
             };
             testcontext.user.Add(user);
-            testcontext.SaveChanges();
+            testcontext.SaveChanges();//l'ajoute a la bdd
             this.Close();
         }
     }

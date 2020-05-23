@@ -19,7 +19,7 @@ namespace mazeprojetynov
         public frmModifierUtilisateur()
         {
             InitializeComponent();
-            cbxUser.DataSource = testcontext.user.Select(c => new { Num = c.id, Nom = c.user_name, password = c.user_mdp }).ToList();
+            cbxUser.DataSource = testcontext.user.Select(c => new { Num = c.id, Nom = c.user_name, password = c.user_mdp }).ToList(); //charge les utilisateur de la base
             cbxUser.DisplayMember = "Nom";
             cbxUser.ValueMember = "Num";
           
@@ -60,7 +60,7 @@ namespace mazeprojetynov
             iduserstring = cbxUser.SelectedValue.ToString();
             id = Convert.ToInt32(iduserstring);
 
-            var user = testcontext.user.Where(p => p.id == id);
+            var user = testcontext.user.Where(p => p.id == id); //modifie celui choisi
             foreach (var utilisateur in user)
             {
                 txtBoxUsername.Text = utilisateur.user_name;
